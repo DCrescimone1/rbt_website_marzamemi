@@ -1,0 +1,1 @@
+export { useTranslation, type UseTranslationReturn } from './useTranslation'
