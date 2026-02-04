@@ -34,21 +34,21 @@ export default function Home() {
         <HeroSection />
       </div>
 
-      <section id="property">
+      <div id="property">
         <PropertyDescriptionSection />
-      </section>
+      </div>
 
-      <section id="gallery">
+      <div id="gallery">
         <GallerySection />
-      </section>
+      </div>
 
-      <section id="booking">
+      <div id="booking">
         <BookingSection />
-      </section>
+      </div>
 
-      <section id="location">
+      <div id="location">
         <LocationSection />
-      </section>
+      </div>
 
       <WaveSeparator />
 

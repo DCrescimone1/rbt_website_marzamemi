@@ -1,19 +1,19 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Playfair_Display, Lora } from "next/font/google"
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google"
 import "./globals.css"
 import { LanguageProvider } from "@/lib/contexts"
 import { DynamicMetadata } from "@/components/dynamic-metadata"
 
-const playfairDisplay = Playfair_Display({
+const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-serif",
-  weight: ["400", "700", "900"],
+  variable: "--font-heading",
+  weight: ["400", "500", "600", "700", "800"],
 })
 
-const lora = Lora({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-body",
   weight: ["400", "500", "600", "700"],
 })
 
@@ -136,7 +136,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${playfairDisplay.variable} ${lora.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}
+        className={`${bricolageGrotesque.variable} ${plusJakartaSans.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}
       >
         <LanguageProvider>
           <DynamicMetadata />
