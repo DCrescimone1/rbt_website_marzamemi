@@ -1,5 +1,5 @@
 /**
- * Context exports for the Acquamarina application
+ * Context exports for the SEAcily villas application
  * Provides centralized access to all React contexts
  */
 

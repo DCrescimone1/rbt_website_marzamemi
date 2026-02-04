@@ -254,10 +254,10 @@ export default function FloatingLogoButton() {
             <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <Image
               src="/logo.webp"
-              alt="Acquamarina Logo"
+              alt="SEAcily villas Logo"
               width={96}
               height={96}
-              className="w-full h-full object-contain p-1"
+              className="w-full h-full object-cover p-0.5 scale-[1.08]"
             />
           </button>
 
@@ -288,7 +288,7 @@ export default function FloatingLogoButton() {
               <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center overflow-hidden flex-shrink-0 p-0.5">
                 <Image
                   src="/logo.webp"
-                  alt="Acquamarina"
+                  alt="SEAcily villas"
                   width={40}
                   height={40}
                   className="w-full h-full object-cover rounded-full"
@@ -326,7 +326,7 @@ export default function FloatingLogoButton() {
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center overflow-hidden p-0.5">
                     <Image
                       src="/logo.webp"
-                      alt="Acquamarina"
+                      alt="SEAcily villas"
                       width={32}
                       height={32}
                       className="w-full h-full object-cover rounded-full"
@@ -357,7 +357,7 @@ export default function FloatingLogoButton() {
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center overflow-hidden p-0.5">
                       <Image
                         src="/logo.webp"
-                        alt="Acquamarina"
+                        alt="SEAcily villas"
                         width={32}
                         height={32}
                         className="w-full h-full object-cover rounded-full"
@@ -395,7 +395,7 @@ export default function FloatingLogoButton() {
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center overflow-hidden p-0.5">
                     <Image
                       src="/logo.webp"
-                      alt="Acquamarina"
+                      alt="SEAcily villas"
                       width={32}
                       height={32}
                       className="w-full h-full object-cover rounded-full"

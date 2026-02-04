@@ -54,7 +54,7 @@ const checks = [
   },
   {
     name: 'Company name replaced',
-    test: () => prompt.includes('Acquamarina')
+    test: () => prompt.includes('SEAcily villas')
   }
 ];
 

@@ -1,21 +1,21 @@
 import type { TranslationData } from './types'
 
 /**
- * Italian translations for Acquamarina Casa Vacanze
+ * Italian translations for SEAcily villas Casa Vacanze
  * Complete translation set with Italian as the default language
  */
 export const itTranslations: TranslationData = {
   metadata: {
-    title: "Acquamarina Marzamemi | Casa Vacanze con 2 Piscine e Parcheggio Privato",
+    title: "SEAcily villas Marzamemi | Casa Vacanze con 2 Piscine e Parcheggio Privato",
     description: "A pochi passi dalla spiaggia in una residenza privata a Marzamemi. Casa vacanze con 1 camera da letto (max 4 ospiti), cucina attrezzata, giardino privato, WiFi veloce, 2 piscine (idromassaggio e a sfioro) e parcheggio privato.",
-    keywords: "Acquamarina, Marzamemi, casa vacanze, appartamento, 1 camera da letto, 2 piscine, parcheggio privato, vicino alla spiaggia, Sicilia, WiFi",
+    keywords: "SEAcily villas, Marzamemi, casa vacanze, appartamento, 1 camera da letto, 2 piscine, parcheggio privato, vicino alla spiaggia, Sicilia, WiFi",
     openGraph: {
-      title: "Acquamarina Marzamemi – Casa Vacanze con 2 Piscine",
+      title: "SEAcily villas Marzamemi – Casa Vacanze con 2 Piscine",
       description: "Appartamento a Marzamemi con giardino, cucina, WiFi e parcheggio. A 400m dal porto, vicino alla spiaggia.",
-      siteName: "Acquamarina Marzamemi"
+      siteName: "SEAcily villas Marzamemi"
     },
     twitter: {
-      title: "Acquamarina Marzamemi – Casa Vacanze",
+      title: "SEAcily villas Marzamemi – Casa Vacanze",
       description: "1 camera da letto, 2 piscine, vicino alla spiaggia. Prenota il tuo soggiorno a Marzamemi."
     }
   },
@@ -59,18 +59,20 @@ export const itTranslations: TranslationData = {
         whatsapp: "WhatsApp"
       }
     },
-    copyright: "Acquamarina Marzamemi. Tutti i diritti riservati.",
+    copyright: "SEAcily villas Marzamemi. Tutti i diritti riservati.",
     tagline: "Progettato con eleganza per la tua fuga perfetta"
   },
   hero: {
-    title: "La tua Sicilia autentica, a due passi dal mare",
-    subtitle: "",
+    title: "Prenota SEAcily villas: il mare ti aspetta",
+    subtitle: "Prenota SEAcily villas: il mare ti aspetta",
+    bookNow: "Prenota Ora",
     description: "A pochi passi dalla spiaggia in una residenza privata, a 400m dal porto di Marzamemi. Comfort moderni con fascino siciliano, cucina completamente attrezzata, due piscine e parcheggio privato per un soggiorno tranquillo",
-    scrollText: "Scorri"
+    scrollText: "Scorri",
+    revealText: "Prenota la tua casa paradisiaca in Sicilia"
   },
   property: {
     sectionTitle: "Una Posizione Unica",
-    locationTitle: "Acquamarina",
+    locationTitle: "SEAcily villas",
     description: "A pochi passi dalla spiaggia in una residenza privata, a 400m dal porto di Marzamemi. Confort moderni con fascino siciliano, cucina completamente attrezzata, giardino privato e parcheggio privato per un soggiorno tranquillo.",
     detailedDescription: "Appartamento esclusivo con 2 piscine a Marzamemi. Casa vacanze con 1 camera da letto, aria condizionata, WiFi gratuito, parcheggio privato, cucina completamente attrezzata e terrazza con vista mare. Piscina con giardino recintato. Nelle vicinanze: Spiaggia Cavettone (800m), Riserva di Vendicari (17km), Cattedrale di Noto (25km).",
     amenitiesTitle: "Servizi Premium",
@@ -215,16 +217,16 @@ export const itTranslations: TranslationData = {
     }
   },
   whatsapp: {
-    defaultMessage: "Ciao! Sono interessato/a a prenotare Acquamarina Casa Vacanze a Marzamemi. Potreste fornirmi maggiori informazioni sulla disponibilità e i prezzi?"
+    defaultMessage: "Ciao! Sono interessato/a a prenotare SEAcily villas Casa Vacanze a Marzamemi. Potreste fornirmi maggiori informazioni sulla disponibilità e i prezzi?"
   },
   chat: {
     tooltip: "Chatta con noi",
     header: {
-      title: "Acquamarina",
+      title: "SEAcily villas",
       subtitle: "Casa Vacanze"
     },
     welcome: {
-      greeting: "Benvenuto ad Acquamarina Casa Vacanze! 🌊",
+      greeting: "Benvenuto a SEAcily villas Casa Vacanze! 🌊",
       question: "Come possiamo aiutarti a pianificare la tua perfetta fuga costiera?"
     },
     input: {
@@ -232,7 +234,7 @@ export const itTranslations: TranslationData = {
       send: "Invia messaggio"
     },
     aria: {
-      openChat: "Acquamarina Casa Vacanze - Apri Chat",
+      openChat: "SEAcily villas Casa Vacanze - Apri Chat",
       closeChat: "Chiudi chat",
       sendMessage: "Invia messaggio"
     }

@@ -28,7 +28,7 @@ function loadPromptTemplate(): string {
   } catch (error) {
     console.error('Failed to load prompt_chatbot.yaml:', error);
     // Return a basic fallback template
-    return "You're a helpful AI assistant for Acquamarina, a holiday home in Sicily. Answer questions based on the context provided.";
+    return "You're a helpful AI assistant for SEAcily villas, a holiday home in Sicily. Answer questions based on the context provided.";
   }
 }
 
@@ -54,7 +54,7 @@ export function buildPrompt(context: QAPair[]): string {
   
   // Replace template variables
   const prompt = template
-    .replace('{company_name}', 'Acquamarina')
+    .replace('{company_name}', 'SEAcily villas')
     .replace('{intel}', formattedContext);
   
   return prompt;

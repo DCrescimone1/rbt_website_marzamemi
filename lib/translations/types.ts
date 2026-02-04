@@ -1,5 +1,5 @@
 /**
- * Translation data structure types for the Acquamarina Casa Vacanze website
+ * Translation data structure types for the SEAcily villas Casa Vacanze website
  * Provides comprehensive TypeScript interfaces for all translatable content
  */
 
@@ -64,8 +64,10 @@ export interface TranslationData {
   hero: {
     title: string
     subtitle: string
+    bookNow: string
     description: string
     scrollText: string
+    revealText: string
   }
   property: {
     sectionTitle: string

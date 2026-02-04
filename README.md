@@ -1,5 +1,27 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Hero Section Animation
+
+The hero section features a GSAP-powered perspective zoom effect with the following elements:
+
+1. **12 Images** - Distributed across 3 depth layers, zoom toward viewer as you scroll
+2. **Title** - "La Tua Sicilia Autentica" - zooms from far (z:-2000, opacity:0.1) to close (z:50, opacity:1)
+3. **Subtitle** - "La Sicilia autentica a due passi dal mare" - inverse animation, starts visible (opacity:1) and fades out (opacity:0) as it zooms
+4. **Book Now Button** - Fades in at 85% animation completion
+5. **Scroll unlock** - After animation completes, title remains at max size, subtitle fully faded, normal page scroll begins
+
+### Animation Timeline
+
+- **Scroll 0-100%**: All elements zoom together
+- **Scroll 85%**: Button fades in
+- **Scroll 100%**: Title visible, subtitle gone, scroll unlocks
+
+### Components
+
+- `HeroSection` - Main container with ScrollSmoother integration
+- `ZoomContainer` - Manages 12 images across 3 depth layers
+- `HeadingSection` - Animated title, subtitle, and button
+
 ## Getting Started
 
 First, run the development server:

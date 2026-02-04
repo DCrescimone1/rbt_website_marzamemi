@@ -36,7 +36,7 @@ export default function Navigation({ isScrolled }: NavigationProps) {
             <div
               className={`${isScrolled ? "bg-primary" : "bg-white/20"} text-white backdrop-blur-sm px-3 md:px-4 py-2 md:py-2.5 rounded-sm transition-all group-hover:shadow-lg ${isScrolled ? "group-hover:bg-primary/90" : "group-hover:bg-white/30"}`}
             >
-              <h1 className="font-serif text-sm md:text-base font-bold tracking-wider">ACQUAMARINA</h1>
+              <h1 className="font-serif text-sm md:text-base font-bold tracking-wider">SEACILY VILLAS</h1>
             </div>
           </Link>
 

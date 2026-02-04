@@ -77,7 +77,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.email')}</p>
-                  <a href="mailto:Acquamarina.marzamemi@gmail.com" className="text-lg hover:text-secondary transition-colors">
+                  <a href="mailto:acquamarina.marzamemi@gmail.com" className="text-lg hover:text-secondary transition-colors">
                     acquamarina.marzamemi@gmail.com
                   </a>
                 </div>

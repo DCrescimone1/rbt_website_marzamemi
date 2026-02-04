@@ -9,7 +9,7 @@ import StaticHeroFallback from './hero-section-static';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 
 /**
- * HeroSection Component
+ * HeroSectionGSAP Component
  * 
  * Main container component that orchestrates all GSAP scroll animations.
  * Integrates ScrollSmoother for smooth scrolling throughout the hero section.
@@ -25,9 +25,9 @@ import { useTranslation } from '@/lib/hooks/useTranslation';
  * - Falls back to StaticHeroFallback if GSAP plugins fail to load
  * - Logs errors for debugging
  * 
- * Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 3.5, 4.6, 5.1, 5.2, 5.3, 5.4, 5.5, 9.3
+ * Requirements: 1.1, 1.2, 1.3, 1.4, 5.1, 5.2, 5.3, 5.4, 5.5
  */
-export default function HeroSection() {
+export default function HeroSectionGSAP() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<any>(null);
@@ -35,7 +35,7 @@ export default function HeroSection() {
   const [pluginsLoaded, setPluginsLoaded] = useState<boolean | null>(null);
 
   // Register GSAP plugins on mount with error handling
-  // Requirements: 1.1, 1.2, 1.3, 1.4, 1.5
+  // Requirements: 1.1, 1.2, 1.3, 1.4
   useEffect(() => {
     try {
       const success = registerGSAPPlugins();
@@ -55,8 +55,7 @@ export default function HeroSection() {
     if (pluginsLoaded === false) return;
 
     // Initialize ScrollSmoother if available
-    // ScrollSmoother requires GSAP Club membership and may not be available
-    if (ScrollSmoother !== null && ScrollSmoother !== undefined && typeof ScrollSmoother.create === 'function') {
+    if (ScrollSmoother && typeof ScrollSmoother.create === 'function') {
       try {
         smootherRef.current = ScrollSmoother.create({
           wrapper: '#smooth-wrapper',
@@ -77,16 +76,14 @@ export default function HeroSection() {
     }
 
     // Scroll indicator fade-out animation
-    // Requirement: 9.4
     if (scrollIndicatorRef.current) {
       try {
         gsap.to(scrollIndicatorRef.current, {
           opacity: 0,
-          y: -20, // Move up slightly as it fades
           force3D: true, // Hardware acceleration - Requirement 10.2
           scrollTrigger: {
             start: 'top top',
-            end: '+=50vh', // Fade out faster - within first 50vh of scroll
+            end: '+=100vh',
             scrub: true,
           },
         });
@@ -169,18 +166,18 @@ export default function HeroSection() {
           <ZoomContainer />
         </div>
 
-        {/* Scroll Indicator - Requirements: 9.1, 9.2, 9.3, 9.4 */}
+        {/* Scroll Indicator */}
         <div 
           ref={scrollIndicatorRef}
           className="fixed bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce pointer-events-none"
           style={{ willChange: 'transform, opacity' }} // CSS optimization - Requirement 10.1
         >
-          <div className="text-primary text-center">
-            <p className="text-lg md:text-xl tracking-widest uppercase mb-3 font-bold">
+          <div className="text-white text-center">
+            <p className="text-xs tracking-widest uppercase mb-2">
               {t('hero.scrollText')}
             </p>
             <svg 
-              className="w-8 h-8 md:w-10 md:h-10 mx-auto" 
+              className="w-5 h-5 md:w-6 md:h-6 mx-auto" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -188,7 +185,7 @@ export default function HeroSection() {
               <path 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
-                strokeWidth={2.5} 
+                strokeWidth={2} 
                 d="M19 14l-7 7m0 0l-7-7m7 7V3" 
               />
             </svg>

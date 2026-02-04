@@ -25,11 +25,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "")),
-  title: "Acquamarina Marzamemi | Casa Vacanze con 2 Piscine e Parcheggio Privato",
+  title: "SEAcily villas Marzamemi | Casa Vacanze con 2 Piscine e Parcheggio Privato",
   description:
     "A pochi passi dalla spiaggia in una residenza privata a Marzamemi. Casa vacanze con 1 camera da letto (max 4 ospiti), cucina attrezzata, giardino privato, WiFi veloce, 2 piscine (idromassaggio e a sfioro) e parcheggio privato.",
   keywords: [
-    "Acquamarina",
+    "SEAcily villas",
     "Marzamemi",
     "casa vacanze",
     "appartamento",
@@ -41,22 +41,22 @@ export const metadata: Metadata = {
     "WiFi",
   ],
   openGraph: {
-    title: "Acquamarina Marzamemi – Casa Vacanze con 2 Piscine",
+    title: "SEAcily villas Marzamemi – Casa Vacanze con 2 Piscine",
     description: "Appartamento a Marzamemi con giardino, cucina, WiFi e parcheggio. A 400m dal porto, vicino alla spiaggia.",
-    siteName: "Acquamarina Marzamemi",
+    siteName: "SEAcily villas Marzamemi",
     type: "website",
     images: [
       {
         url: "/favicon_io/android-chrome-512x512.png",
         width: 512,
         height: 512,
-        alt: "Acquamarina Marzamemi Icon",
+        alt: "SEAcily villas Marzamemi Icon",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acquamarina Marzamemi – Casa Vacanze",
+    title: "SEAcily villas Marzamemi – Casa Vacanze",
     description: "1 camera da letto, 2 piscine, vicino alla spiaggia.",
     images: ["/favicon_io/android-chrome-512x512.png"],
   },
@@ -102,7 +102,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LodgingBusiness",
-              name: "Acquamarina Marzamemi",
+              name: "SEAcily villas Marzamemi",
               url: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, ""),
               image: [
                 "/logo.webp"

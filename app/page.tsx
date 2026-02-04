@@ -30,29 +30,29 @@ export default function Home() {
 
       <FloatingLogoButton />
 
-      <div id="hero">
+      <div id="hero" className="relative z-0">
         <HeroSection />
       </div>
 
-      <div id="property">
+      <div id="property" className="relative z-10 bg-white">
         <PropertyDescriptionSection />
       </div>
 
-      <div id="gallery">
+      <div id="gallery" className="relative z-10">
         <GallerySection />
       </div>
 
-      <div id="booking">
+      <div id="booking" className="relative z-10">
         <BookingSection />
       </div>
 
-      <div id="location">
+      <div id="location" className="relative z-10">
         <LocationSection />
       </div>
 
       <WaveSeparator />
 
-      <div id="contact">
+      <div id="contact" className="relative z-10">
         <ContactSection />
       </div>
 

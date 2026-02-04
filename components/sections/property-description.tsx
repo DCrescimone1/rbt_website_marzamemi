@@ -22,7 +22,7 @@ export default function PropertyDescriptionSection() {
   ]
 
   return (
-    <section className="bg-white">
+    <section className="bg-white relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">

@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
           price_data: {
             currency: "eur",
             product_data: {
-              name: "Acquamarina - Beach Holiday Apartment",
+              name: "SEAcily villas - Beach Holiday Apartment",
               description: `${nights} night${nights > 1 ? "s" : ""} • ${guests} guest${
                 guests > 1 ? "s" : ""
               }\nCheck-in: ${formatDate(checkIn)} • Check-out: ${formatDate(checkOut)}`,

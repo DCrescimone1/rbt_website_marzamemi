@@ -1,21 +1,21 @@
 import type { TranslationData } from './types'
 
 /**
- * English translations for Acquamarina Casa Vacanze
+ * English translations for SEAcily villas Casa Vacanze
  * Organized existing English content into structured translation format
  */
 export const enTranslations: TranslationData = {
   metadata: {
-    title: "Acquamarina Marzamemi | Holiday Home with 2 Pools & Private Parking",
+    title: "SEAcily villas Marzamemi | Holiday Home with 2 Pools & Private Parking",
     description: "Steps from the beach in a private residence in Marzamemi. 1-bedroom holiday home (max 4 guests) with equipped kitchen, private garden, fast WiFi, 2 pools (jacuzzi and infinity), and private parking.",
-    keywords: "Acquamarina, Marzamemi, holiday home, apartment, 1 bedroom, 2 pools, private parking, near the beach, Sicily, WiFi",
+    keywords: "SEAcily villas, Marzamemi, holiday home, apartment, 1 bedroom, 2 pools, private parking, near the beach, Sicily, WiFi",
     openGraph: {
-      title: "Acquamarina Marzamemi – Holiday Home with 2 Pools",
+      title: "SEAcily villas Marzamemi – Holiday Home with 2 Pools",
       description: "Apartment in Marzamemi with garden, kitchen, WiFi and parking. 400m from the port, near the beach.",
-      siteName: "Acquamarina Marzamemi"
+      siteName: "SEAcily villas Marzamemi"
     },
     twitter: {
-      title: "Acquamarina Marzamemi – Holiday Home",
+      title: "SEAcily villas Marzamemi – Holiday Home",
       description: "1 bedroom, 2 pools, steps from the beach. Book your stay in Marzamemi."
     }
   },
@@ -59,18 +59,20 @@ export const enTranslations: TranslationData = {
         whatsapp: "WhatsApp"
       }
     },
-    copyright: "Acquamarina Marzamemi. All rights reserved.",
+    copyright: "SEAcily villas Marzamemi. All rights reserved.",
     tagline: "Designed with elegance for your perfect escape"
   },
   hero: {
-    title: "Your authentic Sicily, steps from the sea",
-    subtitle: "",
+    title: "Book SEAcily villas: live Sicily, live easily",
+    subtitle: "Book SEAcily villas: live Sicily, live easily",
+    bookNow: "Book Now",
     description: "Just steps from the beach in a private residence, 400m from Marzamemi port. Modern comforts with Sicilian charm, fully equipped kitchen, two pools, and private parking for a peaceful stay",
-    scrollText: "Scroll"
+    scrollText: "Scroll",
+    revealText: "Book your paradise home in Sicily"
   },
   property: {
     sectionTitle: "A Unique Location",
-    locationTitle: "Acquamarina",
+    locationTitle: "SEAcily villas",
     description: "Just steps from the beach in a private residence, 400m from Marzamemi port. Modern comforts with Sicilian charm, a fully equipped kitchen, private garden, and private parking for a peaceful stay.",
     detailedDescription: "Exclusive Apartment with 2 Pools in Marzamemi. 1-bedroom holiday home with air conditioning, free WiFi, private parking, fully equipped kitchen, and terrace with sea views. Pool with fenced garden. Nearby: Spiaggia Cavettone (800m), Vendicari Reserve (17km), Noto Cathedral (25km).",
     amenitiesTitle: "Premium Amenities",
@@ -215,16 +217,16 @@ export const enTranslations: TranslationData = {
     }
   },
   whatsapp: {
-    defaultMessage: "Hello! I'm interested in booking Acquamarina Casa Vacanze in Marzamemi. Could you provide more information about availability and pricing?"
+    defaultMessage: "Hello! I'm interested in booking SEAcily villas Casa Vacanze in Marzamemi. Could you provide more information about availability and pricing?"
   },
   chat: {
     tooltip: "Chat with us",
     header: {
-      title: "Acquamarina",
+      title: "SEAcily villas",
       subtitle: "Casa Vacanze"
     },
     welcome: {
-      greeting: "Welcome to Acquamarina Casa Vacanze! 🌊",
+      greeting: "Welcome to SEAcily villas Casa Vacanze! 🌊",
       question: "How can we help you plan your perfect coastal getaway?"
     },
     input: {
@@ -232,7 +234,7 @@ export const enTranslations: TranslationData = {
       send: "Send message"
     },
     aria: {
-      openChat: "Acquamarina Casa Vacanze - Open Chat",
+      openChat: "SEAcily villas Casa Vacanze - Open Chat",
       closeChat: "Close chat",
       sendMessage: "Send message"
     }

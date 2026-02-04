@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
       {
-        name: 'acquamarina',
+        name: 'seacily-villas',
         script: 'npm',
         args: 'start',
         exec_mode: 'fork',

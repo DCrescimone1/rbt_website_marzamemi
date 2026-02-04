@@ -4,7 +4,7 @@ import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from '../translations'
 /**
  * Storage key for language preference in localStorage
  */
-const STORAGE_KEY = 'acquamarina-language'
+const STORAGE_KEY = 'seacily-villas-language'
 
 /**
  * Language persistence utilities for localStorage management
