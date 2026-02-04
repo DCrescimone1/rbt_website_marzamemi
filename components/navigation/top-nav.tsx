@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import LanguageSwitcher from "@/components/language-switcher"
@@ -33,6 +34,15 @@ export default function Navigation({ isScrolled }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 md:py-4">
         <div className="flex items-center justify-between h-full">
           <Link href="/" className="hidden md:flex items-center gap-2 z-50 flex-shrink-0 group">
+            <div className="relative w-8 h-8 flex-shrink-0">
+              <Image
+                src="/logo.webp"
+                alt="SEAcily Villas Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
             <div
               className={`${isScrolled ? "bg-primary" : "bg-white/20"} text-white backdrop-blur-sm px-3 md:px-4 py-2 md:py-2.5 rounded-sm transition-all group-hover:shadow-lg ${isScrolled ? "group-hover:bg-primary/90" : "group-hover:bg-white/30"}`}
             >

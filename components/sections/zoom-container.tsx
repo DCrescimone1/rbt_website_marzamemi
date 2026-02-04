@@ -69,7 +69,7 @@ export default function ZoomContainer() {
     tl.fromTo(
       container.querySelectorAll('[data-layer="3"]'),
       {
-        opacity: 0.01,
+        opacity: 0.5,
         z: 0,
         scale: 0.8,
       },
@@ -83,11 +83,16 @@ export default function ZoomContainer() {
       0
     );
 
-    // Animate Layer 2 images
+    // Animate Layer 2 images (except one that passes through)
+    const layer2Images = Array.from(container.querySelectorAll('[data-layer="2"]'));
+    const passThroughLayer2 = layer2Images.filter((_, index) => index === 2); // IMG_7597
+    const otherLayer2Images = layer2Images.filter((_, index) => index !== 2);
+    
+    // Regular Layer 2 images
     tl.fromTo(
-      container.querySelectorAll('[data-layer="2"]'),
+      otherLayer2Images,
       {
-        opacity: 0.01,
+        opacity: 0.5,
         z: 0,
         scale: 0.8,
       },
@@ -100,12 +105,35 @@ export default function ZoomContainer() {
       },
       0
     );
-
-    // Animate Layer 1 images
+    
+    // Layer 2 image that passes through
     tl.fromTo(
-      container.querySelectorAll('[data-layer="1"]'),
+      passThroughLayer2,
       {
-        opacity: 0.01,
+        opacity: 0.5,
+        z: 0,
+        scale: 0.8,
+      },
+      {
+        opacity: 0,
+        z: -500,
+        scale: 2.5,
+        force3D: true,
+        ease: 'power1.inOut'
+      },
+      0
+    );
+
+    // Animate Layer 1 images (except bottom two which pass through)
+    const layer1Images = Array.from(container.querySelectorAll('[data-layer="1"]'));
+    const bottomImages = layer1Images.filter((_, index) => index === 1 || index === 2); // IMG_7196 and IMG_7199
+    const otherLayer1Images = layer1Images.filter((_, index) => index !== 1 && index !== 2);
+    
+    // Regular Layer 1 images
+    tl.fromTo(
+      otherLayer1Images,
+      {
+        opacity: 0.5,
         z: 0,
         scale: 0.8,
       },
@@ -118,12 +146,30 @@ export default function ZoomContainer() {
       },
       0
     );
+    
+    // Bottom images that pass through the viewer
+    tl.fromTo(
+      bottomImages,
+      {
+        opacity: 0.5,
+        z: 0,
+        scale: 0.8,
+      },
+      {
+        opacity: 0,
+        z: -500, // Pass through and behind the viewer
+        scale: 2.5,
+        force3D: true,
+        ease: 'power1.inOut'
+      },
+      0
+    );
 
     // Animate heading (synchronized with images) - with scale for zoom effect
     tl.fromTo(
       heading,
       {
-        opacity: 0.05,
+        opacity: 0.4,
         z: -100,
         scale: 0.4,
       },
@@ -147,7 +193,7 @@ export default function ZoomContainer() {
     <div 
       ref={containerRef}
       id="zoom-container"
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full h-screen overflow-hidden bg-white px-4 md:px-8"
       style={{ 
         perspective: '1000px',
         transformStyle: 'preserve-3d',
@@ -177,7 +223,7 @@ export default function ZoomContainer() {
         return (
           <div
             key={`${config.src}-${index}`}
-            className="zoom-image absolute opacity-[0.01]"
+            className="zoom-image absolute"
             data-layer={config.layer}
             style={{
               ...position,
@@ -192,7 +238,7 @@ export default function ZoomContainer() {
               fill
               className="object-cover rounded-lg"
               sizes={`(max-width: 768px) ${size.width}, ${config.size.width}`}
-              quality={80} // Optimized quality for performance - Requirement 10.3
+              quality={90} // Optimized quality for performance - Requirement 10.3
               priority={isPriority} // Priority for above-fold images - Requirement 10.4
               onError={handleImageError}
             />
