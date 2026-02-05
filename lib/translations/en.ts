@@ -51,7 +51,7 @@ export const enTranslations: TranslationData = {
     },
     contact: {
       title: "Contact",
-      email: "acquamarina.marzamemi@gmail.com",
+      email: "cascinabozzetti@gmail.com",
       phone: "+393495780944",
       social: {
         instagram: "Instagram",

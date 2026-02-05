@@ -33,8 +33,8 @@ export default function Navigation({ isScrolled }: NavigationProps) {
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 md:py-4">
         <div className="flex items-center justify-between h-full">
-          <Link href="/" className="hidden md:flex items-center gap-2 z-50 flex-shrink-0 group">
-            <div className="relative w-8 h-8 flex-shrink-0">
+          <Link href="/" className="hidden md:flex items-center gap-3 z-50 flex-shrink-0 group">
+            <div className="relative w-12 h-12 flex-shrink-0">
               <Image
                 src="/logo.webp"
                 alt="SEAcily Villas Logo"
