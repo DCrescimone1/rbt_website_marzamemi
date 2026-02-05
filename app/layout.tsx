@@ -108,8 +108,8 @@ export default function RootLayout({
                 "/logo.webp"
               ],
               logo: "/logo.webp",
-              telephone: "+39 3501159152",
-              email: "acquamarina.marzamemi@gmail.com",
+              telephone: "+39 349 578 0944",
+              email: "cascinabozzetti@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Contrada Calafarina SNC",

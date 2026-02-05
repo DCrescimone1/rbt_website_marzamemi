@@ -77,8 +77,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.email')}</p>
-                  <a href="mailto:acquamarina.marzamemi@gmail.com" className="text-lg hover:text-secondary transition-colors">
-                    acquamarina.marzamemi@gmail.com
+                  <a href="mailto:cascinabozzetti@gmail.com" className="text-lg hover:text-secondary transition-colors">
+                    cascinabozzetti@gmail.com
                   </a>
                 </div>
               </div>
@@ -90,8 +90,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.phone')}</p>
-                  <a href="tel:+393501159152" className="text-lg hover:text-secondary transition-colors">
-                    +39 3501159152
+                  <a href="tel:+393495780944" className="text-lg hover:text-secondary transition-colors">
+                    +39 349 578 0944
                   </a>
                 </div>
               </div>

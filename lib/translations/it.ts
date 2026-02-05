@@ -51,8 +51,8 @@ export const itTranslations: TranslationData = {
     },
     contact: {
       title: "Contatti",
-      email: "acquamarina.marzamemi@gmail.com",
-      phone: "+39 3501159152",
+      email: "cascinabozzetti@gmail.com",
+      phone: "+393495780944",
       social: {
         instagram: "Instagram",
         facebook: "Facebook",
@@ -126,7 +126,7 @@ export const itTranslations: TranslationData = {
     checking: "Verificando...",
     selectDatesError: "Seleziona le date di check-in e check-out",
     availabilityError: "Impossibile verificare la disponibilità",
-    scrapingError: "Stiamo riscontrando difficoltà tecniche nel recupero dei prezzi. Contattaci direttamente al +393501159152 o all'indirizzo acquamarina.marzamemi@gmail.com per assistenza con la tua prenotazione.",
+    scrapingError: "Stiamo riscontrando difficoltà tecniche nel recupero dei prezzi. Contattaci direttamente al +393495780944 o all'indirizzo cascinabozzetti@gmail.com per assistenza con la tua prenotazione.",
     priceComparison: "Confronto Prezzi",
     bestPrice: "Miglior Prezzo",
     view: "Visualizza",
