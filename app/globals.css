@@ -12,12 +12,12 @@
   --popover: #E8E4D9;
   --popover-foreground: #2D3A3A;
 
-  /* Golden sun as primary */
-  --primary: #CFA645;
+  /* Peachy sunset as primary */
+  --primary: #E89A7C;
   --primary-foreground: #FFFFFF;
 
-  /* Dark teal as secondary */
-  --secondary: #3D7A7A;
+  /* Golden sun as secondary */
+  --secondary: #CFA645;
   --secondary-foreground: #FFFFFF;
 
   /* Sand muted tones */
@@ -32,10 +32,10 @@
   --destructive-foreground: #FFFFFF;
   --border: #C5BFA8;
   --input: #F0EBE0;
-  --ring: #CFA645;
+  --ring: #E89A7C;
 
-  --chart-1: #CFA645;
-  --chart-2: #3D7A7A;
+  --chart-1: #E89A7C;
+  --chart-2: #CFA645;
   --chart-3: #A8D1CC;
   --chart-4: #D4C9A8;
   --chart-5: #5D6A6A;
@@ -43,12 +43,12 @@
   --radius: 0.625rem;
   --sidebar: #E8E4D9;
   --sidebar-foreground: #2D3A3A;
-  --sidebar-primary: #CFA645;
+  --sidebar-primary: #E89A7C;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #D4C9A8;
   --sidebar-accent-foreground: #2D3A3A;
   --sidebar-border: #C5BFA8;
-  --sidebar-ring: #CFA645;
+  --sidebar-ring: #E89A7C;
 }
 
 .dark {
@@ -59,10 +59,10 @@
   --card-foreground: #E8E4D9;
   --popover: #2A3636;
   --popover-foreground: #E8E4D9;
-  --primary: #E0BC5E;
+  --primary: #F4A582;
   --primary-foreground: #1E2828;
-  --secondary: #5A9E9E;
-  --secondary-foreground: #FFFFFF;
+  --secondary: #E0BC5E;
+  --secondary-foreground: #1E2828;
   --muted: #3A4545;
   --muted-foreground: #A8B5B5;
   --accent: #6BA89F;
@@ -71,20 +71,20 @@
   --destructive-foreground: #FFFFFF;
   --border: #3A4545;
   --input: #2A3636;
-  --ring: #E0BC5E;
-  --chart-1: #E0BC5E;
-  --chart-2: #5A9E9E;
+  --ring: #F4A582;
+  --chart-1: #F4A582;
+  --chart-2: #E0BC5E;
   --chart-3: #6BA89F;
   --chart-4: #A8B5B5;
   --chart-5: #D4C9A8;
   --sidebar: #1E2828;
   --sidebar-foreground: #E8E4D9;
-  --sidebar-primary: #E0BC5E;
+  --sidebar-primary: #F4A582;
   --sidebar-primary-foreground: #1E2828;
   --sidebar-accent: #3A4545;
   --sidebar-accent-foreground: #E8E4D9;
   --sidebar-border: #3A4545;
-  --sidebar-ring: #E0BC5E;
+  --sidebar-ring: #F4A582;
 }
 
 @theme inline {
