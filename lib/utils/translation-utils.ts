@@ -230,7 +230,7 @@ export const createDateTranslations = (
  * 
  * @example
  * ```ts
- * const url = generateWhatsAppUrl('+393501159152', 'Ciao! Sono interessato...')
+ * const url = generateWhatsAppUrl('+393495780944', 'Ciao! Sono interessato...')
  * // Returns: 'https://wa.me/393501159152?text=Ciao%21%20Sono%20interessato...'
  * ```
  */
@@ -252,7 +252,7 @@ export const generateWhatsAppUrl = (phoneNumber: string, message: string): strin
  */
 export const createWhatsAppUtils = (
   t: (key: string, params?: TranslationParams) => string,
-  phoneNumber: string = '+393501159152'
+  phoneNumber: string = '+393495780944'
 ) => ({
   /**
    * Generate WhatsApp URL with default message in current language
