@@ -11,20 +11,79 @@ export default function GallerySection() {
   const [currentPage, setCurrentPage] = useState(0)
   const [autoRotate, setAutoRotate] = useState(true)
 
-  // Virtual tour images from public/pictures
+  // Combined images from both villas - ALL pictures
   const galleryImages = [
-    { id: 1, src: "/pictures/IMG_7194.webp", alt: "Virtual tour 1", size: 0 },
-    { id: 2, src: "/pictures/IMG_7196.webp", alt: "Virtual tour 2", size: 1 },
-    { id: 3, src: "/pictures/IMG_7199.webp", alt: "Virtual tour 3", size: 2 },
-    { id: 4, src: "/pictures/IMG_7202.webp", alt: "Virtual tour 4", size: 3 },
-    { id: 5, src: "/pictures/IMG_7203.webp", alt: "Virtual tour 5", size: 4 },
-    { id: 6, src: "/pictures/IMG_7205.webp", alt: "Virtual tour 6", size: 5 },
-    { id: 7, src: "/pictures/IMG_7597.webp", alt: "Virtual tour 7", size: 0 },
-    { id: 8, src: "/pictures/IMG_7598.webp", alt: "Virtual tour 8", size: 1 },
-    { id: 9, src: "/pictures/IMG_7599.webp", alt: "Virtual tour 9", size: 2 },
-    { id: 10, src: "/pictures/IMG_7600.webp", alt: "Virtual tour 10", size: 3 },
-    { id: 11, src: "/pictures/IMG_7601.webp", alt: "Virtual tour 11", size: 4 },
-    { id: 12, src: "/pictures/IMG_7602.webp", alt: "Virtual tour 12", size: 5 },
+    // Villa i 2 Mari - 32 images
+    { id: 1, src: "/pictures/villa_i_2_mari/ok%20giardino%20sera-b.webp", alt: "Garden at evening" },
+    { id: 2, src: "/pictures/villa_i_2_mari/ok%20piscina%20alta1.webp", alt: "Pool view" },
+    { id: 3, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20camera1.webp", alt: "Bedroom" },
+    { id: 4, src: "/pictures/villa_i_2_mari/%20ok%20Villa%20i2mari-cucina.webp", alt: "Kitchen" },
+    { id: 5, src: "/pictures/villa_i_2_mari/ok%20z%20soggiorno2%20%202mari.webp", alt: "Living room" },
+    { id: 6, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20bagno.webp", alt: "Bathroom" },
+    { id: 7, src: "/pictures/villa_i_2_mari/ok%20drone.webp", alt: "Aerial view" },
+    { id: 8, src: "/pictures/villa_i_2_mari/ok%20piscine%20notte1.webp", alt: "Pool at night" },
+    { id: 9, src: "/pictures/villa_i_2_mari/ok%20giardino1.webp", alt: "Garden" },
+    { id: 10, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-dal%20balcone.webp", alt: "Balcony view" },
+    { id: 11, src: "/pictures/villa_i_2_mari/ok%20z%20la%20piazzetta1.webp", alt: "Local square" },
+    { id: 12, src: "/pictures/villa_i_2_mari/ok%20isola%20di%20capo%20passero.webp", alt: "Capo Passero island" },
+    { id: 13, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari%20TV.webp", alt: "TV room" },
+    { id: 14, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-bagno1.webp", alt: "Bathroom" },
+    { id: 15, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-camera%203.webp", alt: "Bedroom 3" },
+    { id: 16, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-camera.webp", alt: "Bedroom" },
+    { id: 17, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-cameretta1.webp", alt: "Small bedroom" },
+    { id: 18, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-corridoio1.webp", alt: "Hallway" },
+    { id: 19, src: "/pictures/villa_i_2_mari/ok%20Villa%20i2%20mari-corridoio.webp", alt: "Corridor" },
+    { id: 20, src: "/pictures/villa_i_2_mari/ok%20Villa%20i2mari-tavolo%20cucina.webp", alt: "Kitchen table" },
+    { id: 21, src: "/pictures/villa_i_2_mari/ok%20giardino2.webp", alt: "Garden view" },
+    { id: 22, src: "/pictures/villa_i_2_mari/ok%20villa%20i%202%20mari-cameretta.webp", alt: "Kids room" },
+    { id: 23, src: "/pictures/villa_i_2_mari/ok%20Borgo84%202.webp", alt: "Borgo84" },
+    { id: 24, src: "/pictures/villa_i_2_mari/ok%20Marzamemi%20cinefest.webp", alt: "Marzamemi cinema festival" },
+    { id: 25, src: "/pictures/villa_i_2_mari/ok%20carratois%20pantano.webp", alt: "Carratois beach" },
+    { id: 26, src: "/pictures/villa_i_2_mari/ok%20isolotto%20brancati4.webp", alt: "Brancati island" },
+    { id: 27, src: "/pictures/villa_i_2_mari/ok%20spiaggiacavettone5.webp", alt: "Cavettone beach" },
+    { id: 28, src: "/pictures/villa_i_2_mari/ok%20z%20area%20fitness+padel.webp", alt: "Fitness and padel area" },
+    { id: 29, src: "/pictures/villa_i_2_mari/ok%20z%20la%20cialoma1.webp", alt: "La Cialoma restaurant" },
+    { id: 30, src: "/pictures/villa_i_2_mari/ok%20z%20manifesto%20tonnara2.webp", alt: "Tonnara poster" },
+    { id: 31, src: "/pictures/villa_i_2_mari/ok%20z%20soggiorno3%202%20mari.webp", alt: "Living room" },
+    { id: 32, src: "/pictures/villa_i_2_mari/ok%20z%20tonnara.webp", alt: "Tonnara" },
+    
+    // Villa Zefiro - 36 images
+    { id: 33, src: "/pictures/villa_zefiro/ok%20piscina%20alta.webp", alt: "Pool view" },
+    { id: 34, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno.webp", alt: "Living room" },
+    { id: 35, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera.webp", alt: "Bedroom" },
+    { id: 36, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20terrazza.webp", alt: "Terrace" },
+    { id: 37, src: "/pictures/villa_zefiro/ok%20giardino%20sera-b.webp", alt: "Garden at evening" },
+    { id: 38, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno.webp", alt: "Bathroom" },
+    { id: 39, src: "/pictures/villa_zefiro/ok%20drone3.webp", alt: "Aerial view" },
+    { id: 40, src: "/pictures/villa_zefiro/ok%20piscine%20notte.webp", alt: "Pool at night" },
+    { id: 41, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20mansarda.webp", alt: "Attic room" },
+    { id: 42, src: "/pictures/villa_zefiro/ok%20Capo%20Passero%20dalla%20terrazza.webp", alt: "View from terrace" },
+    { id: 43, src: "/pictures/villa_zefiro/ok%20z%20cialoma%20%20.webp", alt: "La Cialoma" },
+    { id: 44, src: "/pictures/villa_zefiro/ok%20Marzamemi%20porto.webp", alt: "Marzamemi port" },
+    { id: 45, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno1.webp", alt: "Living room" },
+    { id: 46, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno1.webp", alt: "Bathroom" },
+    { id: 47, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20balcone.webp", alt: "Balcony" },
+    { id: 48, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera2.webp", alt: "Bedroom 2" },
+    { id: 49, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera3.webp", alt: "Bedroom 3" },
+    { id: 50, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20letto%20mansarda1.webp", alt: "Attic bed" },
+    { id: 51, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20letto%20mansarda2.webp", alt: "Attic bed 2" },
+    { id: 52, src: "/pictures/villa_zefiro/ok%20App.17%20bagno%20mansarda.webp", alt: "Attic bathroom" },
+    { id: 53, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno%20mansarda.webp", alt: "Attic bathroom" },
+    { id: 54, src: "/pictures/villa_zefiro/ok%20piscina%20bassa3.webp", alt: "Lower pool" },
+    { id: 55, src: "/pictures/villa_zefiro/ok%20piscinabassa4.webp", alt: "Lower pool view" },
+    { id: 56, src: "/pictures/villa_zefiro/ok%20spiaggia%20cavettone1.webp", alt: "Cavettone beach" },
+    { id: 57, src: "/pictures/villa_zefiro/ok%20Borgo84%201.webp", alt: "Borgo84" },
+    { id: 58, src: "/pictures/villa_zefiro/ok%20Baiamuri-b.webp", alt: "Baiamuri beach" },
+    { id: 59, src: "/pictures/villa_zefiro/ok%20WhatsApp%20Image%202025-10-26%20at%2019.36.13(2).webp", alt: "Villa view" },
+    { id: 60, src: "/pictures/villa_zefiro/ok%20WhatsApp%20Image%202025-10-29%20at%2011.53.10(1).webp", alt: "Villa view" },
+    { id: 61, src: "/pictures/villa_zefiro/ok%20z%20aperirivo1%20zefiro.webp", alt: "Aperitivo" },
+    { id: 62, src: "/pictures/villa_zefiro/ok%20z%20area%20fitness+padel.webp", alt: "Fitness and padel area" },
+    { id: 63, src: "/pictures/villa_zefiro/ok%20z%20colazione%20porto1.webp", alt: "Breakfast at port" },
+    { id: 64, src: "/pictures/villa_zefiro/ok%20z%20mansarda%20Zefiro.webp", alt: "Attic" },
+    { id: 65, src: "/pictures/villa_zefiro/ok%20z%20padel.webp", alt: "Padel court" },
+    { id: 66, src: "/pictures/villa_zefiro/ok%20z%20particolare1%20zefiro.webp", alt: "Detail" },
+    { id: 67, src: "/pictures/villa_zefiro/ok%20z%20scala2%20zefiro.webp", alt: "Stairs" },
+    { id: 68, src: "/pictures/villa_zefiro/ok%20z%20tonnara1.webp", alt: "Tonnara" },
   ]
 
   // Auto-rotate pages every 5 seconds
@@ -164,13 +223,6 @@ export default function GallerySection() {
               >
                 <ChevronRight size={18} />
               </Button>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <div
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${autoRotate ? "bg-primary scale-125" : "bg-gray-300"}`}
-              ></div>
-              <span className="hidden sm:inline">{autoRotate ? "Auto" : "Manual"}</span>
             </div>
           </div>
 

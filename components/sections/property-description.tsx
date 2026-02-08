@@ -36,7 +36,7 @@ export default function PropertyDescriptionSection() {
           {/* Image */}
           <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 order-2 lg:order-1 group">
             <Image
-              src="/pictures/IMG_7600.webp"
+              src="/pictures/villa_i_2_mari/ok%20giardino1.webp"
               alt="Property interior"
               fill
               className="object-cover object-center group-hover:scale-105 transition-transform duration-300"

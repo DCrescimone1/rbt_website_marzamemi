@@ -52,6 +52,26 @@ export default function ZoomContainer() {
     const container = containerRef.current;
     const heading = headingRef.current;
     
+    // Wait for images to load before creating animation
+    const images = container.querySelectorAll('img');
+    let loadedCount = 0;
+    const totalImages = images.length;
+    
+    const checkAllLoaded = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        ScrollTrigger.refresh();
+      }
+    };
+    
+    images.forEach(img => {
+      if (img.complete) {
+        checkAllLoaded();
+      } else {
+        img.addEventListener('load', checkAllLoaded);
+      }
+    });
+    
     // Create ONE timeline with ONE ScrollTrigger for ALL elements
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -85,7 +105,7 @@ export default function ZoomContainer() {
 
     // Animate Layer 2 images (except one that passes through)
     const layer2Images = Array.from(container.querySelectorAll('[data-layer="2"]'));
-    const passThroughLayer2 = layer2Images.filter((_, index) => index === 2); // IMG_7597
+    const passThroughLayer2 = layer2Images.filter((_, index) => index === 2); // Villa Zefiro terrazza
     const otherLayer2Images = layer2Images.filter((_, index) => index !== 2);
     
     // Regular Layer 2 images
@@ -126,7 +146,7 @@ export default function ZoomContainer() {
 
     // Animate Layer 1 images (except bottom two which pass through)
     const layer1Images = Array.from(container.querySelectorAll('[data-layer="1"]'));
-    const bottomImages = layer1Images.filter((_, index) => index === 1 || index === 2); // IMG_7196 and IMG_7199
+    const bottomImages = layer1Images.filter((_, index) => index === 1 || index === 2); // piscina alta and camera
     const otherLayer1Images = layer1Images.filter((_, index) => index !== 1 && index !== 2);
     
     // Regular Layer 1 images
@@ -186,6 +206,9 @@ export default function ZoomContainer() {
     // Cleanup
     return () => {
       tl.kill();
+      images.forEach(img => {
+        img.removeEventListener('load', checkAllLoaded);
+      });
     };
   }, { scope: containerRef, dependencies: [isMobile] });
 

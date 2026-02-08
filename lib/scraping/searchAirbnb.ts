@@ -1,18 +1,19 @@
 import type { SearchResult } from './types';
 import { Browser } from 'playwright';
-import { SCRAPING_CONFIG, AIRBNB_CONFIG } from './config';
+import { SCRAPING_CONFIG } from './config';
 
 interface AirbnbSearchParams {
   dates: { from: string; to: string };
   guests: { adults: number; children: number };
   browser: Browser;
+  url: string;
   signal?: AbortSignal;
 }
 
 // Construct Airbnb URL with search parameters
 function buildAirbnbUrl(params: AirbnbSearchParams): string {
-  const { dates, guests } = params;
-  const url = new URL(AIRBNB_CONFIG.baseUrl);
+  const { dates, guests, url: baseUrl } = params;
+  const url = new URL(baseUrl);
   url.searchParams.set('check_in', dates.from);
   url.searchParams.set('check_out', dates.to);
   url.searchParams.set('guests', (guests.adults + guests.children).toString());
@@ -42,6 +43,7 @@ export async function searchAirbnbPrice(
     const url = buildAirbnbUrl(params);
 
     console.log('[prices] Airbnb search started');
+    console.log('[prices] Airbnb URL:', url);
     const startTime = Date.now();
 
     await page.goto(url, {
@@ -130,6 +132,7 @@ export async function searchAirbnbPrice(
       priceText = await page.evaluate(() => {
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
         const pricePattern = /€\s*[\d,\.]+/g;
+        const candidates: string[] = [];
         let node: Node | null;
         while ((node = walker.nextNode())) {
           const text = (node.textContent || '');
@@ -142,14 +145,19 @@ export async function searchAirbnbPrice(
               if (!isStrike) {
                 const lowerText = text.toLowerCase();
                 if (!lowerText.includes('originally') && !lowerText.includes('was') && !lowerText.includes('per night') && !lowerText.includes('/night')) {
-                  return matches[0];
+                  candidates.push(matches[0]);
                 }
               }
             }
           }
         }
-        return null;
+        console.log('[Airbnb Browser] Found price candidates:', candidates);
+        return candidates.length > 0 ? candidates[0] : null;
       });
+      
+      if (priceText) {
+        console.log('[prices] Airbnb: Fallback found price:', priceText);
+      }
     }
 
     if (!priceText) {

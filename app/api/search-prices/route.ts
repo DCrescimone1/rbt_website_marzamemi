@@ -13,6 +13,14 @@ interface SearchRequest {
   language?: string
 }
 
+type CalendarEvent = {
+  start: string
+  end: string
+  summary: string
+  source: string
+  property: "villa_zefiro" | "villa_i2mari"
+}
+
 const FALLBACK_LANGUAGE: LanguageCode = "en"
 
 const resolveLanguage = (language?: string): LanguageCode => {
@@ -30,12 +38,38 @@ const getDirectBookingLabel = (language: LanguageCode): string => {
   return primary ?? fallback ?? "Direct Booking"
 }
 
+const VILLA_ZEFIRO_AIRBNB_URL = process.env.VILLA_ZEFIRO_AIRBNB_URL as string
+const VILLA_I2MARI_AIRBNB_URL = process.env.VILLA_I2MARI_AIRBNB_URL as string
+
+// Guest capacity limits
+const VILLA_ZEFIRO_MAX_GUESTS = 6
+const VILLA_I2MARI_MAX_GUESTS = 4
+
 export async function POST(request: NextRequest) {
   let browser: Browser | null = null
 
   try {
     const body: SearchRequest = await request.json()
     const { dates, guests, language } = body
+
+    // Calculate total guests
+    const totalGuests = guests.adults + guests.children
+    
+    // Determine which villas can accommodate the guests
+    const searchVillaZefiro = totalGuests <= VILLA_ZEFIRO_MAX_GUESTS
+    const searchVillaI2Mari = totalGuests <= VILLA_I2MARI_MAX_GUESTS
+    
+    console.log(`[prices] Total guests: ${totalGuests}`)
+    console.log(`[prices] Search Villa Zefiro (max ${VILLA_ZEFIRO_MAX_GUESTS}): ${searchVillaZefiro}`)
+    console.log(`[prices] Search Villa i 2 Mari (max ${VILLA_I2MARI_MAX_GUESTS}): ${searchVillaI2Mari}`)
+    
+    // If no villa can accommodate, return error
+    if (!searchVillaZefiro && !searchVillaI2Mari) {
+      return NextResponse.json(
+        { error: `Maximum ${VILLA_ZEFIRO_MAX_GUESTS} guests allowed` },
+        { status: 400 }
+      )
+    }
 
     const resolvedLanguage = resolveLanguage(language)
 
@@ -82,25 +116,47 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Execute both searches in parallel using Promise.all with timeouts
+    // Execute OTA searches in parallel using Promise.all with timeouts
     const parallelStartTime = Date.now()
     
     const bookingAbort = new AbortController()
-    const airbnbAbort = new AbortController()
+    const airbnbZefiroAbort = new AbortController()
+    const airbnbI2MariAbort = new AbortController()
 
-    const [bookingResult, airbnbResult] = await Promise.all([
-      withTimeout(
-        searchBookingPrice({ dates, guests, language: resolvedLanguage, browser, signal: bookingAbort.signal }),
-        15000,
-        'Booking.com',
-        bookingAbort
-      ),
-      withTimeout(
-        searchAirbnbPrice({ dates, guests, browser, signal: airbnbAbort.signal }),
-        8000,
-        'Airbnb',
-        airbnbAbort
-      )
+    // Only search Booking.com if at least one villa can accommodate guests
+    const bookingPromise = (searchVillaZefiro || searchVillaI2Mari)
+      ? withTimeout(
+          searchBookingPrice({ dates, guests, language: resolvedLanguage, browser, signal: bookingAbort.signal }),
+          15000,
+          'Booking.com',
+          bookingAbort,
+        )
+      : Promise.resolve({ villaI2Mari: null, villaZefiro: null })
+
+    // Only search Airbnb for Villa Zefiro if it can accommodate guests
+    const airbnbZefiroPromise = (VILLA_ZEFIRO_AIRBNB_URL && searchVillaZefiro)
+      ? withTimeout(
+          searchAirbnbPrice({ dates, guests, browser, url: VILLA_ZEFIRO_AIRBNB_URL, signal: airbnbZefiroAbort.signal }),
+          8000,
+          'Airbnb Villa Zefiro',
+          airbnbZefiroAbort,
+        )
+      : Promise.resolve(null)
+
+    // Only search Airbnb for Villa i 2 Mari if it can accommodate guests
+    const airbnbI2MariPromise = (VILLA_I2MARI_AIRBNB_URL && searchVillaI2Mari)
+      ? withTimeout(
+          searchAirbnbPrice({ dates, guests, browser, url: VILLA_I2MARI_AIRBNB_URL, signal: airbnbI2MariAbort.signal }),
+          8000,
+          'Airbnb Villa i 2 Mari',
+          airbnbI2MariAbort,
+        )
+      : Promise.resolve(null)
+
+    const [bookingResult, airbnbZefiroResult, airbnbI2MariResult] = await Promise.all([
+      bookingPromise,
+      airbnbZefiroPromise,
+      airbnbI2MariPromise,
     ])
 
     const parallelDuration = Date.now() - parallelStartTime
@@ -110,59 +166,164 @@ export async function POST(request: NextRequest) {
     } else {
       console.log('[prices] Booking.com: Result is null (see earlier logs for reasons)')
     }
-    if (airbnbResult) {
-      console.log('[prices] Airbnb: Result OK', airbnbResult)
+    if (airbnbZefiroResult) {
+      console.log('[prices] Airbnb Villa Zefiro: Result OK', airbnbZefiroResult)
     } else {
-      console.log('[prices] Airbnb: Result is null (see earlier logs for reasons)')
+      console.log('[prices] Airbnb Villa Zefiro: Result is null (see earlier logs for reasons)')
+    }
+    if (airbnbI2MariResult) {
+      console.log('[prices] Airbnb Villa i 2 Mari: Result OK', airbnbI2MariResult)
+    } else {
+      console.log('[prices] Airbnb Villa i 2 Mari: Result is null (see earlier logs for reasons)')
     }
 
-    // Handle case where both OTA searches return null (404 error)
-    if (!bookingResult && !airbnbResult) {
+    const bookingVillaI2Mari = bookingResult?.villaI2Mari ?? null
+    const bookingVillaZefiro = bookingResult?.villaZefiro ?? null
+
+    // Handle case where both villas have no OTA prices at all (404 error)
+    const anyOtaForZefiro = !!(bookingVillaZefiro || airbnbZefiroResult)
+    const anyOtaForI2Mari = !!(bookingVillaI2Mari || airbnbI2MariResult)
+    if (!anyOtaForZefiro && !anyOtaForI2Mari) {
       return NextResponse.json(
         { error: "No prices found" },
-        { status: 404 }
+        { status: 404 },
       )
     }
 
-    // Build results array with OTA prices and direct price
-    const results: SearchResult[] = []
-
-    // Add OTA results if available
-    if (bookingResult) {
-      results.push(bookingResult)
+    // Fetch calendar data to determine availability per villa
+    let calendarEvents: CalendarEvent[] = []
+    try {
+      // Use relative URL to avoid issues with NEXT_PUBLIC_APP_URL in development
+      const calendarUrl = process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:3000/api/calendar'
+        : `${process.env.NEXT_PUBLIC_APP_URL}/api/calendar`
+      console.log('[prices] Fetching calendar from:', calendarUrl)
+      const calendarRes = await fetch(calendarUrl)
+      if (calendarRes.ok) {
+        calendarEvents = (await calendarRes.json()) as CalendarEvent[]
+      } else {
+        console.warn('[prices] Calendar API returned non-OK status', calendarRes.status)
+      }
+    } catch (err) {
+      console.error('[prices] Failed to fetch calendar data:', err)
     }
 
-    if (airbnbResult) {
-      results.push(airbnbResult)
+    const searchFrom = new Date(dates.from)
+    const searchTo = new Date(dates.to)
+
+    const hasOverlap = (event: CalendarEvent) => {
+      const eventStart = new Date(event.start)
+      const eventEnd = new Date(event.end)
+      return eventStart <= searchTo && searchFrom <= eventEnd
     }
 
-    // Call calculateDirectPrice with OTA results
-    const otaPrices = [bookingResult, airbnbResult].filter(
-      (result): result is SearchResult => result !== null
-    )
+    const villaZefiroBooked = calendarEvents
+      .filter((e) => e.property === 'villa_zefiro')
+      .some((e) => hasOverlap(e))
 
-    const directPrice = calculateDirectPrice({
-      otaPrices,
-      nights
-    })
+    const villaI2MariBooked = calendarEvents
+      .filter((e) => e.property === 'villa_i2mari')
+      .some((e) => hasOverlap(e))
 
-    console.log(`[prices] Direct price calculated: ${directPrice}`)
+    // Test mode: Force unavailability for testing UI
+    const testZefiroUnavailable = process.env.TEST_VILLA_ZEFIRO_UNAVAILABLE === 'true'
+    const testI2MariUnavailable = process.env.TEST_VILLA_I2MARI_UNAVAILABLE === 'true'
+    
+    if (testZefiroUnavailable) console.log('[prices] TEST MODE: Villa Zefiro forced unavailable')
+    if (testI2MariUnavailable) console.log('[prices] TEST MODE: Villa i 2 Mari forced unavailable')
 
-    // Add direct booking result with isDirectBooking flag
-    results.push({
-      platform: getDirectBookingLabel(resolvedLanguage),
-      price: directPrice.toString(),
-      currency: '€',
-      url: '#',
-      logoSrc: '/logo.webp',
-      isDirectBooking: true
-    })
+    // Villa is available only if: not booked AND can accommodate guests AND not in test mode
+    const villaZefiroAvailable = !villaZefiroBooked && searchVillaZefiro && !testZefiroUnavailable
+    const villaI2MariAvailable = !villaI2MariBooked && searchVillaI2Mari && !testI2MariUnavailable
+
+    // Build per-villa result arrays and direct prices
+    // Only include OTA prices if the villa can accommodate the guests
+    const villaZefiroOta: SearchResult[] = []
+    if (bookingVillaZefiro && searchVillaZefiro) villaZefiroOta.push(bookingVillaZefiro)
+    if (airbnbZefiroResult && searchVillaZefiro) villaZefiroOta.push(airbnbZefiroResult)
+
+    const villaI2MariOta: SearchResult[] = []
+    if (bookingVillaI2Mari && searchVillaI2Mari) villaI2MariOta.push(bookingVillaI2Mari)
+    if (airbnbI2MariResult && searchVillaI2Mari) villaI2MariOta.push(airbnbI2MariResult)
+
+    const directPriceZefiro = villaZefiroOta.length
+      ? calculateDirectPrice({ otaPrices: villaZefiroOta, nights })
+      : null
+    const directPriceI2Mari = villaI2MariOta.length
+      ? calculateDirectPrice({ otaPrices: villaI2MariOta, nights })
+      : null
+
+    const villaZefiroResults: SearchResult[] = []
+    if (airbnbZefiroResult && searchVillaZefiro) villaZefiroResults.push(airbnbZefiroResult)
+    if (bookingVillaZefiro && searchVillaZefiro) villaZefiroResults.push(bookingVillaZefiro)
+    if (directPriceZefiro !== null && searchVillaZefiro) {
+      villaZefiroResults.push({
+        platform: getDirectBookingLabel(resolvedLanguage),
+        price: directPriceZefiro.toString(),
+        currency: '€',
+        url: '#',
+        logoSrc: '/logo.webp',
+        isDirectBooking: true,
+      })
+    }
+
+    const villaI2MariResults: SearchResult[] = []
+    if (airbnbI2MariResult && searchVillaI2Mari) villaI2MariResults.push(airbnbI2MariResult)
+    if (bookingVillaI2Mari && searchVillaI2Mari) villaI2MariResults.push(bookingVillaI2Mari)
+    if (directPriceI2Mari !== null && searchVillaI2Mari) {
+      villaI2MariResults.push({
+        platform: getDirectBookingLabel(resolvedLanguage),
+        price: directPriceI2Mari.toString(),
+        currency: '€',
+        url: '#',
+        logoSrc: '/logo.webp',
+        isDirectBooking: true,
+      })
+    }
 
     const totalDuration = Date.now() - parallelStartTime
-    console.log(`[prices] Search completed. Count: ${results.length}, Duration(ms): ${totalDuration}`)
+    console.log('[prices] Search completed.', {
+      durationMs: totalDuration,
+      villaZefiroCount: villaZefiroResults.length,
+      villaI2MariCount: villaI2MariResults.length,
+    })
 
-    // Return results array with SearchResult objects
-    return NextResponse.json({ results })
+    // Determine unavailability reasons
+    const getUnavailabilityReason = (
+      isBooked: boolean, 
+      canAccommodate: boolean, 
+      maxGuests: number,
+      testMode: boolean
+    ): string | undefined => {
+      if (testMode) return 'Test mode: Forced unavailable'
+      if (!canAccommodate) {
+        const key = translations[resolvedLanguage]?.booking?.unavailability?.exceedsCapacity
+        return key ? key.replace('{maxGuests}', maxGuests.toString()) : `Exceeds capacity (max ${maxGuests} guests)`
+      }
+      if (isBooked) {
+        return translations[resolvedLanguage]?.booking?.unavailability?.alreadyBooked || 'Already booked for these dates'
+      }
+      return undefined
+    }
+
+    return NextResponse.json({
+      villaZefiro: {
+        results: villaZefiroResults,
+        available: villaZefiroAvailable,
+        unavailabilityReason: villaZefiroAvailable 
+          ? undefined 
+          : getUnavailabilityReason(villaZefiroBooked, searchVillaZefiro, VILLA_ZEFIRO_MAX_GUESTS, testZefiroUnavailable),
+        maxGuests: VILLA_ZEFIRO_MAX_GUESTS,
+      },
+      villaI2Mari: {
+        results: villaI2MariResults,
+        available: villaI2MariAvailable,
+        unavailabilityReason: villaI2MariAvailable 
+          ? undefined 
+          : getUnavailabilityReason(villaI2MariBooked, searchVillaI2Mari, VILLA_I2MARI_MAX_GUESTS, testI2MariUnavailable),
+        maxGuests: VILLA_I2MARI_MAX_GUESTS,
+      },
+    })
   } catch (error) {
     // Log all errors with [prices] prefix
     console.error('[prices] Unexpected error:', error)

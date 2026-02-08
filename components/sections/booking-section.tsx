@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { Loader2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -52,7 +53,7 @@ export default function BookingSection() {
   const [children, setChildren] = useState(0)
   const [pets, setPets] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [searchResults, setSearchResults] = useState(null)
+  const [searchResults, setSearchResults] = useState<any>(null)
   const [checkInInput, setCheckInInput] = useState("")
   const [checkOutInput, setCheckOutInput] = useState("")
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
@@ -69,6 +70,20 @@ export default function BookingSection() {
   useEffect(() => {
     if (!isCalendarOpen) return
 
+    // Lock scroll on both html and body so the calendar doesn't move with page scroll
+    const scrollY = window.scrollY
+    const prevHtmlOverflow = document.documentElement.style.overflow
+    const prevBodyOverflow = document.body.style.overflow
+    const prevBodyPosition = document.body.style.position
+    const prevBodyTop = document.body.style.top
+    const prevBodyWidth = document.body.style.width
+
+    document.documentElement.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
+    document.body.style.position = "fixed"
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = "100%"
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeCalendar()
@@ -76,7 +91,15 @@ export default function BookingSection() {
     }
 
     window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
+    return () => {
+      window.removeEventListener("keydown", onKeyDown)
+      document.documentElement.style.overflow = prevHtmlOverflow
+      document.body.style.overflow = prevBodyOverflow
+      document.body.style.position = prevBodyPosition
+      document.body.style.top = prevBodyTop
+      document.body.style.width = prevBodyWidth
+      window.scrollTo(0, scrollY)
+    }
   }, [isCalendarOpen])
 
   const processDateInput = (
@@ -164,8 +187,13 @@ export default function BookingSection() {
         throw new Error((data && data.error) || "Failed to fetch prices")
       }
 
-      // On success: only show results if we actually have some
-      if (data && Array.isArray(data.results) && data.results.length > 0) {
+      // On success: expect dual-villa structure and ensure there are some results
+      const hasZefiroResults =
+        data && data.villaZefiro && Array.isArray(data.villaZefiro.results) && data.villaZefiro.results.length > 0
+      const hasI2MariResults =
+        data && data.villaI2Mari && Array.isArray(data.villaI2Mari.results) && data.villaI2Mari.results.length > 0
+
+      if (hasZefiroResults || hasI2MariResults) {
         setSearchResults(data)
       } else {
         // Defensive: treat empty results as scraping failure
@@ -374,7 +402,8 @@ export default function BookingSection() {
             {searchResults && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <PriceComparison
-                  results={searchResults}
+                  results={searchResults.villaZefiro}
+                  available={searchResults.villaZefiro?.available ?? false}
                   bookingDetails={{
                     checkIn,
                     checkOut,
@@ -384,13 +413,15 @@ export default function BookingSection() {
                   onDirectBooking={handleDirectBooking}
                   property={{
                     name: t('booking.properties.villaZefiro.name'),
-                    image: "/placeholder.svg",
+                    image: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno1.webp",
                     size: t('booking.properties.villaZefiro.size'),
-                    rooms: t('booking.properties.villaZefiro.rooms')
+                    rooms: t('booking.properties.villaZefiro.rooms'),
+                    bedrooms: t('booking.properties.villaZefiro.bedrooms')
                   }}
                 />
                 <PriceComparison
-                  results={searchResults}
+                  results={searchResults.villaI2Mari}
+                  available={searchResults.villaI2Mari?.available ?? false}
                   bookingDetails={{
                     checkIn,
                     checkOut,
@@ -400,9 +431,10 @@ export default function BookingSection() {
                   onDirectBooking={handleDirectBooking}
                   property={{
                     name: t('booking.properties.villaI2Mari.name'),
-                    image: "/placeholder.svg",
+                    image: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari%20TV.webp",
                     size: t('booking.properties.villaI2Mari.size'),
-                    rooms: t('booking.properties.villaI2Mari.rooms')
+                    rooms: t('booking.properties.villaI2Mari.rooms'),
+                    bedrooms: t('booking.properties.villaI2Mari.bedrooms')
                   }}
                 />
               </div>
@@ -424,43 +456,49 @@ export default function BookingSection() {
           </div>
         </div>
       </div>
-      {isCalendarOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-8"
-          onClick={closeCalendar}
-        >
+      {typeof document !== "undefined" &&
+        isCalendarOpen &&
+        createPortal(
           <div
-            className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 px-4 py-8"
+            onClick={closeCalendar}
+            role="dialog"
+            aria-modal="true"
+            aria-label={activeField === "checkIn" ? t("booking.checkIn") : t("booking.checkOut")}
           >
-            <button
-              onClick={closeCalendar}
-              className="absolute top-4 right-4 p-2 rounded-full bg-muted hover:bg-muted/80 text-foreground"
-              aria-label="Close calendar"
+            <div
+              className="relative z-[10000] w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
             >
-              <X size={18} />
-            </button>
-            <div className="p-6">
-              <h4 className="font-serif text-xl font-semibold text-foreground mb-4">
-                {activeField === "checkIn" ? t('booking.checkIn') : t('booking.checkOut')}
-              </h4>
-              <AvailabilityCalendar
-                sticky={false}
-                className="shadow-none border-0"
-                initialFrom={checkIn || undefined}
-                initialTo={checkOut || undefined}
-                onDateSelect={(dates) => {
-                  setCheckIn(dates.from)
-                  setCheckInInput(formatDisplayFromIso(dates.from))
-                  setCheckOut(dates.to)
-                  setCheckOutInput(formatDisplayFromIso(dates.to))
-                  setIsCalendarOpen(false)
-                }}
-              />
+              <button
+                onClick={closeCalendar}
+                className="absolute top-4 right-4 p-2 rounded-full bg-muted hover:bg-muted/80 text-foreground z-10"
+                aria-label="Close calendar"
+              >
+                <X size={18} />
+              </button>
+              <div className="p-6">
+                <h4 className="font-serif text-xl font-semibold text-foreground mb-4">
+                  {activeField === "checkIn" ? t("booking.checkIn") : t("booking.checkOut")}
+                </h4>
+                <AvailabilityCalendar
+                  sticky={false}
+                  className="shadow-none border-0"
+                  initialFrom={checkIn || undefined}
+                  initialTo={checkOut || undefined}
+                  onDateSelect={(dates) => {
+                    setCheckIn(dates.from)
+                    setCheckInInput(formatDisplayFromIso(dates.from))
+                    setCheckOut(dates.to)
+                    setCheckOutInput(formatDisplayFromIso(dates.to))
+                    setIsCalendarOpen(false)
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </section>
   )
 }

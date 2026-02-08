@@ -2,8 +2,10 @@ import { NextResponse } from "next/server"
 import ICAL from "ical.js"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 
-const AIRBNB_CALENDAR_URL = process.env.AIRBNB_CALENDAR_URL as string
-const BOOKING_CALENDAR_URL = process.env.BOOKING_CALENDAR_URL as string
+const VILLA_ZEFIRO_ICAL = process.env.VILLA_ZEFIRO_ICAL as string
+const VILLA_I2MARI_ICAL = process.env.VILLA_I2MARI_ICAL as string
+const VILLA_ZEFIRO_AIRBNB_ICAL = process.env.VILLA_ZEFIRO_AIRBNB_ICAL as string
+const VILLA_I2MARI_AIRBNB_ICAL = process.env.VILLA_I2MARI_AIRBNB_ICAL as string
 const CACHE_DURATION = 300
 
 let cache: {
@@ -11,7 +13,11 @@ let cache: {
   data: string
 } | null = null
 
-async function fetchAndParseCalendar(url: string, source: string) {
+async function fetchAndParseCalendar(
+  url: string,
+  source: string,
+  property: "villa_zefiro" | "villa_i2mari",
+) {
   try {
     const response = await fetch(url, {
       headers: {
@@ -39,6 +45,7 @@ async function fetchAndParseCalendar(url: string, source: string) {
         end: endDate.toISOString(),
         summary: event.summary || "Booked",
         source: source,
+        property: property,
       }
     })
   } catch (error) {
@@ -62,16 +69,34 @@ export async function GET() {
     }
 
     // Fetch calendar data
-    const events = []
+    const events: Array<{
+      start: string
+      end: string
+      summary: string
+      source: string
+      property: "villa_zefiro" | "villa_i2mari"
+    }> = []
 
-    if (AIRBNB_CALENDAR_URL) {
-      const airbnbEvents = await fetchAndParseCalendar(AIRBNB_CALENDAR_URL, "Airbnb")
-      events.push(...airbnbEvents)
+    // Fetch Booking.com calendars
+    if (VILLA_ZEFIRO_ICAL) {
+      const zefiroEvents = await fetchAndParseCalendar(VILLA_ZEFIRO_ICAL, "Villa Zefiro (Booking.com)", "villa_zefiro")
+      events.push(...zefiroEvents)
     }
 
-    if (BOOKING_CALENDAR_URL) {
-      const bookingEvents = await fetchAndParseCalendar(BOOKING_CALENDAR_URL, "Booking.com")
-      events.push(...bookingEvents)
+    if (VILLA_I2MARI_ICAL) {
+      const i2mariEvents = await fetchAndParseCalendar(VILLA_I2MARI_ICAL, "Villa i 2 Mari (Booking.com)", "villa_i2mari")
+      events.push(...i2mariEvents)
+    }
+
+    // Fetch Airbnb calendars
+    if (VILLA_ZEFIRO_AIRBNB_ICAL) {
+      const zefiroAirbnbEvents = await fetchAndParseCalendar(VILLA_ZEFIRO_AIRBNB_ICAL, "Villa Zefiro (Airbnb)", "villa_zefiro")
+      events.push(...zefiroAirbnbEvents)
+    }
+
+    if (VILLA_I2MARI_AIRBNB_ICAL) {
+      const i2mariAirbnbEvents = await fetchAndParseCalendar(VILLA_I2MARI_AIRBNB_ICAL, "Villa i 2 Mari (Airbnb)", "villa_i2mari")
+      events.push(...i2mariAirbnbEvents)
     }
 
     const jsonData = JSON.stringify(events)

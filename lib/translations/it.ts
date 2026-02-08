@@ -130,6 +130,10 @@ export const itTranslations: TranslationData = {
     priceComparison: "Confronto Prezzi",
     bestPrice: "Miglior Prezzo",
     view: "Visualizza",
+    available: "Disponibile",
+    notAvailable: "Non Disponibile",
+    guests: "ospiti",
+    maxGuests: "Max {count} ospiti",
     platforms: {
       direct: "Prenotazione Diretta"
     },
@@ -152,14 +156,20 @@ export const itTranslations: TranslationData = {
     properties: {
       villaZefiro: {
         name: "Villa Zefiro",
-        size: "120 m²",
-        rooms: "3 camere"
+        size: "68 m²",
+        rooms: "2 camere da letto, 2 bagni",
+        bedrooms: "Camera 1: Letto matrimoniale | Camera 2: Letto matrimoniale + Divano letto"
       },
       villaI2Mari: {
         name: "Villa i 2 Mari",
-        size: "150 m²",
-        rooms: "4 camere"
+        size: "44 m²",
+        rooms: "2 camere da letto, 1 bagno",
+        bedrooms: "Camera 1: Letto matrimoniale | Camera 2: Letti a castello | Soggiorno: Divano letto"
       }
+    },
+    unavailability: {
+      exceedsCapacity: "Supera la capacità (max {maxGuests} ospiti)",
+      alreadyBooked: "Già prenotato per queste date"
     }
   },
   contact: {

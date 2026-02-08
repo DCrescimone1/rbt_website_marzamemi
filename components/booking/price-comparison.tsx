@@ -19,6 +19,7 @@ interface PropertyInfo {
   image: string
   size: string
   rooms: string
+  bedrooms?: string
 }
 
 interface PriceComparisonProps {
@@ -26,6 +27,8 @@ interface PriceComparisonProps {
     results?: PriceResult[]
     loading?: boolean
     error?: string
+    unavailabilityReason?: string
+    maxGuests?: number
   }
   bookingDetails?: {
     checkIn: string
@@ -35,12 +38,80 @@ interface PriceComparisonProps {
   }
   onDirectBooking?: (checkIn: string, checkOut: string, guests: number, totalAmount: number, language: 'it' | 'en') => void
   property?: PropertyInfo
+  available?: boolean
 }
 
-export default function PriceComparison({ results, bookingDetails, onDirectBooking, property }: PriceComparisonProps) {
+export default function PriceComparison({ results, bookingDetails, onDirectBooking, property, available }: PriceComparisonProps) {
   const { t } = useTranslation()
 
   if (!results?.results || results.results.length === 0) {
+    // Show unavailability message if property exists but no results
+    if (property && results?.unavailabilityReason) {
+      return (
+        <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6 md:p-8 border border-border">
+          {/* Property Header */}
+          <div className="mb-6">
+            {/* Property Image */}
+            <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden mb-4 bg-muted">
+              <Image
+                src={property.image}
+                alt={property.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Property Name */}
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-foreground">
+                {property.name}
+              </h3>
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold border bg-rose-50 text-rose-700 border-rose-200">
+                ❌ {t('booking.notAvailable')}
+              </span>
+            </div>
+
+            {/* Property Specs */}
+            <div className="flex flex-col gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Maximize size={16} className="flex-shrink-0" />
+                  <span className="font-medium">{property.size}</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <BedDouble size={16} className="flex-shrink-0" />
+                  <span className="font-medium">{property.rooms}</span>
+                </div>
+                {results.maxGuests && (
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Home size={16} className="flex-shrink-0" />
+                    <span className="font-medium">{t('booking.maxGuests').replace('{count}', results.maxGuests.toString())}</span>
+                  </div>
+                )}
+              </div>
+              {property.bedrooms && (
+                <div className="text-xs leading-relaxed text-muted-foreground bg-muted/30 rounded-md px-3 py-2 border border-border/50">
+                  {property.bedrooms
+                    .split('|')
+                    .map((room) => room.trim())
+                    .filter((room) => room.length > 0)
+                    .map((room, index) => (
+                      <div key={index}>{room}</div>
+                    ))}
+                </div>
+              )}
+            </div>
+
+            {/* Unavailability Reason */}
+            <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
+              <p className="text-sm text-rose-700 font-medium">
+                {results.unavailabilityReason}
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return null
   }
 
@@ -82,20 +153,50 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
           </div>
 
           {/* Property Name */}
-          <h3 className="font-serif text-xl sm:text-2xl font-bold text-foreground mb-2">
-            {property.name}
-          </h3>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-foreground">
+              {property.name}
+            </h3>
+            <span
+              className={`inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold border ${
+                available
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  : 'bg-rose-50 text-rose-700 border-rose-200'
+              }`}
+            >
+              {available ? `✅ ${t('booking.available')}` : `❌ ${t('booking.notAvailable')}`}
+            </span>
+          </div>
 
           {/* Property Specs */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-            <span className="flex items-center gap-1">
-              <Maximize size={14} />
-              {property.size}
-            </span>
-            <span className="flex items-center gap-1">
-              <BedDouble size={14} />
-              {property.rooms}
-            </span>
+          <div className="flex flex-col gap-3 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Maximize size={16} className="flex-shrink-0" />
+                <span className="font-medium">{property.size}</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <BedDouble size={16} className="flex-shrink-0" />
+                <span className="font-medium">{property.rooms}</span>
+              </div>
+              {results.maxGuests && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Home size={16} className="flex-shrink-0" />
+                  <span className="font-medium">{t('booking.maxGuests').replace('{count}', results.maxGuests.toString())}</span>
+                </div>
+              )}
+            </div>
+            {property.bedrooms && (
+              <div className="text-xs leading-relaxed text-muted-foreground bg-muted/30 rounded-md px-3 py-2 border border-border/50">
+                {property.bedrooms
+                  .split('|')
+                  .map((room) => room.trim())
+                  .filter((room) => room.length > 0)
+                  .map((room, index) => (
+                    <div key={index}>{room}</div>
+                  ))}
+              </div>
+            )}
           </div>
 
           <div className="border-t border-border pt-4">
@@ -118,24 +219,33 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
           return (
             <div
               key={result.platform}
-              className={`p-3 sm:p-4 rounded-lg border transition-all ${
+              className={`p-4 rounded-lg border transition-all ${
                 isBestPrice ? "border-green-400 bg-green-50" : "border-border hover:shadow-md"
               }`}
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground text-sm sm:text-base truncate">{result.platform}</p>
-                  {isBestPrice && <p className="text-xs text-green-600 font-medium mt-1">{t('booking.bestPrice')}</p>}
-                </div>
-                <div className="text-right flex flex-col items-end gap-2 flex-shrink-0">
-                  <p className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap">
-                    {result.currency}
-                    {price}
+              <div className="flex flex-col gap-3">
+                {/* Platform name and best price badge */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-foreground text-base truncate">{result.platform}</p>
+                    {isBestPrice && <p className="text-xs text-green-600 font-medium mt-1">{t('booking.bestPrice')}</p>}
+                  </div>
+                  <p className="text-2xl font-bold text-primary whitespace-nowrap">
+                    {result.currency}{price}
                   </p>
+                </div>
+                
+                {/* Action button - full width */}
+                <div className="w-full">
                   {isDirect && bookingDetails && onDirectBooking ? (
                     <Button
                       onClick={() => handleDirectBookingClick(result)}
-                      className="bg-primary hover:bg-primary/90 text-white h-9 text-xs sm:text-sm px-3 sm:px-4 whitespace-nowrap"
+                      disabled={available === false}
+                      className={`w-full h-10 text-sm ${
+                        available === false
+                          ? 'bg-gray-200 text-gray-500 cursor-not-allowed opacity-70'
+                          : 'bg-primary hover:bg-primary/90 text-white'
+                      }`}
                     >
                       {t('booking.proceedBooking')}
                     </Button>
@@ -144,9 +254,9 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
                       href={result.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-accent hover:underline flex items-center gap-1 justify-end"
+                      className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
                     >
-                      {t('booking.view')} <ExternalLink size={12} />
+                      {t('booking.view')} <ExternalLink size={14} />
                     </a>
                   )}
                 </div>

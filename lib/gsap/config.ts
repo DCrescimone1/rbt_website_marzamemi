@@ -61,7 +61,7 @@ export const scrollSmootherConfig = {
 export const imageConfigs: ImageConfig[] = [
   // Layer 1 (closest) - 5 images - well distributed
   {
-    src: '/pictures/IMG_7194.webp',
+    src: '/pictures/villa_i_2_mari/ok%20giardino%20sera-b.webp',
     layer: 1,
     position: { top: '5%', left: '3%' },
     size: { width: '14vw', height: '18vh' },
@@ -69,7 +69,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '5%', left: '2%' },
   },
   {
-    src: '/pictures/IMG_7196.webp',
+    src: '/pictures/villa_i_2_mari/ok%20piscina%20alta1.webp',
     layer: 1,
     position: { bottom: '5%', right: '5%' },
     size: { width: '16vw', height: '20vh' },
@@ -77,7 +77,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '5%', right: '3%' },
   },
   {
-    src: '/pictures/IMG_7199.webp',
+    src: '/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20camera1.webp',
     layer: 1,
     position: { bottom: '8%', left: '8%' },
     size: { width: '15vw', height: '19vh' },
@@ -85,7 +85,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '8%', left: '5%' },
   },
   {
-    src: '/pictures/IMG_7202.webp',
+    src: '/pictures/villa_i_2_mari/%20ok%20Villa%20i2mari-cucina.webp',
     layer: 1,
     position: { top: '8%', right: '4%' },
     size: { width: '13vw', height: '17vh' },
@@ -93,7 +93,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '8%', right: '3%' },
   },
   {
-    src: '/pictures/IMG_8540.webp',
+    src: '/pictures/villa_zefiro/ok%20piscina%20alta.webp',
     layer: 1,
     position: { top: '60%', right: '35%' },
     size: { width: '14vw', height: '18vh' },
@@ -103,7 +103,7 @@ export const imageConfigs: ImageConfig[] = [
   
   // Layer 2 (middle) - 5 images - filling gaps
   {
-    src: '/pictures/IMG_7203.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno.webp',
     layer: 2,
     position: { top: '35%', left: '15%' },
     size: { width: '12vw', height: '16vh' },
@@ -111,7 +111,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '35%', left: '10%' },
   },
   {
-    src: '/pictures/IMG_7205.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera.webp',
     layer: 2,
     position: { bottom: '35%', left: '5%' },
     size: { width: '14vw', height: '18vh' },
@@ -119,7 +119,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '35%', left: '3%' },
   },
   {
-    src: '/pictures/IMG_7597.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20terrazza.webp',
     layer: 2,
     position: { top: '65%', left: '35%' },
     size: { width: '11vw', height: '14vh' },
@@ -127,7 +127,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '70%', left: '30%' },
   },
   {
-    src: '/pictures/IMG_7598.webp',
+    src: '/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20bagno.webp',
     layer: 2,
     position: { bottom: '40%', right: '8%' },
     size: { width: '13vw', height: '17vh' },
@@ -135,7 +135,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '40%', right: '5%' },
   },
   {
-    src: '/pictures/IMG_7602.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno.webp',
     layer: 2,
     position: { top: '40%', right: '15%' },
     size: { width: '12vw', height: '15vh' },
@@ -145,7 +145,7 @@ export const imageConfigs: ImageConfig[] = [
   
   // Layer 3 (farthest) - 4 images - background fill
   {
-    src: '/pictures/IMG_7599.webp',
+    src: '/pictures/villa_i_2_mari/ok%20drone.webp',
     layer: 3,
     position: { top: '25%', left: '40%' },
     size: { width: '10vw', height: '13vh' },
@@ -153,7 +153,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '25%', left: '35%' },
   },
   {
-    src: '/pictures/IMG_7600.webp',
+    src: '/pictures/villa_i_2_mari/ok%20piscine%20notte1.webp',
     layer: 3,
     position: { bottom: '15%', right: '30%' },
     size: { width: '11vw', height: '14vh' },
@@ -161,7 +161,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '15%', right: '25%' },
   },
   {
-    src: '/pictures/IMG_7601.webp',
+    src: '/pictures/villa_zefiro/ok%20drone3.webp',
     layer: 3,
     position: { top: '55%', right: '5%' },
     size: { width: '10vw', height: '12vh' },
@@ -169,7 +169,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '55%', right: '3%' },
   },
   {
-    src: '/pictures/IMG_8498.webp',
+    src: '/pictures/villa_zefiro/ok%20piscine%20notte.webp',
     layer: 3,
     position: { bottom: '60%', left: '60%' },
     size: { width: '11vw', height: '13vh' },

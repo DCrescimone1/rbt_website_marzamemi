@@ -1,5 +1,30 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+The application relies on several environment variables configured in `.env.local`:
+
+- `VILLA_ZEFIRO_ICAL` – iCal URL for the **Villa Zefiro** availability calendar
+- `VILLA_I2MARI_ICAL` – iCal URL for the **Villa i 2 Mari** availability calendar
+- `VILLA_ZEFIRO_AIRBNB_URL` – Airbnb listing URL for **Villa Zefiro**
+- `VILLA_I2MARI_AIRBNB_URL` – Airbnb listing URL for **Villa i 2 Mari**
+- `BOOKING_BASE_URL` – Booking.com URL that contains prices for both villas
+
+These variables are used by the calendar API and scraping layer to fetch availability and prices from external providers.
+
+## Dual-Villa Booking System
+
+The booking flow supports two separate properties:
+
+- **Villa Zefiro**
+- **Villa i 2 Mari**
+
+Key behaviors:
+
+- **Calendar logic** – a date is marked as unavailable only when **both** villas are booked for that date.
+- **Price search** – the `/api/search-prices` endpoint fetches prices separately for each villa from Airbnb and Booking.com, plus a calculated direct booking price.
+- **Booking cards** – the booking section renders two price comparison cards side by side, one per villa, each showing platform prices, a direct booking option, and an availability badge.
+
 ## Hero Section Animation
 
 The hero section features a GSAP-powered perspective zoom effect with the following elements:

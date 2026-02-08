@@ -142,6 +142,10 @@ export interface TranslationData {
         rooms: string
       }
     }
+    unavailability: {
+      exceedsCapacity: string
+      alreadyBooked: string
+    }
   }
   contact: {
     title: string

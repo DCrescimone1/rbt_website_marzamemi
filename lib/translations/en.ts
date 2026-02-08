@@ -130,6 +130,10 @@ export const enTranslations: TranslationData = {
     priceComparison: "Price Comparison",
     bestPrice: "Best Price",
     view: "View",
+    available: "Available",
+    notAvailable: "Not Available",
+    guests: "guests",
+    maxGuests: "Max {count} guests",
     platforms: {
       direct: "Direct Booking"
     },
@@ -152,14 +156,20 @@ export const enTranslations: TranslationData = {
     properties: {
       villaZefiro: {
         name: "Villa Zefiro",
-        size: "120 m²",
-        rooms: "3 rooms"
+        size: "68 m²",
+        rooms: "2 bedrooms, 2 bathrooms",
+        bedrooms: "Bedroom 1: Queen bed | Bedroom 2: Queen bed + Sofa bed"
       },
       villaI2Mari: {
         name: "Villa i 2 Mari",
-        size: "150 m²",
-        rooms: "4 rooms"
+        size: "44 m²",
+        rooms: "2 bedrooms, 1 bathroom",
+        bedrooms: "Bedroom 1: Queen bed | Bedroom 2: Bunk beds | Living room: Sofa bed"
       }
+    },
+    unavailability: {
+      exceedsCapacity: "Exceeds capacity (max {maxGuests} guests)",
+      alreadyBooked: "Already booked for these dates"
     }
   },
   contact: {

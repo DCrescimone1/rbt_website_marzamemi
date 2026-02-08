@@ -18,7 +18,7 @@ export const SCRAPING_CONFIG: ScrapingConfig = {
  * Booking.com base URL and static parameters
  */
 export const BOOKING_CONFIG = {
-  baseUrl: 'https://www.booking.com/hotel/it/acquamarina-pachino.html',
+  baseUrl: 'https://www.booking.com/hotel/it/villa-zefiro-marzamemi.html',
   staticParams: {
     aid: '397594',
     dest_id: '12041954',
@@ -30,11 +30,9 @@ export const BOOKING_CONFIG = {
 };
 
 /**
- * Airbnb base URL
+ * Airbnb configuration (URL will be provided dynamically at call site)
  */
-export const AIRBNB_CONFIG = {
-  baseUrl: 'https://www.airbnb.com/rooms/1453439455106920703',
-};
+export const AIRBNB_CONFIG = {};
 
 /**
  * Direct price calculation defaults

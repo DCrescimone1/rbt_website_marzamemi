@@ -71,11 +71,23 @@ export default function AvailabilityCalendar({
   }, [initialFrom, initialTo])
 
   const isDateBooked = (date: Date) => {
-    return bookedDates.some((booking) => {
-      const start = new Date(booking.start)
-      const end = new Date(booking.end)
-      return date >= start && date <= end
-    })
+    const zefiroBooked = bookedDates
+      .filter((booking) => booking.property === "villa_zefiro")
+      .some((booking) => {
+        const start = new Date(booking.start)
+        const end = new Date(booking.end)
+        return date >= start && date <= end
+      })
+
+    const i2mariBooked = bookedDates
+      .filter((booking) => booking.property === "villa_i2mari")
+      .some((booking) => {
+        const start = new Date(booking.start)
+        const end = new Date(booking.end)
+        return date >= start && date <= end
+      })
+
+    return zefiroBooked && i2mariBooked
   }
 
   const effectiveMonth = currentMonth ?? startOfToday()

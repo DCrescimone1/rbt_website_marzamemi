@@ -50,11 +50,11 @@ function buildBookingUrl(params: BookingSearchParams): string {
 
 /**
  * Search for price on Booking.com
- * Returns SearchResult or null if extraction fails
+ * Returns prices for both villas or nulls if extraction fails
  */
 export async function searchBookingPrice(
   params: BookingSearchParams
-): Promise<SearchResult | null> {
+): Promise<{ villaI2Mari: SearchResult | null; villaZefiro: SearchResult | null }> {
   const { browser, dates } = params;
   let context;
 
@@ -75,6 +75,7 @@ export async function searchBookingPrice(
     const url = buildBookingUrl(params);
 
     console.log('[prices] Booking.com search started');
+    console.log('[prices] Booking.com URL:', url);
     const startTime = Date.now();
 
     // Navigate to Booking.com URL with domcontentloaded strategy
@@ -83,88 +84,102 @@ export async function searchBookingPrice(
       timeout: SCRAPING_CONFIG.navigationTimeout,
     });
 
-    let priceText: string | null = null;
-
-    // Wait for price element with primary selector
+    // Collect all visible price elements on the page
+    let rawPriceTexts: string[] = [];
     try {
       await page.waitForSelector('.prco-valign-middle-helper', {
         timeout: SCRAPING_CONFIG.selectorTimeout,
       });
-      priceText = await page.textContent('.prco-valign-middle-helper');
+      rawPriceTexts = await page.$$eval('.prco-valign-middle-helper', (elements) =>
+        elements
+          .map((el) => (el.textContent || '').trim())
+          .filter((text) => text.length > 0),
+      );
     } catch (error) {
-      // Implement fallback direct query if selector times out
-      console.log('[prices] Primary selector timed out, trying fallback');
-      priceText = await page.textContent('.prco-valign-middle-helper');
-    }
-
-    // Try span.prco-valign-middle-helper if first one fails
-    if (!priceText) {
-      try {
-        await page.waitForSelector('span.prco-valign-middle-helper', {
-          timeout: SCRAPING_CONFIG.selectorTimeout,
-        });
-        priceText = await page.textContent('span.prco-valign-middle-helper');
-      } catch (error) {
-        console.log('[prices] span.prco-valign-middle-helper selector timed out, trying fallback');
-        priceText = await page.textContent('span.prco-valign-middle-helper');
+      console.log('[prices] Booking.com: Failed to collect price elements', error);
+      
+      // Fallback: try alternative selectors
+      const fallbackSelectors = [
+        '[data-testid="price-and-discounted-price"]',
+        '.prco-text-link',
+        '[data-testid="price-summary"]',
+        '.bui-price-display__value',
+        '.prco-inline-block-maker-helper',
+      ];
+      
+      for (const selector of fallbackSelectors) {
+        try {
+          const elements = await page.$$(selector);
+          if (elements.length > 0) {
+            console.log(`[prices] Booking.com: Trying fallback selector: ${selector}`);
+            rawPriceTexts = await page.$$eval(selector, (els) =>
+              els.map((el) => (el.textContent || '').trim()).filter((text) => text.length > 0),
+            );
+            if (rawPriceTexts.length > 0) {
+              console.log(`[prices] Booking.com: Found ${rawPriceTexts.length} prices with fallback selector`);
+              break;
+            }
+          }
+        } catch {}
       }
     }
 
-    // Try span.bui-u-sr-only if still no price
-    if (!priceText) {
-      try {
-        await page.waitForSelector('span.bui-u-sr-only', {
-          timeout: SCRAPING_CONFIG.selectorTimeout,
-        });
-        priceText = await page.textContent('span.bui-u-sr-only');
-      } catch (error) {
-        console.log('[prices] span.bui-u-sr-only selector timed out, trying fallback');
-        priceText = await page.textContent('span.bui-u-sr-only');
-      }
+    if (!rawPriceTexts.length) {
+      console.log('[prices] Booking.com: No price elements found');
+      return { villaI2Mari: null, villaZefiro: null };
     }
 
-    if (!priceText) {
-      console.log('[prices] Booking.com: No price found');
-      return null;
+    // Extract numeric values and sort ascending
+    const parsedPrices = rawPriceTexts
+      .map((text) => {
+        const match = text.match(/[\d.,]+/);
+        if (!match) return null;
+        const clean = match[0].replace(/[.]/g, '').replace(/,/g, '');
+        const value = parseInt(clean, 10);
+        if (isNaN(value)) return null;
+        return { text, value };
+      })
+      .filter((p): p is { text: string; value: number } => !!p)
+      .filter((p) => p.value >= minimumPrice)
+      .sort((a, b) => a.value - b.value);
+
+    if (!parsedPrices.length) {
+      console.log('[prices] Booking.com: No valid prices after parsing/filtering');
+      return { villaI2Mari: null, villaZefiro: null };
     }
 
-    // Extract and parse price text, removing thousand separators
-    const priceMatch = priceText.match(/[\d.,]+/);
-    if (!priceMatch) {
-      console.log('[prices] Booking.com: Could not parse price from text:', priceText);
-      return null;
-    }
-
-    // Remove thousand separators (dots or commas) and parse
-    const cleanPrice = priceMatch[0].replace(/\./g, '').replace(/,/g, '');
-    const price = parseInt(cleanPrice, 10);
-
-    if (isNaN(price)) {
-      console.log('[prices] Booking.com: Invalid price value:', cleanPrice);
-      return null;
-    }
-
-    // Safety check: price should never be lower than (nights × €40)
-    if (price < minimumPrice) {
-      console.log(`[prices] Booking.com: Price ${price} is below minimum threshold ${minimumPrice} (${nights} nights × €40)`);
-      return null;
-    }
+    const first = parsedPrices[0];
+    const second = parsedPrices[1] ?? null;
 
     const duration = Date.now() - startTime;
     console.log(`[prices] Booking.com search completed in ${duration}ms`);
 
-    return {
-      platform: 'Booking.com',
-      price: price.toString(),
-      currency: '€',
-      url,
-      logoSrc: '/logo/logo_booking.png',
-    };
+    const villaI2Mari: SearchResult | null = first
+      ? {
+          platform: 'Booking.com',
+          price: first.value.toString(),
+          currency: '€',
+          url,
+          logoSrc: '/logo/logo_booking.png',
+        }
+      : null;
+
+    const villaZefiro: SearchResult | null = second
+      ? {
+          platform: 'Booking.com',
+          price: second.value.toString(),
+          currency: '€',
+          url,
+          logoSrc: '/logo/logo_booking.png',
+        }
+      : null;
+
+    return { villaI2Mari, villaZefiro };
   } catch (error) {
     // Log errors with [prices] prefix
     console.error('[prices] Booking.com search error:', error);
-    // Return null on extraction failure without throwing
-    return null;
+    // Return nulls on extraction failure without throwing
+    return { villaI2Mari: null, villaZefiro: null };
   } finally {
     // Close browser context in finally block
     if (context) {

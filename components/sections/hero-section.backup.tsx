@@ -17,7 +17,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/pictures/IMG_8540.webp"
+          src="/pictures/villa_zefiro/ok%20piscina%20alta.webp"
           alt="Luxury beach property"
           fill
           priority
