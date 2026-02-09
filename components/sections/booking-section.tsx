@@ -51,7 +51,6 @@ export default function BookingSection() {
   const [checkOut, setCheckOut] = useState("")
   const [adults, setAdults] = useState(2)
   const [children, setChildren] = useState(0)
-  const [pets, setPets] = useState(false)
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<any>(null)
   const [checkInInput, setCheckInInput] = useState("")
@@ -341,7 +340,7 @@ export default function BookingSection() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4 sm:mb-6">
+              <div className="grid grid-cols-2 gap-4 mb-4 sm:mb-6">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">{t('booking.adults')}</label>
                   <Input
@@ -364,18 +363,6 @@ export default function BookingSection() {
                     onChange={(e) => setChildren(Number.parseInt(e.target.value) || 0)}
                     className="w-full"
                   />
-                </div>
-
-                <div className="flex items-end">
-                  <label className="flex items-center gap-2 cursor-pointer w-full">
-                    <input
-                      type="checkbox"
-                      checked={pets}
-                      onChange={(e) => setPets(e.target.checked)}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm font-medium text-foreground">{t('booking.pets')}</span>
-                  </label>
                 </div>
               </div>
 

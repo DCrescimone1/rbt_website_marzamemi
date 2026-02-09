@@ -199,6 +199,9 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
             )}
           </div>
 
+          {/* Extra spacing for Villa Zefiro to align "Confronto Prezzi" with Villa i 2 Mari */}
+          {property.name.includes('Zefiro') && <div className="h-[1.5rem]" />}
+
           <div className="border-t border-border pt-4">
             <h4 className="font-medium text-foreground mb-3">{t('booking.priceComparison')}</h4>
           </div>
