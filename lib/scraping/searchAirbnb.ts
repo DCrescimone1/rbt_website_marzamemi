@@ -101,7 +101,10 @@ export async function searchAirbnbPrice(
       ((t.includes('€') || t.includes('EUR')) && /\d{2,}/.test(t))
     );
 
-    const excludePatterns = ['originally', 'was', 'per night', '/night', 'for', 'nights'];
+    console.log('[prices] Airbnb: Valid candidates:', validCandidates.length);
+
+    // Exclude patterns in both English and Italian
+    const excludePatterns = ['originally', 'was', 'per night', '/night', 'for', 'nights', 'per notte', 'notti'];
     const filteredCandidates = validCandidates.filter((text) => {
       const lower = text.toLowerCase();
       if (excludePatterns.some((p) => lower.includes(p))) return false;
@@ -109,6 +112,8 @@ export async function searchAirbnbPrice(
       if (!/\d/.test(text)) return false;
       return true;
     });
+
+    console.log('[prices] Airbnb: Filtered candidates:', filteredCandidates.length, filteredCandidates.slice(0, 3));
 
     // Choose best candidate
     let priceText: string | null = null;
@@ -131,7 +136,8 @@ export async function searchAirbnbPrice(
       console.log('[prices] Airbnb: Using full page scan fallback');
       priceText = await page.evaluate(() => {
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-        const pricePattern = /€\s*[\d,\.]+/g;
+        // Match both formats: €1234 (English) and 1234 € (Italian)
+        const pricePattern = /(€\s*[\d,\.]+|[\d,\.]+\s*€)/g;
         const candidates: string[] = [];
         let node: Node | null;
         while ((node = walker.nextNode())) {
@@ -144,7 +150,10 @@ export async function searchAirbnbPrice(
               const isStrike = style.textDecorationLine === 'line-through' || style.textDecoration.includes('line-through');
               if (!isStrike) {
                 const lowerText = text.toLowerCase();
-                if (!lowerText.includes('originally') && !lowerText.includes('was') && !lowerText.includes('per night') && !lowerText.includes('/night')) {
+                // Exclude patterns in both English and Italian
+                const excludeWords = ['originally', 'was', 'per night', '/night', 'per notte', 'notti'];
+                const shouldExclude = excludeWords.some(word => lowerText.includes(word));
+                if (!shouldExclude) {
                   candidates.push(matches[0]);
                 }
               }
