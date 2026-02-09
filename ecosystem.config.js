@@ -6,7 +6,7 @@ module.exports = {
     cwd: '/home/raspy/projects/rbt_website_marzamemi',
     exec_mode: 'fork',
     instances: 1,
-    max_memory_restart: '512M',
+    max_memory_restart: '1G',
     env: {
       NODE_ENV: 'production',
       PORT: 3004

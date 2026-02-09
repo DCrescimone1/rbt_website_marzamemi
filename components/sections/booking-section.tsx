@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { createPortal } from "react-dom"
 import { Loader2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -59,6 +59,7 @@ export default function BookingSection() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const [activeField, setActiveField] = useState<"checkIn" | "checkOut">("checkIn")
   const datePlaceholder = language === "en" ? "dd / mm / yyyy" : "gg / mm / aaaa"
+  const resultsRef = useRef<HTMLDivElement>(null)
 
   const openCalendar = (field: "checkIn" | "checkOut") => {
     setActiveField(field)
@@ -98,7 +99,11 @@ export default function BookingSection() {
       document.body.style.position = prevBodyPosition
       document.body.style.top = prevBodyTop
       document.body.style.width = prevBodyWidth
+      // Restore scroll position without triggering smooth scroll
+      const scrollBehavior = document.documentElement.style.scrollBehavior
+      document.documentElement.style.scrollBehavior = 'auto'
       window.scrollTo(0, scrollY)
+      document.documentElement.style.scrollBehavior = scrollBehavior
     }
   }, [isCalendarOpen])
 
@@ -195,6 +200,35 @@ export default function BookingSection() {
 
       if (hasZefiroResults || hasI2MariResults) {
         setSearchResults(data)
+        // Scroll to results after they're rendered with custom smooth animation
+        setTimeout(() => {
+          if (resultsRef.current) {
+            const targetPosition = resultsRef.current.getBoundingClientRect().top + window.scrollY - 100
+            const startPosition = window.scrollY
+            const distance = targetPosition - startPosition
+            const duration = 1200 // milliseconds
+            let start: number | null = null
+
+            const animation = (currentTime: number) => {
+              if (start === null) start = currentTime
+              const timeElapsed = currentTime - start
+              const progress = Math.min(timeElapsed / duration, 1)
+              
+              // Easing function for smoother animation
+              const easeInOutCubic = progress < 0.5
+                ? 4 * progress * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2
+
+              window.scrollTo(0, startPosition + distance * easeInOutCubic)
+
+              if (timeElapsed < duration) {
+                requestAnimationFrame(animation)
+              }
+            }
+
+            requestAnimationFrame(animation)
+          }
+        }, 100)
       } else {
         // Defensive: treat empty results as scraping failure
         alert(t('booking.scrapingError'))
@@ -281,7 +315,10 @@ export default function BookingSection() {
                     value={checkInInput}
                     onChange={(e) => processDateInput(e.target.value, setCheckInInput, setCheckIn)}
                     onFocus={() => openCalendar("checkIn")}
-                    onClick={() => openCalendar("checkIn")}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      openCalendar("checkIn")
+                    }}
                     className="w-full"
                   />
                 </div>
@@ -295,7 +332,10 @@ export default function BookingSection() {
                     value={checkOutInput}
                     onChange={(e) => processDateInput(e.target.value, setCheckOutInput, setCheckOut)}
                     onFocus={() => openCalendar("checkOut")}
-                    onClick={() => openCalendar("checkOut")}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      openCalendar("checkOut")
+                    }}
                     className="w-full"
                   />
                 </div>
@@ -400,7 +440,7 @@ export default function BookingSection() {
 
             {/* Price Comparison Results - Two Properties Side by Side */}
             {searchResults && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div ref={resultsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <PriceComparison
                   results={searchResults.villaZefiro}
                   available={searchResults.villaZefiro?.available ?? false}
