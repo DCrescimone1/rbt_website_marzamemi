@@ -58,7 +58,8 @@ Folder structure:
 │   │   └── input.tsx
 │   └── wave-separator.tsx
 ├── components.json
-├── ecosystem.config.cjs
+├── debug-airbnb-scraper.js
+├── ecosystem.config.js
 ├── eslint.config.mjs
 ├── lib
 │   ├── chat
@@ -100,6 +101,7 @@ Folder structure:
 │   │   ├── language-persistence.ts
 │   │   └── translation-utils.ts
 │   └── utils.ts
+├── logs
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── next.config.ts
@@ -122,20 +124,76 @@ Folder structure:
 │   ├── globe.svg
 │   ├── logo.webp
 │   ├── pictures
-│   │   ├── IMG_7194.webp
-│   │   ├── IMG_7196.webp
-│   │   ├── IMG_7199.webp
-│   │   ├── IMG_7202.webp
-│   │   ├── IMG_7203.webp
-│   │   ├── IMG_7205.webp
-│   │   ├── IMG_7597.webp
-│   │   ├── IMG_7598.webp
-│   │   ├── IMG_7599.webp
-│   │   ├── IMG_7600.webp
-│   │   ├── IMG_7601.webp
-│   │   ├── IMG_7602.webp
-│   │   ├── IMG_8498.webp
-│   │   └── IMG_8540.webp
+│   │   ├── villa_i_2_mari
+│   │   │   ├──  ok Villa i2mari-cucina.webp
+│   │   │   ├── ok Borgo84 2.webp
+│   │   │   ├── ok Marzamemi cinefest.webp
+│   │   │   ├── ok Villa i 2 mari TV.webp
+│   │   │   ├── ok Villa i 2 mari- bagno.webp
+│   │   │   ├── ok Villa i 2 mari- camera1.webp
+│   │   │   ├── ok Villa i 2 mari-bagno1.webp
+│   │   │   ├── ok Villa i 2 mari-camera 3.webp
+│   │   │   ├── ok Villa i 2 mari-camera.webp
+│   │   │   ├── ok Villa i 2 mari-cameretta1.webp
+│   │   │   ├── ok Villa i 2 mari-corridoio1.webp
+│   │   │   ├── ok Villa i 2 mari-dal balcone.webp
+│   │   │   ├── ok Villa i2 mari-corridoio.webp
+│   │   │   ├── ok Villa i2mari-tavolo cucina.webp
+│   │   │   ├── ok carratois pantano.webp
+│   │   │   ├── ok drone.webp
+│   │   │   ├── ok giardino sera-b.webp
+│   │   │   ├── ok giardino1.webp
+│   │   │   ├── ok giardino2.webp
+│   │   │   ├── ok isola di capo passero.webp
+│   │   │   ├── ok isolotto brancati4.webp
+│   │   │   ├── ok piscina alta1.webp
+│   │   │   ├── ok piscine notte1.webp
+│   │   │   ├── ok spiaggiacavettone5.webp
+│   │   │   ├── ok villa i 2 mari-cameretta.webp
+│   │   │   ├── ok z area fitness+padel.webp
+│   │   │   ├── ok z la cialoma1.webp
+│   │   │   ├── ok z la piazzetta1.webp
+│   │   │   ├── ok z manifesto tonnara2.webp
+│   │   │   ├── ok z soggiorno2  2mari.webp
+│   │   │   ├── ok z soggiorno3 2 mari.webp
+│   │   │   └── ok z tonnara.webp
+│   │   └── villa_zefiro
+│   │       ├── ok App.17 bagno mansarda.webp
+│   │       ├── ok Baiamuri-b.webp
+│   │       ├── ok Borgo84 1.webp
+│   │       ├── ok Capo Passero dalla terrazza.webp
+│   │       ├── ok Marzamemi porto.webp
+│   │       ├── ok Villa Zefiro bagno mansarda.webp
+│   │       ├── ok Villa Zefiro bagno.webp
+│   │       ├── ok Villa Zefiro bagno1.webp
+│   │       ├── ok Villa Zefiro balcone.webp
+│   │       ├── ok Villa Zefiro camera.webp
+│   │       ├── ok Villa Zefiro camera2.webp
+│   │       ├── ok Villa Zefiro camera3.webp
+│   │       ├── ok Villa Zefiro letto mansarda1.webp
+│   │       ├── ok Villa Zefiro letto mansarda2.webp
+│   │       ├── ok Villa Zefiro mansarda.webp
+│   │       ├── ok Villa Zefiro soggiorno.webp
+│   │       ├── ok Villa Zefiro soggiorno1.webp
+│   │       ├── ok Villa Zefiro terrazza.webp
+│   │       ├── ok WhatsApp Image 2025-10-26 at 19.36.13(2).webp
+│   │       ├── ok WhatsApp Image 2025-10-29 at 11.53.10(1).webp
+│   │       ├── ok drone3.webp
+│   │       ├── ok giardino sera-b.webp
+│   │       ├── ok piscina alta.webp
+│   │       ├── ok piscina bassa3.webp
+│   │       ├── ok piscinabassa4.webp
+│   │       ├── ok piscine notte.webp
+│   │       ├── ok spiaggia cavettone1.webp
+│   │       ├── ok z aperirivo1 zefiro.webp
+│   │       ├── ok z area fitness+padel.webp
+│   │       ├── ok z cialoma  .webp
+│   │       ├── ok z colazione porto1.webp
+│   │       ├── ok z mansarda Zefiro.webp
+│   │       ├── ok z padel.webp
+│   │       ├── ok z particolare1 zefiro.webp
+│   │       ├── ok z scala2 zefiro.webp
+│   │       └── ok z tonnara1.webp
 │   └── window.svg
 ├── ref_scraping_price
 │   ├── README_PRICE_SEARCH.md
@@ -161,7 +219,7 @@ Folder structure:
 ├── verify-image-config.ts
 └── verify-language-implementation.ts
 
-30 directories, 131 files
+33 directories, 186 files
 
 
 --- File Contents ---
@@ -1521,6 +1579,8 @@ import { startOfDay, endOfDay, subDays } from "date-fns"
 
 const VILLA_ZEFIRO_ICAL = process.env.VILLA_ZEFIRO_ICAL as string
 const VILLA_I2MARI_ICAL = process.env.VILLA_I2MARI_ICAL as string
+const VILLA_ZEFIRO_AIRBNB_ICAL = process.env.VILLA_ZEFIRO_AIRBNB_ICAL as string
+const VILLA_I2MARI_AIRBNB_ICAL = process.env.VILLA_I2MARI_AIRBNB_ICAL as string
 const CACHE_DURATION = 300
 
 let cache: {
@@ -1592,14 +1652,26 @@ export async function GET() {
       property: "villa_zefiro" | "villa_i2mari"
     }> = []
 
+    // Fetch Booking.com calendars
     if (VILLA_ZEFIRO_ICAL) {
-      const zefiroEvents = await fetchAndParseCalendar(VILLA_ZEFIRO_ICAL, "Villa Zefiro", "villa_zefiro")
+      const zefiroEvents = await fetchAndParseCalendar(VILLA_ZEFIRO_ICAL, "Villa Zefiro (Booking.com)", "villa_zefiro")
       events.push(...zefiroEvents)
     }
 
     if (VILLA_I2MARI_ICAL) {
-      const i2mariEvents = await fetchAndParseCalendar(VILLA_I2MARI_ICAL, "Villa i 2 Mari", "villa_i2mari")
+      const i2mariEvents = await fetchAndParseCalendar(VILLA_I2MARI_ICAL, "Villa i 2 Mari (Booking.com)", "villa_i2mari")
       events.push(...i2mariEvents)
+    }
+
+    // Fetch Airbnb calendars
+    if (VILLA_ZEFIRO_AIRBNB_ICAL) {
+      const zefiroAirbnbEvents = await fetchAndParseCalendar(VILLA_ZEFIRO_AIRBNB_ICAL, "Villa Zefiro (Airbnb)", "villa_zefiro")
+      events.push(...zefiroAirbnbEvents)
+    }
+
+    if (VILLA_I2MARI_AIRBNB_ICAL) {
+      const i2mariAirbnbEvents = await fetchAndParseCalendar(VILLA_I2MARI_AIRBNB_ICAL, "Villa i 2 Mari (Airbnb)", "villa_i2mari")
+      events.push(...i2mariAirbnbEvents)
     }
 
     const jsonData = JSON.stringify(events)
@@ -2074,12 +2146,35 @@ const getDirectBookingLabel = (language: LanguageCode): string => {
 const VILLA_ZEFIRO_AIRBNB_URL = process.env.VILLA_ZEFIRO_AIRBNB_URL as string
 const VILLA_I2MARI_AIRBNB_URL = process.env.VILLA_I2MARI_AIRBNB_URL as string
 
+// Guest capacity limits
+const VILLA_ZEFIRO_MAX_GUESTS = 6
+const VILLA_I2MARI_MAX_GUESTS = 4
+
 export async function POST(request: NextRequest) {
   let browser: Browser | null = null
 
   try {
     const body: SearchRequest = await request.json()
     const { dates, guests, language } = body
+
+    // Calculate total guests
+    const totalGuests = guests.adults + guests.children
+    
+    // Determine which villas can accommodate the guests
+    const searchVillaZefiro = totalGuests <= VILLA_ZEFIRO_MAX_GUESTS
+    const searchVillaI2Mari = totalGuests <= VILLA_I2MARI_MAX_GUESTS
+    
+    console.log(`[prices] Total guests: ${totalGuests}`)
+    console.log(`[prices] Search Villa Zefiro (max ${VILLA_ZEFIRO_MAX_GUESTS}): ${searchVillaZefiro}`)
+    console.log(`[prices] Search Villa i 2 Mari (max ${VILLA_I2MARI_MAX_GUESTS}): ${searchVillaI2Mari}`)
+    
+    // If no villa can accommodate, return error
+    if (!searchVillaZefiro && !searchVillaI2Mari) {
+      return NextResponse.json(
+        { error: `Maximum ${VILLA_ZEFIRO_MAX_GUESTS} guests allowed` },
+        { status: 400 }
+      )
+    }
 
     const resolvedLanguage = resolveLanguage(language)
 
@@ -2133,14 +2228,18 @@ export async function POST(request: NextRequest) {
     const airbnbZefiroAbort = new AbortController()
     const airbnbI2MariAbort = new AbortController()
 
-    const bookingPromise = withTimeout(
-      searchBookingPrice({ dates, guests, language: resolvedLanguage, browser, signal: bookingAbort.signal }),
-      15000,
-      'Booking.com',
-      bookingAbort,
-    )
+    // Only search Booking.com if at least one villa can accommodate guests
+    const bookingPromise = (searchVillaZefiro || searchVillaI2Mari)
+      ? withTimeout(
+          searchBookingPrice({ dates, guests, language: resolvedLanguage, browser, signal: bookingAbort.signal }),
+          15000,
+          'Booking.com',
+          bookingAbort,
+        )
+      : Promise.resolve({ villaI2Mari: null, villaZefiro: null })
 
-    const airbnbZefiroPromise = VILLA_ZEFIRO_AIRBNB_URL
+    // Only search Airbnb for Villa Zefiro if it can accommodate guests
+    const airbnbZefiroPromise = (VILLA_ZEFIRO_AIRBNB_URL && searchVillaZefiro)
       ? withTimeout(
           searchAirbnbPrice({ dates, guests, browser, url: VILLA_ZEFIRO_AIRBNB_URL, signal: airbnbZefiroAbort.signal }),
           8000,
@@ -2149,7 +2248,8 @@ export async function POST(request: NextRequest) {
         )
       : Promise.resolve(null)
 
-    const airbnbI2MariPromise = VILLA_I2MARI_AIRBNB_URL
+    // Only search Airbnb for Villa i 2 Mari if it can accommodate guests
+    const airbnbI2MariPromise = (VILLA_I2MARI_AIRBNB_URL && searchVillaI2Mari)
       ? withTimeout(
           searchAirbnbPrice({ dates, guests, browser, url: VILLA_I2MARI_AIRBNB_URL, signal: airbnbI2MariAbort.signal }),
           8000,
@@ -2198,7 +2298,12 @@ export async function POST(request: NextRequest) {
     // Fetch calendar data to determine availability per villa
     let calendarEvents: CalendarEvent[] = []
     try {
-      const calendarRes = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/calendar`)
+      // Use relative URL to avoid issues with NEXT_PUBLIC_APP_URL in development
+      const calendarUrl = process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:3000/api/calendar'
+        : `${process.env.NEXT_PUBLIC_APP_URL}/api/calendar`
+      console.log('[prices] Fetching calendar from:', calendarUrl)
+      const calendarRes = await fetch(calendarUrl)
       if (calendarRes.ok) {
         calendarEvents = (await calendarRes.json()) as CalendarEvent[]
       } else {
@@ -2225,17 +2330,26 @@ export async function POST(request: NextRequest) {
       .filter((e) => e.property === 'villa_i2mari')
       .some((e) => hasOverlap(e))
 
-    const villaZefiroAvailable = !villaZefiroBooked
-    const villaI2MariAvailable = !villaI2MariBooked
+    // Test mode: Force unavailability for testing UI
+    const testZefiroUnavailable = process.env.TEST_VILLA_ZEFIRO_UNAVAILABLE === 'true'
+    const testI2MariUnavailable = process.env.TEST_VILLA_I2MARI_UNAVAILABLE === 'true'
+    
+    if (testZefiroUnavailable) console.log('[prices] TEST MODE: Villa Zefiro forced unavailable')
+    if (testI2MariUnavailable) console.log('[prices] TEST MODE: Villa i 2 Mari forced unavailable')
+
+    // Villa is available only if: not booked AND can accommodate guests AND not in test mode
+    const villaZefiroAvailable = !villaZefiroBooked && searchVillaZefiro && !testZefiroUnavailable
+    const villaI2MariAvailable = !villaI2MariBooked && searchVillaI2Mari && !testI2MariUnavailable
 
     // Build per-villa result arrays and direct prices
+    // Only include OTA prices if the villa can accommodate the guests
     const villaZefiroOta: SearchResult[] = []
-    if (bookingVillaZefiro) villaZefiroOta.push(bookingVillaZefiro)
-    if (airbnbZefiroResult) villaZefiroOta.push(airbnbZefiroResult)
+    if (bookingVillaZefiro && searchVillaZefiro) villaZefiroOta.push(bookingVillaZefiro)
+    if (airbnbZefiroResult && searchVillaZefiro) villaZefiroOta.push(airbnbZefiroResult)
 
     const villaI2MariOta: SearchResult[] = []
-    if (bookingVillaI2Mari) villaI2MariOta.push(bookingVillaI2Mari)
-    if (airbnbI2MariResult) villaI2MariOta.push(airbnbI2MariResult)
+    if (bookingVillaI2Mari && searchVillaI2Mari) villaI2MariOta.push(bookingVillaI2Mari)
+    if (airbnbI2MariResult && searchVillaI2Mari) villaI2MariOta.push(airbnbI2MariResult)
 
     const directPriceZefiro = villaZefiroOta.length
       ? calculateDirectPrice({ otaPrices: villaZefiroOta, nights })
@@ -2245,9 +2359,9 @@ export async function POST(request: NextRequest) {
       : null
 
     const villaZefiroResults: SearchResult[] = []
-    if (airbnbZefiroResult) villaZefiroResults.push(airbnbZefiroResult)
-    if (bookingVillaZefiro) villaZefiroResults.push(bookingVillaZefiro)
-    if (directPriceZefiro !== null) {
+    if (airbnbZefiroResult && searchVillaZefiro) villaZefiroResults.push(airbnbZefiroResult)
+    if (bookingVillaZefiro && searchVillaZefiro) villaZefiroResults.push(bookingVillaZefiro)
+    if (directPriceZefiro !== null && searchVillaZefiro) {
       villaZefiroResults.push({
         platform: getDirectBookingLabel(resolvedLanguage),
         price: directPriceZefiro.toString(),
@@ -2259,9 +2373,9 @@ export async function POST(request: NextRequest) {
     }
 
     const villaI2MariResults: SearchResult[] = []
-    if (airbnbI2MariResult) villaI2MariResults.push(airbnbI2MariResult)
-    if (bookingVillaI2Mari) villaI2MariResults.push(bookingVillaI2Mari)
-    if (directPriceI2Mari !== null) {
+    if (airbnbI2MariResult && searchVillaI2Mari) villaI2MariResults.push(airbnbI2MariResult)
+    if (bookingVillaI2Mari && searchVillaI2Mari) villaI2MariResults.push(bookingVillaI2Mari)
+    if (directPriceI2Mari !== null && searchVillaI2Mari) {
       villaI2MariResults.push({
         platform: getDirectBookingLabel(resolvedLanguage),
         price: directPriceI2Mari.toString(),
@@ -2279,14 +2393,40 @@ export async function POST(request: NextRequest) {
       villaI2MariCount: villaI2MariResults.length,
     })
 
+    // Determine unavailability reasons
+    const getUnavailabilityReason = (
+      isBooked: boolean, 
+      canAccommodate: boolean, 
+      maxGuests: number,
+      testMode: boolean
+    ): string | undefined => {
+      if (testMode) return 'Test mode: Forced unavailable'
+      if (!canAccommodate) {
+        const key = translations[resolvedLanguage]?.booking?.unavailability?.exceedsCapacity
+        return key ? key.replace('{maxGuests}', maxGuests.toString()) : `Exceeds capacity (max ${maxGuests} guests)`
+      }
+      if (isBooked) {
+        return translations[resolvedLanguage]?.booking?.unavailability?.alreadyBooked || 'Already booked for these dates'
+      }
+      return undefined
+    }
+
     return NextResponse.json({
       villaZefiro: {
         results: villaZefiroResults,
         available: villaZefiroAvailable,
+        unavailabilityReason: villaZefiroAvailable 
+          ? undefined 
+          : getUnavailabilityReason(villaZefiroBooked, searchVillaZefiro, VILLA_ZEFIRO_MAX_GUESTS, testZefiroUnavailable),
+        maxGuests: VILLA_ZEFIRO_MAX_GUESTS,
       },
       villaI2Mari: {
         results: villaI2MariResults,
         available: villaI2MariAvailable,
+        unavailabilityReason: villaI2MariAvailable 
+          ? undefined 
+          : getUnavailabilityReason(villaI2MariBooked, searchVillaI2Mari, VILLA_I2MARI_MAX_GUESTS, testI2MariUnavailable),
+        maxGuests: VILLA_I2MARI_MAX_GUESTS,
       },
     })
   } catch (error) {
@@ -2398,8 +2538,9 @@ export default function Home() {
   --popover: #E8E4D9;
   --popover-foreground: #2D3A3A;
 
-  /* Peachy sunset as primary */
-  --primary: #E89A7C;
+  /* Peachy sunset as primary --primary: #E89A7C; */
+  --primary: #7FDBDA ;
+
   --primary-foreground: #FFFFFF;
 
   /* Golden sun as secondary */
@@ -2995,7 +3136,7 @@ console.log('='.repeat(70));
 
 /// <reference types="next" />
 /// <reference types="next/image-types/global" />
-import "./.next/types/routes.d.ts";
+import "./.next/dev/types/routes.d.ts";
 
 // NOTE: This file should not be edited
 // see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
@@ -3203,20 +3344,79 @@ export default function GallerySection() {
   const [currentPage, setCurrentPage] = useState(0)
   const [autoRotate, setAutoRotate] = useState(true)
 
-  // Virtual tour images from public/pictures
+  // Combined images from both villas - ALL pictures
   const galleryImages = [
-    { id: 1, src: "/pictures/IMG_7194.webp", alt: "Virtual tour 1", size: 0 },
-    { id: 2, src: "/pictures/IMG_7196.webp", alt: "Virtual tour 2", size: 1 },
-    { id: 3, src: "/pictures/IMG_7199.webp", alt: "Virtual tour 3", size: 2 },
-    { id: 4, src: "/pictures/IMG_7202.webp", alt: "Virtual tour 4", size: 3 },
-    { id: 5, src: "/pictures/IMG_7203.webp", alt: "Virtual tour 5", size: 4 },
-    { id: 6, src: "/pictures/IMG_7205.webp", alt: "Virtual tour 6", size: 5 },
-    { id: 7, src: "/pictures/IMG_7597.webp", alt: "Virtual tour 7", size: 0 },
-    { id: 8, src: "/pictures/IMG_7598.webp", alt: "Virtual tour 8", size: 1 },
-    { id: 9, src: "/pictures/IMG_7599.webp", alt: "Virtual tour 9", size: 2 },
-    { id: 10, src: "/pictures/IMG_7600.webp", alt: "Virtual tour 10", size: 3 },
-    { id: 11, src: "/pictures/IMG_7601.webp", alt: "Virtual tour 11", size: 4 },
-    { id: 12, src: "/pictures/IMG_7602.webp", alt: "Virtual tour 12", size: 5 },
+    // Villa i 2 Mari - 32 images
+    { id: 1, src: "/pictures/villa_i_2_mari/ok%20giardino%20sera-b.webp", alt: "Garden at evening" },
+    { id: 2, src: "/pictures/villa_i_2_mari/ok%20piscina%20alta1.webp", alt: "Pool view" },
+    { id: 3, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20camera1.webp", alt: "Bedroom" },
+    { id: 4, src: "/pictures/villa_i_2_mari/%20ok%20Villa%20i2mari-cucina.webp", alt: "Kitchen" },
+    { id: 5, src: "/pictures/villa_i_2_mari/ok%20z%20soggiorno2%20%202mari.webp", alt: "Living room" },
+    { id: 6, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20bagno.webp", alt: "Bathroom" },
+    { id: 7, src: "/pictures/villa_i_2_mari/ok%20drone.webp", alt: "Aerial view" },
+    { id: 8, src: "/pictures/villa_i_2_mari/ok%20piscine%20notte1.webp", alt: "Pool at night" },
+    { id: 9, src: "/pictures/villa_i_2_mari/ok%20giardino1.webp", alt: "Garden" },
+    { id: 10, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-dal%20balcone.webp", alt: "Balcony view" },
+    { id: 11, src: "/pictures/villa_i_2_mari/ok%20z%20la%20piazzetta1.webp", alt: "Local square" },
+    { id: 12, src: "/pictures/villa_i_2_mari/ok%20isola%20di%20capo%20passero.webp", alt: "Capo Passero island" },
+    { id: 13, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari%20TV.webp", alt: "TV room" },
+    { id: 14, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-bagno1.webp", alt: "Bathroom" },
+    { id: 15, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-camera%203.webp", alt: "Bedroom 3" },
+    { id: 16, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-camera.webp", alt: "Bedroom" },
+    { id: 17, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-cameretta1.webp", alt: "Small bedroom" },
+    { id: 18, src: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-corridoio1.webp", alt: "Hallway" },
+    { id: 19, src: "/pictures/villa_i_2_mari/ok%20Villa%20i2%20mari-corridoio.webp", alt: "Corridor" },
+    { id: 20, src: "/pictures/villa_i_2_mari/ok%20Villa%20i2mari-tavolo%20cucina.webp", alt: "Kitchen table" },
+    { id: 21, src: "/pictures/villa_i_2_mari/ok%20giardino2.webp", alt: "Garden view" },
+    { id: 22, src: "/pictures/villa_i_2_mari/ok%20villa%20i%202%20mari-cameretta.webp", alt: "Kids room" },
+    { id: 23, src: "/pictures/villa_i_2_mari/ok%20Borgo84%202.webp", alt: "Borgo84" },
+    { id: 24, src: "/pictures/villa_i_2_mari/ok%20Marzamemi%20cinefest.webp", alt: "Marzamemi cinema festival" },
+    { id: 25, src: "/pictures/villa_i_2_mari/ok%20carratois%20pantano.webp", alt: "Carratois beach" },
+    { id: 26, src: "/pictures/villa_i_2_mari/ok%20isolotto%20brancati4.webp", alt: "Brancati island" },
+    { id: 27, src: "/pictures/villa_i_2_mari/ok%20spiaggiacavettone5.webp", alt: "Cavettone beach" },
+    { id: 28, src: "/pictures/villa_i_2_mari/ok%20z%20area%20fitness+padel.webp", alt: "Fitness and padel area" },
+    { id: 29, src: "/pictures/villa_i_2_mari/ok%20z%20la%20cialoma1.webp", alt: "La Cialoma restaurant" },
+    { id: 30, src: "/pictures/villa_i_2_mari/ok%20z%20manifesto%20tonnara2.webp", alt: "Tonnara poster" },
+    { id: 31, src: "/pictures/villa_i_2_mari/ok%20z%20soggiorno3%202%20mari.webp", alt: "Living room" },
+    { id: 32, src: "/pictures/villa_i_2_mari/ok%20z%20tonnara.webp", alt: "Tonnara" },
+    
+    // Villa Zefiro - 36 images
+    { id: 33, src: "/pictures/villa_zefiro/ok%20piscina%20alta.webp", alt: "Pool view" },
+    { id: 34, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno.webp", alt: "Living room" },
+    { id: 35, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera.webp", alt: "Bedroom" },
+    { id: 36, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20terrazza.webp", alt: "Terrace" },
+    { id: 37, src: "/pictures/villa_zefiro/ok%20giardino%20sera-b.webp", alt: "Garden at evening" },
+    { id: 38, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno.webp", alt: "Bathroom" },
+    { id: 39, src: "/pictures/villa_zefiro/ok%20drone3.webp", alt: "Aerial view" },
+    { id: 40, src: "/pictures/villa_zefiro/ok%20piscine%20notte.webp", alt: "Pool at night" },
+    { id: 41, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20mansarda.webp", alt: "Attic room" },
+    { id: 42, src: "/pictures/villa_zefiro/ok%20Capo%20Passero%20dalla%20terrazza.webp", alt: "View from terrace" },
+    { id: 43, src: "/pictures/villa_zefiro/ok%20z%20cialoma%20%20.webp", alt: "La Cialoma" },
+    { id: 44, src: "/pictures/villa_zefiro/ok%20Marzamemi%20porto.webp", alt: "Marzamemi port" },
+    { id: 45, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno1.webp", alt: "Living room" },
+    { id: 46, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno1.webp", alt: "Bathroom" },
+    { id: 47, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20balcone.webp", alt: "Balcony" },
+    { id: 48, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera2.webp", alt: "Bedroom 2" },
+    { id: 49, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera3.webp", alt: "Bedroom 3" },
+    { id: 50, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20letto%20mansarda1.webp", alt: "Attic bed" },
+    { id: 51, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20letto%20mansarda2.webp", alt: "Attic bed 2" },
+    { id: 52, src: "/pictures/villa_zefiro/ok%20App.17%20bagno%20mansarda.webp", alt: "Attic bathroom" },
+    { id: 53, src: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno%20mansarda.webp", alt: "Attic bathroom" },
+    { id: 54, src: "/pictures/villa_zefiro/ok%20piscina%20bassa3.webp", alt: "Lower pool" },
+    { id: 55, src: "/pictures/villa_zefiro/ok%20piscinabassa4.webp", alt: "Lower pool view" },
+    { id: 56, src: "/pictures/villa_zefiro/ok%20spiaggia%20cavettone1.webp", alt: "Cavettone beach" },
+    { id: 57, src: "/pictures/villa_zefiro/ok%20Borgo84%201.webp", alt: "Borgo84" },
+    { id: 58, src: "/pictures/villa_zefiro/ok%20Baiamuri-b.webp", alt: "Baiamuri beach" },
+    { id: 59, src: "/pictures/villa_zefiro/ok%20WhatsApp%20Image%202025-10-26%20at%2019.36.13(2).webp", alt: "Villa view" },
+    { id: 60, src: "/pictures/villa_zefiro/ok%20WhatsApp%20Image%202025-10-29%20at%2011.53.10(1).webp", alt: "Villa view" },
+    { id: 61, src: "/pictures/villa_zefiro/ok%20z%20aperirivo1%20zefiro.webp", alt: "Aperitivo" },
+    { id: 62, src: "/pictures/villa_zefiro/ok%20z%20area%20fitness+padel.webp", alt: "Fitness and padel area" },
+    { id: 63, src: "/pictures/villa_zefiro/ok%20z%20colazione%20porto1.webp", alt: "Breakfast at port" },
+    { id: 64, src: "/pictures/villa_zefiro/ok%20z%20mansarda%20Zefiro.webp", alt: "Attic" },
+    { id: 65, src: "/pictures/villa_zefiro/ok%20z%20padel.webp", alt: "Padel court" },
+    { id: 66, src: "/pictures/villa_zefiro/ok%20z%20particolare1%20zefiro.webp", alt: "Detail" },
+    { id: 67, src: "/pictures/villa_zefiro/ok%20z%20scala2%20zefiro.webp", alt: "Stairs" },
+    { id: 68, src: "/pictures/villa_zefiro/ok%20z%20tonnara1.webp", alt: "Tonnara" },
   ]
 
   // Auto-rotate pages every 5 seconds
@@ -3357,13 +3557,6 @@ export default function GallerySection() {
                 <ChevronRight size={18} />
               </Button>
             </div>
-
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <div
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${autoRotate ? "bg-primary scale-125" : "bg-gray-300"}`}
-              ></div>
-              <span className="hidden sm:inline">{autoRotate ? "Auto" : "Manual"}</span>
-            </div>
           </div>
 
           <div className="mt-6 h-1 bg-border rounded-full overflow-hidden">
@@ -3382,7 +3575,8 @@ export default function GallerySection() {
 
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import { createPortal } from "react-dom"
 import { Loader2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -3432,7 +3626,6 @@ export default function BookingSection() {
   const [checkOut, setCheckOut] = useState("")
   const [adults, setAdults] = useState(2)
   const [children, setChildren] = useState(0)
-  const [pets, setPets] = useState(false)
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<any>(null)
   const [checkInInput, setCheckInInput] = useState("")
@@ -3440,6 +3633,7 @@ export default function BookingSection() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const [activeField, setActiveField] = useState<"checkIn" | "checkOut">("checkIn")
   const datePlaceholder = language === "en" ? "dd / mm / yyyy" : "gg / mm / aaaa"
+  const resultsRef = useRef<HTMLDivElement>(null)
 
   const openCalendar = (field: "checkIn" | "checkOut") => {
     setActiveField(field)
@@ -3451,6 +3645,20 @@ export default function BookingSection() {
   useEffect(() => {
     if (!isCalendarOpen) return
 
+    // Lock scroll on both html and body so the calendar doesn't move with page scroll
+    const scrollY = window.scrollY
+    const prevHtmlOverflow = document.documentElement.style.overflow
+    const prevBodyOverflow = document.body.style.overflow
+    const prevBodyPosition = document.body.style.position
+    const prevBodyTop = document.body.style.top
+    const prevBodyWidth = document.body.style.width
+
+    document.documentElement.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
+    document.body.style.position = "fixed"
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = "100%"
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeCalendar()
@@ -3458,7 +3666,19 @@ export default function BookingSection() {
     }
 
     window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
+    return () => {
+      window.removeEventListener("keydown", onKeyDown)
+      document.documentElement.style.overflow = prevHtmlOverflow
+      document.body.style.overflow = prevBodyOverflow
+      document.body.style.position = prevBodyPosition
+      document.body.style.top = prevBodyTop
+      document.body.style.width = prevBodyWidth
+      // Restore scroll position without triggering smooth scroll
+      const scrollBehavior = document.documentElement.style.scrollBehavior
+      document.documentElement.style.scrollBehavior = 'auto'
+      window.scrollTo(0, scrollY)
+      document.documentElement.style.scrollBehavior = scrollBehavior
+    }
   }, [isCalendarOpen])
 
   const processDateInput = (
@@ -3554,6 +3774,35 @@ export default function BookingSection() {
 
       if (hasZefiroResults || hasI2MariResults) {
         setSearchResults(data)
+        // Scroll to results after they're rendered with custom smooth animation
+        setTimeout(() => {
+          if (resultsRef.current) {
+            const targetPosition = resultsRef.current.getBoundingClientRect().top + window.scrollY - 100
+            const startPosition = window.scrollY
+            const distance = targetPosition - startPosition
+            const duration = 1200 // milliseconds
+            let start: number | null = null
+
+            const animation = (currentTime: number) => {
+              if (start === null) start = currentTime
+              const timeElapsed = currentTime - start
+              const progress = Math.min(timeElapsed / duration, 1)
+              
+              // Easing function for smoother animation
+              const easeInOutCubic = progress < 0.5
+                ? 4 * progress * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2
+
+              window.scrollTo(0, startPosition + distance * easeInOutCubic)
+
+              if (timeElapsed < duration) {
+                requestAnimationFrame(animation)
+              }
+            }
+
+            requestAnimationFrame(animation)
+          }
+        }, 100)
       } else {
         // Defensive: treat empty results as scraping failure
         alert(t('booking.scrapingError'))
@@ -3640,7 +3889,10 @@ export default function BookingSection() {
                     value={checkInInput}
                     onChange={(e) => processDateInput(e.target.value, setCheckInInput, setCheckIn)}
                     onFocus={() => openCalendar("checkIn")}
-                    onClick={() => openCalendar("checkIn")}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      openCalendar("checkIn")
+                    }}
                     className="w-full"
                   />
                 </div>
@@ -3654,13 +3906,16 @@ export default function BookingSection() {
                     value={checkOutInput}
                     onChange={(e) => processDateInput(e.target.value, setCheckOutInput, setCheckOut)}
                     onFocus={() => openCalendar("checkOut")}
-                    onClick={() => openCalendar("checkOut")}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      openCalendar("checkOut")
+                    }}
                     className="w-full"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4 sm:mb-6">
+              <div className="grid grid-cols-2 gap-4 mb-4 sm:mb-6">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">{t('booking.adults')}</label>
                   <Input
@@ -3683,18 +3938,6 @@ export default function BookingSection() {
                     onChange={(e) => setChildren(Number.parseInt(e.target.value) || 0)}
                     className="w-full"
                   />
-                </div>
-
-                <div className="flex items-end">
-                  <label className="flex items-center gap-2 cursor-pointer w-full">
-                    <input
-                      type="checkbox"
-                      checked={pets}
-                      onChange={(e) => setPets(e.target.checked)}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm font-medium text-foreground">{t('booking.pets')}</span>
-                  </label>
                 </div>
               </div>
 
@@ -3759,9 +4002,9 @@ export default function BookingSection() {
 
             {/* Price Comparison Results - Two Properties Side by Side */}
             {searchResults && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div ref={resultsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <PriceComparison
-                  results={searchResults.villaZefiro?.results ?? []}
+                  results={searchResults.villaZefiro}
                   available={searchResults.villaZefiro?.available ?? false}
                   bookingDetails={{
                     checkIn,
@@ -3772,13 +4015,14 @@ export default function BookingSection() {
                   onDirectBooking={handleDirectBooking}
                   property={{
                     name: t('booking.properties.villaZefiro.name'),
-                    image: "/placeholder.svg",
+                    image: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno1.webp",
                     size: t('booking.properties.villaZefiro.size'),
-                    rooms: t('booking.properties.villaZefiro.rooms')
+                    rooms: t('booking.properties.villaZefiro.rooms'),
+                    bedrooms: t('booking.properties.villaZefiro.bedrooms')
                   }}
                 />
                 <PriceComparison
-                  results={searchResults.villaI2Mari?.results ?? []}
+                  results={searchResults.villaI2Mari}
                   available={searchResults.villaI2Mari?.available ?? false}
                   bookingDetails={{
                     checkIn,
@@ -3789,9 +4033,10 @@ export default function BookingSection() {
                   onDirectBooking={handleDirectBooking}
                   property={{
                     name: t('booking.properties.villaI2Mari.name'),
-                    image: "/placeholder.svg",
+                    image: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari%20TV.webp",
                     size: t('booking.properties.villaI2Mari.size'),
-                    rooms: t('booking.properties.villaI2Mari.rooms')
+                    rooms: t('booking.properties.villaI2Mari.rooms'),
+                    bedrooms: t('booking.properties.villaI2Mari.bedrooms')
                   }}
                 />
               </div>
@@ -3813,43 +4058,49 @@ export default function BookingSection() {
           </div>
         </div>
       </div>
-      {isCalendarOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-8"
-          onClick={closeCalendar}
-        >
+      {typeof document !== "undefined" &&
+        isCalendarOpen &&
+        createPortal(
           <div
-            className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 px-4 py-8"
+            onClick={closeCalendar}
+            role="dialog"
+            aria-modal="true"
+            aria-label={activeField === "checkIn" ? t("booking.checkIn") : t("booking.checkOut")}
           >
-            <button
-              onClick={closeCalendar}
-              className="absolute top-4 right-4 p-2 rounded-full bg-muted hover:bg-muted/80 text-foreground"
-              aria-label="Close calendar"
+            <div
+              className="relative z-[10000] w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
             >
-              <X size={18} />
-            </button>
-            <div className="p-6">
-              <h4 className="font-serif text-xl font-semibold text-foreground mb-4">
-                {activeField === "checkIn" ? t('booking.checkIn') : t('booking.checkOut')}
-              </h4>
-              <AvailabilityCalendar
-                sticky={false}
-                className="shadow-none border-0"
-                initialFrom={checkIn || undefined}
-                initialTo={checkOut || undefined}
-                onDateSelect={(dates) => {
-                  setCheckIn(dates.from)
-                  setCheckInInput(formatDisplayFromIso(dates.from))
-                  setCheckOut(dates.to)
-                  setCheckOutInput(formatDisplayFromIso(dates.to))
-                  setIsCalendarOpen(false)
-                }}
-              />
+              <button
+                onClick={closeCalendar}
+                className="absolute top-4 right-4 p-2 rounded-full bg-muted hover:bg-muted/80 text-foreground z-10"
+                aria-label="Close calendar"
+              >
+                <X size={18} />
+              </button>
+              <div className="p-6">
+                <h4 className="font-serif text-xl font-semibold text-foreground mb-4">
+                  {activeField === "checkIn" ? t("booking.checkIn") : t("booking.checkOut")}
+                </h4>
+                <AvailabilityCalendar
+                  sticky={false}
+                  className="shadow-none border-0"
+                  initialFrom={checkIn || undefined}
+                  initialTo={checkOut || undefined}
+                  onDateSelect={(dates) => {
+                    setCheckIn(dates.from)
+                    setCheckInInput(formatDisplayFromIso(dates.from))
+                    setCheckOut(dates.to)
+                    setCheckOutInput(formatDisplayFromIso(dates.to))
+                    setIsCalendarOpen(false)
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </section>
   )
 }
@@ -3894,7 +4145,7 @@ export default function PropertyDescriptionSection() {
           {/* Image */}
           <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 order-2 lg:order-1 group">
             <Image
-              src="/pictures/IMG_7600.webp"
+              src="/pictures/villa_i_2_mari/ok%20giardino1.webp"
               alt="Property interior"
               fill
               className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
@@ -4054,7 +4305,7 @@ export default function ContactSection() {
               {/* Email */}
               <div className="flex gap-4 items-start">
                 <div className="shrink-0 mt-1">
-                  <Mail size={24} className="text-secondary" />
+                  <Mail size={24} className="text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.email')}</p>
@@ -4067,7 +4318,7 @@ export default function ContactSection() {
               {/* Phone */}
               <div className="flex gap-4 items-start">
                 <div className="shrink-0 mt-1">
-                  <Phone size={24} className="text-secondary" />
+                  <Phone size={24} className="text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.phone')}</p>
@@ -4080,7 +4331,7 @@ export default function ContactSection() {
               {/* WhatsApp */}
               <div className="flex gap-4 items-start">
                 <div className="shrink-0 mt-1">
-                  <MessageCircle size={24} className="text-secondary" />
+                  <MessageCircle size={24} className="text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">
@@ -4229,6 +4480,26 @@ export default function ZoomContainer() {
     const container = containerRef.current;
     const heading = headingRef.current;
     
+    // Wait for images to load before creating animation
+    const images = container.querySelectorAll('img');
+    let loadedCount = 0;
+    const totalImages = images.length;
+    
+    const checkAllLoaded = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        ScrollTrigger.refresh();
+      }
+    };
+    
+    images.forEach(img => {
+      if (img.complete) {
+        checkAllLoaded();
+      } else {
+        img.addEventListener('load', checkAllLoaded);
+      }
+    });
+    
     // Create ONE timeline with ONE ScrollTrigger for ALL elements
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -4262,7 +4533,7 @@ export default function ZoomContainer() {
 
     // Animate Layer 2 images (except one that passes through)
     const layer2Images = Array.from(container.querySelectorAll('[data-layer="2"]'));
-    const passThroughLayer2 = layer2Images.filter((_, index) => index === 2); // IMG_7597
+    const passThroughLayer2 = layer2Images.filter((_, index) => index === 2); // Villa Zefiro terrazza
     const otherLayer2Images = layer2Images.filter((_, index) => index !== 2);
     
     // Regular Layer 2 images
@@ -4303,7 +4574,7 @@ export default function ZoomContainer() {
 
     // Animate Layer 1 images (except bottom two which pass through)
     const layer1Images = Array.from(container.querySelectorAll('[data-layer="1"]'));
-    const bottomImages = layer1Images.filter((_, index) => index === 1 || index === 2); // IMG_7196 and IMG_7199
+    const bottomImages = layer1Images.filter((_, index) => index === 1 || index === 2); // piscina alta and camera
     const otherLayer1Images = layer1Images.filter((_, index) => index !== 1 && index !== 2);
     
     // Regular Layer 1 images
@@ -4363,6 +4634,9 @@ export default function ZoomContainer() {
     // Cleanup
     return () => {
       tl.kill();
+      images.forEach(img => {
+        img.removeEventListener('load', checkAllLoaded);
+      });
     };
   }, { scope: containerRef, dependencies: [isMobile] });
 
@@ -4461,7 +4735,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/pictures/IMG_8540.webp"
+          src="/pictures/villa_zefiro/ok%20piscina%20alta.webp"
           alt="Luxury beach property"
           fill
           priority
@@ -5554,6 +5828,7 @@ interface PropertyInfo {
   image: string
   size: string
   rooms: string
+  bedrooms?: string
 }
 
 interface PriceComparisonProps {
@@ -5561,6 +5836,8 @@ interface PriceComparisonProps {
     results?: PriceResult[]
     loading?: boolean
     error?: string
+    unavailabilityReason?: string
+    maxGuests?: number
   }
   bookingDetails?: {
     checkIn: string
@@ -5577,6 +5854,73 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
   const { t } = useTranslation()
 
   if (!results?.results || results.results.length === 0) {
+    // Show unavailability message if property exists but no results
+    if (property && results?.unavailabilityReason) {
+      return (
+        <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6 md:p-8 border border-border">
+          {/* Property Header */}
+          <div className="mb-6">
+            {/* Property Image */}
+            <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden mb-4 bg-muted">
+              <Image
+                src={property.image}
+                alt={property.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Property Name */}
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-foreground">
+                {property.name}
+              </h3>
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold border bg-rose-50 text-rose-700 border-rose-200">
+                ❌ {t('booking.notAvailable')}
+              </span>
+            </div>
+
+            {/* Property Specs */}
+            <div className="flex flex-col gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Maximize size={16} className="flex-shrink-0" />
+                  <span className="font-medium">{property.size}</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <BedDouble size={16} className="flex-shrink-0" />
+                  <span className="font-medium">{property.rooms}</span>
+                </div>
+                {results.maxGuests && (
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Home size={16} className="flex-shrink-0" />
+                    <span className="font-medium">{t('booking.maxGuests').replace('{count}', results.maxGuests.toString())}</span>
+                  </div>
+                )}
+              </div>
+              {property.bedrooms && (
+                <div className="text-xs leading-relaxed text-muted-foreground bg-muted/30 rounded-md px-3 py-2 border border-border/50">
+                  {property.bedrooms
+                    .split('|')
+                    .map((room) => room.trim())
+                    .filter((room) => room.length > 0)
+                    .map((room, index) => (
+                      <div key={index}>{room}</div>
+                    ))}
+                </div>
+              )}
+            </div>
+
+            {/* Unavailability Reason */}
+            <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
+              <p className="text-sm text-rose-700 font-medium">
+                {results.unavailabilityReason}
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return null
   }
 
@@ -5629,21 +5973,43 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
                   : 'bg-rose-50 text-rose-700 border-rose-200'
               }`}
             >
-              {available ? '✅ Available' : '❌ Not Available'}
+              {available ? `✅ ${t('booking.available')}` : `❌ ${t('booking.notAvailable')}`}
             </span>
           </div>
 
           {/* Property Specs */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-            <span className="flex items-center gap-1">
-              <Maximize size={14} />
-              {property.size}
-            </span>
-            <span className="flex items-center gap-1">
-              <BedDouble size={14} />
-              {property.rooms}
-            </span>
+          <div className="flex flex-col gap-3 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Maximize size={16} className="flex-shrink-0" />
+                <span className="font-medium">{property.size}</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <BedDouble size={16} className="flex-shrink-0" />
+                <span className="font-medium">{property.rooms}</span>
+              </div>
+              {results.maxGuests && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Home size={16} className="flex-shrink-0" />
+                  <span className="font-medium">{t('booking.maxGuests').replace('{count}', results.maxGuests.toString())}</span>
+                </div>
+              )}
+            </div>
+            {property.bedrooms && (
+              <div className="text-xs leading-relaxed text-muted-foreground bg-muted/30 rounded-md px-3 py-2 border border-border/50">
+                {property.bedrooms
+                  .split('|')
+                  .map((room) => room.trim())
+                  .filter((room) => room.length > 0)
+                  .map((room, index) => (
+                    <div key={index}>{room}</div>
+                  ))}
+              </div>
+            )}
           </div>
+
+          {/* Extra spacing for Villa Zefiro to align "Confronto Prezzi" with Villa i 2 Mari */}
+          {property.name.includes('Zefiro') && <div className="h-[1.5rem]" />}
 
           <div className="border-t border-border pt-4">
             <h4 className="font-medium text-foreground mb-3">{t('booking.priceComparison')}</h4>
@@ -5665,25 +6031,29 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
           return (
             <div
               key={result.platform}
-              className={`p-3 sm:p-4 rounded-lg border transition-all ${
+              className={`p-4 rounded-lg border transition-all ${
                 isBestPrice ? "border-green-400 bg-green-50" : "border-border hover:shadow-md"
               }`}
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground text-sm sm:text-base truncate">{result.platform}</p>
-                  {isBestPrice && <p className="text-xs text-green-600 font-medium mt-1">{t('booking.bestPrice')}</p>}
-                </div>
-                <div className="text-right flex flex-col items-end gap-2 shrink-0">
-                  <p className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap">
-                    {result.currency}
-                    {price}
+              <div className="flex flex-col gap-3">
+                {/* Platform name and best price badge */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-foreground text-base truncate">{result.platform}</p>
+                    {isBestPrice && <p className="text-xs text-green-600 font-medium mt-1">{t('booking.bestPrice')}</p>}
+                  </div>
+                  <p className="text-2xl font-bold text-primary whitespace-nowrap">
+                    {result.currency}{price}
                   </p>
+                </div>
+                
+                {/* Action button - full width */}
+                <div className="w-full">
                   {isDirect && bookingDetails && onDirectBooking ? (
                     <Button
                       onClick={() => handleDirectBookingClick(result)}
                       disabled={available === false}
-                      className={`h-9 text-xs sm:text-sm px-3 sm:px-4 whitespace-nowrap ${
+                      className={`w-full h-10 text-sm ${
                         available === false
                           ? 'bg-gray-200 text-gray-500 cursor-not-allowed opacity-70'
                           : 'bg-primary hover:bg-primary/90 text-white'
@@ -5696,9 +6066,9 @@ export default function PriceComparison({ results, bookingDetails, onDirectBooki
                       href={result.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-accent hover:underline flex items-center gap-1 justify-end"
+                      className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
                     >
-                      {t('booking.view')} <ExternalLink size={12} />
+                      {t('booking.view')} <ExternalLink size={14} />
                     </a>
                   )}
                 </div>
@@ -6528,6 +6898,7 @@ export async function searchAirbnbPrice(
     const url = buildAirbnbUrl(params);
 
     console.log('[prices] Airbnb search started');
+    console.log('[prices] Airbnb URL:', url);
     const startTime = Date.now();
 
     await page.goto(url, {
@@ -6585,7 +6956,10 @@ export async function searchAirbnbPrice(
       ((t.includes('€') || t.includes('EUR')) && /\d{2,}/.test(t))
     );
 
-    const excludePatterns = ['originally', 'was', 'per night', '/night', 'for', 'nights'];
+    console.log('[prices] Airbnb: Valid candidates:', validCandidates.length);
+
+    // Exclude patterns in both English and Italian
+    const excludePatterns = ['originally', 'was', 'per night', '/night', 'for', 'nights', 'per notte', 'notti'];
     const filteredCandidates = validCandidates.filter((text) => {
       const lower = text.toLowerCase();
       if (excludePatterns.some((p) => lower.includes(p))) return false;
@@ -6593,6 +6967,8 @@ export async function searchAirbnbPrice(
       if (!/\d/.test(text)) return false;
       return true;
     });
+
+    console.log('[prices] Airbnb: Filtered candidates:', filteredCandidates.length, filteredCandidates.slice(0, 3));
 
     // Choose best candidate
     let priceText: string | null = null;
@@ -6615,7 +6991,9 @@ export async function searchAirbnbPrice(
       console.log('[prices] Airbnb: Using full page scan fallback');
       priceText = await page.evaluate(() => {
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-        const pricePattern = /€\s*[\d,\.]+/g;
+        // Match both formats: €1234 (English) and 1234 € (Italian)
+        const pricePattern = /(€\s*[\d,\.]+|[\d,\.]+\s*€)/g;
+        const candidates: string[] = [];
         let node: Node | null;
         while ((node = walker.nextNode())) {
           const text = (node.textContent || '');
@@ -6627,15 +7005,23 @@ export async function searchAirbnbPrice(
               const isStrike = style.textDecorationLine === 'line-through' || style.textDecoration.includes('line-through');
               if (!isStrike) {
                 const lowerText = text.toLowerCase();
-                if (!lowerText.includes('originally') && !lowerText.includes('was') && !lowerText.includes('per night') && !lowerText.includes('/night')) {
-                  return matches[0];
+                // Exclude patterns in both English and Italian
+                const excludeWords = ['originally', 'was', 'per night', '/night', 'per notte', 'notti'];
+                const shouldExclude = excludeWords.some(word => lowerText.includes(word));
+                if (!shouldExclude) {
+                  candidates.push(matches[0]);
                 }
               }
             }
           }
         }
-        return null;
+        console.log('[Airbnb Browser] Found price candidates:', candidates);
+        return candidates.length > 0 ? candidates[0] : null;
       });
+      
+      if (priceText) {
+        console.log('[prices] Airbnb: Fallback found price:', priceText);
+      }
     }
 
     if (!priceText) {
@@ -6852,6 +7238,7 @@ export async function searchBookingPrice(
     const url = buildBookingUrl(params);
 
     console.log('[prices] Booking.com search started');
+    console.log('[prices] Booking.com URL:', url);
     const startTime = Date.now();
 
     // Navigate to Booking.com URL with domcontentloaded strategy
@@ -6873,6 +7260,31 @@ export async function searchBookingPrice(
       );
     } catch (error) {
       console.log('[prices] Booking.com: Failed to collect price elements', error);
+      
+      // Fallback: try alternative selectors
+      const fallbackSelectors = [
+        '[data-testid="price-and-discounted-price"]',
+        '.prco-text-link',
+        '[data-testid="price-summary"]',
+        '.bui-price-display__value',
+        '.prco-inline-block-maker-helper',
+      ];
+      
+      for (const selector of fallbackSelectors) {
+        try {
+          const elements = await page.$$(selector);
+          if (elements.length > 0) {
+            console.log(`[prices] Booking.com: Trying fallback selector: ${selector}`);
+            rawPriceTexts = await page.$$eval(selector, (els) =>
+              els.map((el) => (el.textContent || '').trim()).filter((text) => text.length > 0),
+            );
+            if (rawPriceTexts.length > 0) {
+              console.log(`[prices] Booking.com: Found ${rawPriceTexts.length} prices with fallback selector`);
+              break;
+            }
+          }
+        } catch {}
+      }
     }
 
     if (!rawPriceTexts.length) {
@@ -8693,7 +9105,7 @@ export const scrollSmootherConfig = {
 export const imageConfigs: ImageConfig[] = [
   // Layer 1 (closest) - 5 images - well distributed
   {
-    src: '/pictures/IMG_7194.webp',
+    src: '/pictures/villa_i_2_mari/ok%20giardino%20sera-b.webp',
     layer: 1,
     position: { top: '5%', left: '3%' },
     size: { width: '14vw', height: '18vh' },
@@ -8701,7 +9113,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '5%', left: '2%' },
   },
   {
-    src: '/pictures/IMG_7196.webp',
+    src: '/pictures/villa_i_2_mari/ok%20piscina%20alta1.webp',
     layer: 1,
     position: { bottom: '5%', right: '5%' },
     size: { width: '16vw', height: '20vh' },
@@ -8709,7 +9121,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '5%', right: '3%' },
   },
   {
-    src: '/pictures/IMG_7199.webp',
+    src: '/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20camera1.webp',
     layer: 1,
     position: { bottom: '8%', left: '8%' },
     size: { width: '15vw', height: '19vh' },
@@ -8717,7 +9129,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '8%', left: '5%' },
   },
   {
-    src: '/pictures/IMG_7202.webp',
+    src: '/pictures/villa_i_2_mari/%20ok%20Villa%20i2mari-cucina.webp',
     layer: 1,
     position: { top: '8%', right: '4%' },
     size: { width: '13vw', height: '17vh' },
@@ -8725,7 +9137,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '8%', right: '3%' },
   },
   {
-    src: '/pictures/IMG_8540.webp',
+    src: '/pictures/villa_zefiro/ok%20piscina%20alta.webp',
     layer: 1,
     position: { top: '60%', right: '35%' },
     size: { width: '14vw', height: '18vh' },
@@ -8735,7 +9147,7 @@ export const imageConfigs: ImageConfig[] = [
   
   // Layer 2 (middle) - 5 images - filling gaps
   {
-    src: '/pictures/IMG_7203.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno.webp',
     layer: 2,
     position: { top: '35%', left: '15%' },
     size: { width: '12vw', height: '16vh' },
@@ -8743,7 +9155,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '35%', left: '10%' },
   },
   {
-    src: '/pictures/IMG_7205.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20camera.webp',
     layer: 2,
     position: { bottom: '35%', left: '5%' },
     size: { width: '14vw', height: '18vh' },
@@ -8751,7 +9163,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '35%', left: '3%' },
   },
   {
-    src: '/pictures/IMG_7597.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20terrazza.webp',
     layer: 2,
     position: { top: '65%', left: '35%' },
     size: { width: '11vw', height: '14vh' },
@@ -8759,7 +9171,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '70%', left: '30%' },
   },
   {
-    src: '/pictures/IMG_7598.webp',
+    src: '/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari-%20bagno.webp',
     layer: 2,
     position: { bottom: '40%', right: '8%' },
     size: { width: '13vw', height: '17vh' },
@@ -8767,7 +9179,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '40%', right: '5%' },
   },
   {
-    src: '/pictures/IMG_7602.webp',
+    src: '/pictures/villa_zefiro/ok%20Villa%20Zefiro%20bagno.webp',
     layer: 2,
     position: { top: '40%', right: '15%' },
     size: { width: '12vw', height: '15vh' },
@@ -8777,7 +9189,7 @@ export const imageConfigs: ImageConfig[] = [
   
   // Layer 3 (farthest) - 4 images - background fill
   {
-    src: '/pictures/IMG_7599.webp',
+    src: '/pictures/villa_i_2_mari/ok%20drone.webp',
     layer: 3,
     position: { top: '25%', left: '40%' },
     size: { width: '10vw', height: '13vh' },
@@ -8785,7 +9197,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '25%', left: '35%' },
   },
   {
-    src: '/pictures/IMG_7600.webp',
+    src: '/pictures/villa_i_2_mari/ok%20piscine%20notte1.webp',
     layer: 3,
     position: { bottom: '15%', right: '30%' },
     size: { width: '11vw', height: '14vh' },
@@ -8793,7 +9205,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { bottom: '15%', right: '25%' },
   },
   {
-    src: '/pictures/IMG_7601.webp',
+    src: '/pictures/villa_zefiro/ok%20drone3.webp',
     layer: 3,
     position: { top: '55%', right: '5%' },
     size: { width: '10vw', height: '12vh' },
@@ -8801,7 +9213,7 @@ export const imageConfigs: ImageConfig[] = [
     mobilePosition: { top: '55%', right: '3%' },
   },
   {
-    src: '/pictures/IMG_8498.webp',
+    src: '/pictures/villa_zefiro/ok%20piscine%20notte.webp',
     layer: 3,
     position: { bottom: '60%', left: '60%' },
     size: { width: '11vw', height: '13vh' },
@@ -8944,6 +9356,10 @@ export const itTranslations: TranslationData = {
     priceComparison: "Confronto Prezzi",
     bestPrice: "Miglior Prezzo",
     view: "Visualizza",
+    available: "Disponibile",
+    notAvailable: "Non Disponibile",
+    guests: "ospiti",
+    maxGuests: "Max {count} ospiti",
     platforms: {
       direct: "Prenotazione Diretta"
     },
@@ -8966,14 +9382,20 @@ export const itTranslations: TranslationData = {
     properties: {
       villaZefiro: {
         name: "Villa Zefiro",
-        size: "120 m²",
-        rooms: "3 camere"
+        size: "68 m²",
+        rooms: "2 camere da letto, 2 bagni",
+        bedrooms: "Camera 1: Letto matrimoniale | Camera 2: Letto matrimoniale + Divano letto"
       },
       villaI2Mari: {
         name: "Villa i 2 Mari",
-        size: "150 m²",
-        rooms: "4 camere"
+        size: "44 m²",
+        rooms: "2 camere da letto, 1 bagno",
+        bedrooms: "Camera 1: Letto matrimoniale | Camera 2: Letti a castello | Soggiorno: Divano letto"
       }
+    },
+    unavailability: {
+      exceedsCapacity: "Supera la capacità (max {maxGuests} ospiti)",
+      alreadyBooked: "Già prenotato per queste date"
     }
   },
   contact: {
@@ -9207,6 +9629,10 @@ export const enTranslations: TranslationData = {
     priceComparison: "Price Comparison",
     bestPrice: "Best Price",
     view: "View",
+    available: "Available",
+    notAvailable: "Not Available",
+    guests: "guests",
+    maxGuests: "Max {count} guests",
     platforms: {
       direct: "Direct Booking"
     },
@@ -9229,14 +9655,20 @@ export const enTranslations: TranslationData = {
     properties: {
       villaZefiro: {
         name: "Villa Zefiro",
-        size: "120 m²",
-        rooms: "3 rooms"
+        size: "68 m²",
+        rooms: "2 bedrooms, 2 bathrooms",
+        bedrooms: "Bedroom 1: Queen bed | Bedroom 2: Queen bed + Sofa bed"
       },
       villaI2Mari: {
         name: "Villa i 2 Mari",
-        size: "150 m²",
-        rooms: "4 rooms"
+        size: "44 m²",
+        rooms: "2 bedrooms, 1 bathroom",
+        bedrooms: "Bedroom 1: Queen bed | Bedroom 2: Bunk beds | Living room: Sofa bed"
       }
+    },
+    unavailability: {
+      exceedsCapacity: "Exceeds capacity (max {maxGuests} guests)",
+      alreadyBooked: "Already booked for these dates"
     }
   },
   contact: {
@@ -9481,6 +9913,10 @@ export interface TranslationData {
         size: string
         rooms: string
       }
+    }
+    unavailability: {
+      exceedsCapacity: string
+      alreadyBooked: string
     }
   }
   contact: {
@@ -9815,31 +10251,201 @@ export type {
   ErrorResponse,
 } from './types';
 
-------------------------------------------------- ./ecosystem.config.cjs --------------------------------------------------
+------------------------------------------------- ./debug-airbnb-scraper.js --------------------------------------------------
 
-module.exports = {
-    apps: [
-      {
-        name: 'seacily-villas',
-        script: 'npm',
-        args: 'start',
-        exec_mode: 'fork',
-        env: {
-          NODE_ENV: 'production',
-          PORT: 3001
-        },
-        instances: 1,
-        autorestart: true,
-        watch: false,
-        max_memory_restart: '1G',
-        error_file: 'logs/pm2_error.log',
-        out_file: 'logs/pm2_out.log',
-        log_file: 'logs/pm2_combined.log',
-        merge_logs: true,
-        log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
+/**
+ * Debug script to test Airbnb scraping on Raspberry Pi
+ * This will take screenshots and log what the scraper sees
+ * 
+ * Usage:
+ * node debug-airbnb-scraper.js
+ */
+
+const { chromium } = require('playwright');
+
+// Use the same URLs from your .env
+const VILLA_ZEFIRO_URL = 'https://www.airbnb.it/rooms/1558634550299608683';
+const VILLA_I2MARI_URL = 'https://www.airbnb.it/rooms/1561453392648145770';
+
+async function debugAirbnbScraping(baseUrl, villaName) {
+  console.log(`\n========== Testing ${villaName} ==========`);
+  
+  const browser = await chromium.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  const context = await browser.newContext({
+    viewport: { width: 1920, height: 1080 },
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  });
+
+  const page = await context.newPage();
+
+  // Build URL with search params
+  const url = new URL(baseUrl);
+  url.searchParams.set('check_in', '2026-03-22');
+  url.searchParams.set('check_out', '2026-03-28');
+  url.searchParams.set('guests', '2');
+  url.searchParams.set('currency', 'EUR');
+
+  console.log('URL:', url.toString());
+  console.log('Loading page...');
+
+  try {
+    await page.goto(url.toString(), {
+      waitUntil: 'domcontentloaded',
+      timeout: 10000,
+    });
+
+    console.log('Page loaded, scrolling...');
+    await page.evaluate(() => window.scrollBy(0, 300));
+    await page.waitForTimeout(1000);
+
+    // Take screenshot 1: Initial load
+    const screenshotName1 = `debug-${villaName.replace(/\s/g, '-')}-1-initial.png`;
+    await page.screenshot({ path: screenshotName1, fullPage: false });
+    console.log(`Screenshot saved: ${screenshotName1}`);
+
+    // Wait a bit more for lazy loading
+    await page.waitForTimeout(2000);
+
+    // Take screenshot 2: After wait
+    const screenshotName2 = `debug-${villaName.replace(/\s/g, '-')}-2-after-wait.png`;
+    await page.screenshot({ path: screenshotName2, fullPage: false });
+    console.log(`Screenshot saved: ${screenshotName2}`);
+
+    // Check for sidebar
+    console.log('\n--- Checking for booking sidebar ---');
+    const sidebarSelectors = [
+      '[data-section-id="BOOK_IT_SIDEBAR"]',
+      '[data-testid="book-it-default"]',
+      '[data-plugin-in-point-id="BOOK_IT_SIDEBAR"]',
+      '.c1yo0219',
+    ];
+
+    for (const selector of sidebarSelectors) {
+      try {
+        const element = await page.waitForSelector(selector, { timeout: 2000 });
+        if (element) {
+          console.log(`✓ Found sidebar with selector: ${selector}`);
+          break;
+        }
+      } catch (e) {
+        console.log(`✗ Sidebar not found with: ${selector}`);
       }
-    ]
+    }
+
+    // Try to find price with all selectors
+    console.log('\n--- Testing price selectors ---');
+    const priceSelectors = [
+      '[data-testid="book-it-default"] span',
+      '._1y74zjx',
+      '._tyxjp1',
+      '._1k4xcdh',
+      'span[aria-hidden="true"]',
+    ];
+
+    for (const selector of priceSelectors) {
+      try {
+        const elements = await page.$$(selector);
+        console.log(`Selector "${selector}": Found ${elements.length} elements`);
+        
+        if (elements.length > 0) {
+          // Get text from first 5 elements
+          for (let i = 0; i < Math.min(5, elements.length); i++) {
+            const text = await elements[i].textContent();
+            if (text && text.trim()) {
+              console.log(`  [${i}] "${text.trim()}"`);
+            }
+          }
+        }
+      } catch (e) {
+        console.log(`Selector "${selector}": Error - ${e.message}`);
+      }
+    }
+
+    // Full page scan for prices
+    console.log('\n--- Full page scan for € symbols ---');
+    const pricesFound = await page.evaluate(() => {
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+      const pricePattern = /€\s*[\d,\.]+/g;
+      const candidates = [];
+      let node;
+      
+      while ((node = walker.nextNode())) {
+        const text = node.textContent || '';
+        const matches = text.match(pricePattern);
+        
+        if (matches && matches.length > 0) {
+          const parent = node.parentElement;
+          if (parent) {
+            const style = window.getComputedStyle(parent);
+            const isStrike = style.textDecorationLine === 'line-through' || 
+                           style.textDecoration.includes('line-through');
+            
+            candidates.push({
+              text: text.trim(),
+              match: matches[0],
+              isStrike: isStrike,
+              tagName: parent.tagName,
+              className: parent.className,
+            });
+          }
+        }
+      }
+      
+      return candidates;
+    });
+
+    console.log(`Found ${pricesFound.length} price candidates:`);
+    pricesFound.forEach((p, i) => {
+      console.log(`  [${i}] ${p.match} - Strike: ${p.isStrike} - Tag: ${p.tagName} - Class: ${p.className.substring(0, 50)}`);
+    });
+
+    // Get page HTML for inspection
+    console.log('\n--- Saving page HTML ---');
+    const html = await page.content();
+    const fs = require('fs');
+    const htmlFileName = `debug-${villaName.replace(/\s/g, '-')}-page.html`;
+    fs.writeFileSync(htmlFileName, html);
+    console.log(`HTML saved: ${htmlFileName}`);
+
+    // Check if page shows any error or blocking message
+    console.log('\n--- Checking for blocking messages ---');
+    const bodyText = await page.evaluate(() => document.body.innerText);
+    const blockingKeywords = ['robot', 'bot', 'captcha', 'blocked', 'verify', 'unusual traffic'];
+    
+    for (const keyword of blockingKeywords) {
+      if (bodyText.toLowerCase().includes(keyword)) {
+        console.log(`⚠️  Found keyword "${keyword}" in page - might be blocked!`);
+      }
+    }
+
+  } catch (error) {
+    console.error('Error during scraping:', error.message);
+  } finally {
+    await context.close();
+    await browser.close();
   }
+}
+
+async function main() {
+  console.log('Starting Airbnb scraping debug...');
+  console.log('This will create screenshots and HTML files for inspection\n');
+
+  // Test both villas
+  await debugAirbnbScraping(VILLA_ZEFIRO_URL, 'Villa-Zefiro');
+  await debugAirbnbScraping(VILLA_I2MARI_URL, 'Villa-i-2-Mari');
+
+  console.log('\n========== Debug Complete ==========');
+  console.log('Check the generated files:');
+  console.log('  - debug-*.png (screenshots)');
+  console.log('  - debug-*.html (page HTML)');
+}
+
+main().catch(console.error);
+
 ------------------------------------------------- ./prompt_chatbot.yaml --------------------------------------------------
 
 template: |
@@ -9987,6 +10593,31 @@ async function runTests() {
 // Run the tests
 runTests().catch(console.error);
 
+------------------------------------------------- ./ecosystem.config.js --------------------------------------------------
+
+module.exports = {
+  apps: [{
+    name: 'seacilyvillas',
+    script: 'npm',
+    args: 'start',
+    cwd: '/home/raspy/projects/rbt_website_marzamemi',
+    exec_mode: 'fork',
+    instances: 1,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 3004
+    },
+    log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+    out_file: './logs/pm2_out.log',
+    error_file: './logs/pm2_error.log',
+    log_file: './logs/pm2_combined.log',
+    merge_logs: true,
+    time: true,
+    autorestart: true,
+    watch: false
+  }]
+}
 ------------------------------------------------- ./test-stripe.sh --------------------------------------------------
 
 #!/bin/bash

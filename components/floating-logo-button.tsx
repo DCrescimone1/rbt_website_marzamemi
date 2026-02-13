@@ -262,14 +262,16 @@ export default function FloatingLogoButton() {
           </button>
 
           {/* Tooltip: always visible on md+ (web), hover-based on mobile */}
-          <div
-            className={`absolute bottom-full right-0 mb-2 px-3 py-1.5 bg-primary text-white text-sm rounded-lg whitespace-nowrap transition-all duration-300 ${
+          <button
+            onClick={() => setIsChatOpen(!isChatOpen)}
+            className={`absolute bottom-full right-0 mb-2 px-3 py-1.5 bg-primary text-white text-sm rounded-lg whitespace-nowrap transition-all duration-300 hover:bg-primary/90 cursor-pointer ${
               isHovered && !isChatOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
             } md:opacity-100 md:translate-y-0 md:pointer-events-auto`}
+            aria-label={t('chat.aria.openChat')}
           >
             {t('chat.tooltip')}
             <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-primary" />
-          </div>
+          </button>
         </div>
       )}
 

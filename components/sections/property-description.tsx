@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import { useTranslation } from "@/lib/hooks/useTranslation"
 
 export default function PropertyDescriptionSection() {
@@ -12,106 +11,111 @@ export default function PropertyDescriptionSection() {
     setIsVisible(true)
   }, [])
 
-  const amenities = [
-    { icon: "🏡", title: t('property.amenities.bedrooms.title'), description: t('property.amenities.bedrooms.description') },
-    { icon: "🏨", title: t('property.amenities.kitchen.title'), description: t('property.amenities.kitchen.description') },
-    { icon: "🏊‍♀️", title: t('property.amenities.pool.title'), description: t('property.amenities.pool.description') },
-    { icon: "🌊", title: t('property.amenities.terrace.title'), description: t('property.amenities.terrace.description') },
-    { icon: "🎾", title: t('property.amenities.entertainment.title'), description: t('property.amenities.entertainment.description') },
-    { icon: "🚴", title: t('property.amenities.wellness.title'), description: t('property.amenities.wellness.description') },
-  ]
-
   return (
     <section className="bg-white relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-            {t('property.sectionTitle')}
+            {t("property.sectionTitle")}
           </h2>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mb-16 md:mb-20">
-          {/* Image */}
-          <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 order-2 lg:order-1 group">
-            <Image
-              src="/pictures/villa_i_2_mari/ok%20giardino1.webp"
-              alt="Property interior"
-              fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-              quality={85}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/10 transition-all duration-300"></div>
+        {/* Two-column villa comparison */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_auto_minmax(0,1.4fr)] gap-12 lg:gap-16 items-stretch">
+          {/* Left column — Villa Zefiro */}
+          <div
+            className={`flex flex-col transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+            }`}
+          >
+            <span className="text-xs tracking-[0.2em] uppercase text-primary">
+              {t("property.villaZefiro.tagline")}
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4 md:mb-6">
+              {t("property.villaZefiro.name")}
+            </h3>
+
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t("property.villaZefiro.description")}
+            </p>
+
+            {/* Stats row */}
+            <div className="flex items-center gap-6 md:gap-8 pt-6 md:pt-8 mt-auto border-t border-border">
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {t("property.villaZefiro.guests")}
+                </p>
+              </div>
+              <span className="text-border">|</span>
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {t("property.villaZefiro.size")}
+                </p>
+              </div>
+              <span className="text-border">|</span>
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {`${t("property.villaZefiro.bedrooms")} · ${t("property.villaZefiro.bathrooms")}`}
+                </p>
+              </div>
+            </div>
+
+            {/* Highlight badge */}
+            <div className="mt-4">
+              <span className="inline-flex items-center rounded-full border border-primary/60 bg-primary/5 px-5 py-2 text-xs md:text-sm text-foreground/70">
+                {t("property.villaZefiro.highlight")}
+              </span>
+            </div>
           </div>
 
-          {/* Description */}
+          {/* Vertical divider */}
+          <div className="hidden lg:block w-px bg-border/30" aria-hidden="true" />
+
+          {/* Right column — Villa i 2 Mari */}
           <div
-            className={`transition-all duration-1000 order-1 lg:order-2 ${
+            className={`flex flex-col transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
           >
-            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 md:mb-6">
-              {t('property.locationTitle')}
+            <span className="text-xs tracking-[0.2em] uppercase text-primary">
+              {t("property.villaI2Mari.tagline")}
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4 md:mb-6">
+              {t("property.villaI2Mari.name")}
             </h3>
 
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
-              {t('property.description')}
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t("property.villaI2Mari.description")}
             </p>
 
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 md:mb-8">
-              {t('property.detailedDescription')}
-            </p>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 pt-6 md:pt-8 border-t border-border">
-              <div className="group hover:scale-105 transition-transform duration-200">
-                <p className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-primary transition-colors group-hover:text-accent">
-                  4
-                </p>
-                <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-wide mt-1 md:mt-2">
-                  {t('property.stats.bedrooms')}
+            {/* Stats row */}
+            <div className="flex items-center gap-6 md:gap-8 pt-6 md:pt-8 mt-auto border-t border-border">
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {t("property.villaI2Mari.guests")}
                 </p>
               </div>
-              <div className="group hover:scale-105 transition-transform duration-200">
-                <p className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-primary transition-colors group-hover:text-accent">
-                  1
-                </p>
-                <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-wide mt-1 md:mt-2">
-                  {t('property.stats.bathrooms')}
+              <span className="text-border">|</span>
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {t("property.villaI2Mari.size")}
                 </p>
               </div>
-              <div className="group hover:scale-105 transition-transform duration-200">
-                <p className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-primary transition-colors group-hover:text-accent">
-                  36
+              <span className="text-border">|</span>
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {`${t("property.villaI2Mari.bedrooms")} · ${t("property.villaI2Mari.bathrooms")}`}
                 </p>
-                <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-wide mt-1 md:mt-2">{t('property.stats.area')}</p>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Amenities Grid */}
-        <div className="mt-12 md:mt-20 lg:mt-32">
-          <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-8 md:mb-16">
-            {t('property.amenitiesTitle')}
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            {amenities.map((item, index) => (
-              <div
-                key={index}
-                className="p-6 md:p-8 border border-border rounded-lg hover:shadow-lg hover:border-primary/50 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1"
-              >
-                <p className="text-3xl md:text-4xl mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
-                  {item.icon}
-                </p>
-                <h4 className="font-serif text-lg md:text-xl font-semibold text-foreground mb-2 md:mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
+            {/* Highlight badge */}
+            <div className="mt-4">
+              <span className="inline-flex items-center rounded-full border border-primary/60 bg-primary/5 px-5 py-2 text-xs md:text-sm text-foreground/70">
+                {t("property.villaI2Mari.highlight")}
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -71,41 +71,26 @@ export const itTranslations: TranslationData = {
     revealText: "Prenota la tua casa paradisiaca in Sicilia"
   },
   property: {
-    sectionTitle: "Una Posizione Unica",
-    locationTitle: "SEAcily villas",
-    description: "A pochi passi dalla spiaggia in una residenza privata, a 400m dal porto di Marzamemi. Confort moderni con fascino siciliano, cucina completamente attrezzata, giardino privato e parcheggio privato per un soggiorno tranquillo.",
-    detailedDescription: "Appartamento esclusivo con 2 piscine a Marzamemi. Casa vacanze con 1 camera da letto, aria condizionata, WiFi gratuito, parcheggio privato, cucina completamente attrezzata e terrazza con vista mare. Piscina con giardino recintato. Nelle vicinanze: Spiaggia Cavettone (800m), Riserva di Vendicari (17km), Cattedrale di Noto (25km).",
-    amenitiesTitle: "Servizi Premium",
-    amenities: {
-      bedrooms: {
-        title: "Casa in Stile Siciliano",
-        description: "Nuova costruzione elegante con giardinetto privato e architettura tradizionale"
-      },
-      kitchen: {
-        title: "Luxury Resort",
-        description: "Situata in un esclusivo luxury resort con posti auto privati riservati"
-      },
-      pool: {
-        title: "Due Piscine",
-        description: "Piscine con idromassaggio e piscina a sfioro panoramica"
-      },
-      terrace: {
-        title: "Mare a Due Passi",
-        description: "Alla spiaggia e al mare cristallino"
-      },
-      entertainment: {
-        title: "Sport e Divertimento",
-        description: "Campi da padel e beach volley per momenti di svago e competizione"
-      },
-      wellness: {
-        title: "Fitness all'Aperto",
-        description: "Palestra all'aperto attrezzata con pista ciclabile panoramica"
-      }
+    sectionTitle: "Le Nostre Ville",
+    villaZefiro: {
+      name: "Villa Zefiro",
+      tagline: "L'oasi panoramica",
+      description: "Un rifugio di serenità con fascino siciliano, affacciato sull'Isola di Capo Passero. La terrazza panoramica è il cuore della villa: ideale per una colazione con vista mare, un aperitivo al tramonto o semplicemente per godersi il silenzio. Con due camere, due bagni e spazio per sei persone, accoglie famiglie, coppie e gruppi di amici che cercano comfort autentico a pochi passi dalla spiaggia.",
+      guests: "6 ospiti",
+      size: "68 m²",
+      bedrooms: "2 camere",
+      bathrooms: "2 bagni",
+      highlight: "Terrazza panoramica sul mare"
     },
-    stats: {
-      bedrooms: "Posti Letto",
-      bathrooms: "Bagno",
-      area: "Mq"
+    villaI2Mari: {
+      name: "Villa i 2 Mari",
+      tagline: "Luce, mare e giardino",
+      description: "Luminosa e ariosa grazie alle finestre che si aprono sia sul mare che sul giardino — da qui il nome. Un appartamento pensato per chi vuole sentirsi dentro e fuori allo stesso tempo: dai balconi della camera e del soggiorno, la vista abbraccia il verde e il blu in un colpo solo. Accoglie fino a quattro persone in un'atmosfera intima e familiare, perfetta anche per chi viaggia con bambini.",
+      guests: "4 ospiti",
+      size: "44 m²",
+      bedrooms: "2 camere",
+      bathrooms: "1 bagno",
+      highlight: "Vista mare e giardino da ogni stanza"
     }
   },
   gallery: {

@@ -71,22 +71,25 @@ export interface TranslationData {
   }
   property: {
     sectionTitle: string
-    locationTitle: string
-    description: string
-    detailedDescription: string
-    amenitiesTitle: string
-    amenities: {
-      bedrooms: { title: string; description: string }
-      kitchen: { title: string; description: string }
-      pool: { title: string; description: string }
-      terrace: { title: string; description: string }
-      entertainment: { title: string; description: string }
-      wellness: { title: string; description: string }
-    }
-    stats: {
+    villaZefiro: {
+      name: string
+      tagline: string
+      description: string
+      guests: string
+      size: string
       bedrooms: string
       bathrooms: string
-      area: string
+      highlight: string
+    }
+    villaI2Mari: {
+      name: string
+      tagline: string
+      description: string
+      guests: string
+      size: string
+      bedrooms: string
+      bathrooms: string
+      highlight: string
     }
   }
   gallery: {
@@ -297,8 +300,6 @@ export type TranslationKey =
   | `footer.contact.social.${keyof TranslationData['footer']['contact']['social']}`
   | `hero.${keyof TranslationData['hero']}`
   | `property.${keyof TranslationData['property']}`
-  | `property.amenities.${keyof TranslationData['property']['amenities']}.${keyof TranslationData['property']['amenities']['bedrooms']}`
-  | `property.stats.${keyof TranslationData['property']['stats']}`
   | `gallery.${keyof TranslationData['gallery']}`
   | `booking.${keyof TranslationData['booking']}`
   | `contact.${keyof TranslationData['contact']}`

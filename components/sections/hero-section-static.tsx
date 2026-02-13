@@ -1,3 +1,4 @@
+// NOTE: superseded by hero-dual-album.tsx — kept for reference
 "use client"
 
 import { useTranslation } from '@/lib/hooks/useTranslation';

@@ -25,27 +25,21 @@ Key behaviors:
 - **Price search** – the `/api/search-prices` endpoint fetches prices separately for each villa from Airbnb and Booking.com, plus a calculated direct booking price.
 - **Booking cards** – the booking section renders two price comparison cards side by side, one per villa, each showing platform prices, a direct booking option, and an availability badge.
 
-## Hero Section Animation
+## Hero Section
 
-The hero section features a GSAP-powered perspective zoom effect with the following elements:
+The hero section is a split-screen, dual-villa album with the following behavior:
 
-1. **12 Images** - Distributed across 3 depth layers, zoom toward viewer as you scroll
-2. **Title** - "La Tua Sicilia Autentica" - zooms from far (z:-2000, opacity:0.1) to close (z:50, opacity:1)
-3. **Subtitle** - "La Sicilia autentica a due passi dal mare" - inverse animation, starts visible (opacity:1) and fades out (opacity:0) as it zooms
-4. **Book Now Button** - Fades in at 85% animation completion
-5. **Scroll unlock** - After animation completes, title remains at max size, subtitle fully faded, normal page scroll begins
-
-### Animation Timeline
-
-- **Scroll 0-100%**: All elements zoom together
-- **Scroll 85%**: Button fades in
-- **Scroll 100%**: Title visible, subtitle gone, scroll unlocks
+1. **Two full-height panels** – one for **Villa Zefiro**, one for **Villa i 2 Mari**, displayed side by side on desktop (stacked on mobile)
+2. **Auto-cycling background images** – each panel cycles through its own set of villa images every 6 seconds, with a subtle Ken Burns-style zoom
+3. **Hover interactions** – on hover, each panel reveals a thumbnail strip, previous/next arrows and a top-right image counter (e.g. `01 / 10`)
+4. **Translated titles** – villa names are read from the translation system (`property.villaZefiro.name`, `property.villaI2Mari.name`)
 
 ### Components
 
-- `HeroSection` - Main container with ScrollSmoother integration
-- `ZoomContainer` - Manages 12 images across 3 depth layers
-- `HeadingSection` - Animated title, subtitle, and button
+- `HeroSection` – thin wrapper used by the page, now rendering the new dual album
+- `HeroDualAlbum` – self-contained split-screen hero for the two villas
+
+> Note: the previous GSAP-based `ZoomContainer` hero is still present in the codebase for reference but is no longer used on the page.
 
 ## Getting Started
 

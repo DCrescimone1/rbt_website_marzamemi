@@ -71,41 +71,26 @@ export const enTranslations: TranslationData = {
     revealText: "Book your paradise home in Sicily"
   },
   property: {
-    sectionTitle: "A Unique Location",
-    locationTitle: "SEAcily villas",
-    description: "Just steps from the beach in a private residence, 400m from Marzamemi port. Modern comforts with Sicilian charm, a fully equipped kitchen, private garden, and private parking for a peaceful stay.",
-    detailedDescription: "Exclusive Apartment with 2 Pools in Marzamemi. 1-bedroom holiday home with air conditioning, free WiFi, private parking, fully equipped kitchen, and terrace with sea views. Pool with fenced garden. Nearby: Spiaggia Cavettone (800m), Vendicari Reserve (17km), Noto Cathedral (25km).",
-    amenitiesTitle: "Premium Amenities",
-    amenities: {
-      bedrooms: {
-        title: "Sicilian Style House",
-        description: "Elegant new construction with private garden and traditional architecture"
-      },
-      kitchen: {
-        title: "Luxury Resort",
-        description: "Located in an exclusive luxury resort with reserved private parking"
-      },
-      pool: {
-        title: "Two Pools",
-        description: "Pools with jacuzzi and panoramic infinity pool"
-      },
-      terrace: {
-        title: "Steps from the Sea",
-        description: "To the beach and crystal-clear sea"
-      },
-      entertainment: {
-        title: "Sports & Entertainment",
-        description: "Padel courts and beach volleyball for leisure and competition"
-      },
-      wellness: {
-        title: "Outdoor Fitness",
-        description: "Fully equipped outdoor gym with panoramic cycling track"
-      }
+    sectionTitle: "Our Villas",
+    villaZefiro: {
+      name: "Villa Zefiro",
+      tagline: "The panoramic retreat",
+      description: "A serene sanctuary with authentic Sicilian charm, overlooking the Isola di Capo Passero. The panoramic sea terrace is the heart of the villa — perfect for a breakfast with a view, a sunset aperitivo, or simply soaking in the silence. Sleeping up to six, it suits families, couples, and groups of friends who want real comfort just steps from the beach.",
+      guests: "6 guests",
+      size: "68 m²",
+      bedrooms: "2 bedrooms",
+      bathrooms: "2 bathrooms",
+      highlight: "Panoramic sea terrace"
     },
-    stats: {
-      bedrooms: "Sleeping Spots",
-      bathrooms: "Bathroom",
-      area: "Sq M"
+    villaI2Mari: {
+      name: "Villa i 2 Mari",
+      tagline: "Light, sea and garden",
+      description: "Bright and airy, with windows facing both the sea and the garden — which is exactly where the name comes from. An apartment designed for those who want to feel inside and outside at once: from the balconies off the living room and bedrooms, the view takes in both green and blue in a single glance. Cosy and intimate, it sleeps up to four and is ideal for families with children.",
+      guests: "4 guests",
+      size: "44 m²",
+      bedrooms: "2 bedrooms",
+      bathrooms: "1 bathroom",
+      highlight: "Sea and garden view from every room"
     }
   },
   gallery: {

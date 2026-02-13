@@ -1,3 +1,4 @@
+// NOTE: superseded by hero-dual-album.tsx — kept for reference
 "use client"
 
 import { useEffect, useState } from "react"

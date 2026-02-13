@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import HeroSection from "@/components/sections/hero-section"
 import PropertyDescriptionSection from "@/components/sections/property-description"
-import GallerySection from "@/components/sections/gallery-section"
 import BookingSection from "@/components/sections/booking-section"
 import LocationSection from "@/components/sections/location-section"
 import ContactSection from "@/components/sections/contact-section"
@@ -30,16 +29,12 @@ export default function Home() {
 
       <FloatingLogoButton />
 
-      <div id="hero" className="relative z-0">
+      <div id="hero" className="relative z-0 bg-black">
         <HeroSection />
       </div>
 
       <div id="property" className="relative z-10 bg-white">
         <PropertyDescriptionSection />
-      </div>
-
-      <div id="gallery" className="relative z-10">
-        <GallerySection />
       </div>
 
       <div id="booking" className="relative z-10">
