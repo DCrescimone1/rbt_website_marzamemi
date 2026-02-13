@@ -7,6 +7,15 @@ export default function PropertyDescriptionSection() {
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation()
 
+  const amenities = [
+    { icon: "🏡", title: t('property.amenities.bedrooms.title'), description: t('property.amenities.bedrooms.description') },
+    { icon: "🏨", title: t('property.amenities.kitchen.title'), description: t('property.amenities.kitchen.description') },
+    { icon: "🏊‍♀️", title: t('property.amenities.pool.title'), description: t('property.amenities.pool.description') },
+    { icon: "🌊", title: t('property.amenities.terrace.title'), description: t('property.amenities.terrace.description') },
+    { icon: "🎾", title: t('property.amenities.entertainment.title'), description: t('property.amenities.entertainment.description') },
+    { icon: "🚴", title: t('property.amenities.wellness.title'), description: t('property.amenities.wellness.description') },
+  ]
+
   useEffect(() => {
     setIsVisible(true)
   }, [])
@@ -29,7 +38,7 @@ export default function PropertyDescriptionSection() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             }`}
           >
-            <span className="text-xs tracking-[0.2em] uppercase text-primary">
+            <span className="text-xs tracking-[0.2em] uppercase text-primary font-semibold">
               {t("property.villaZefiro.tagline")}
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4 md:mb-6">
@@ -78,7 +87,7 @@ export default function PropertyDescriptionSection() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
           >
-            <span className="text-xs tracking-[0.2em] uppercase text-primary">
+            <span className="text-xs tracking-[0.2em] uppercase text-primary font-semibold">
               {t("property.villaI2Mari.tagline")}
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4 md:mb-6">
@@ -116,6 +125,54 @@ export default function PropertyDescriptionSection() {
                 {t("property.villaI2Mari.highlight")}
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Residence Section */}
+        <div className="mt-12 md:mt-20 lg:mt-32">
+          <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-8 md:mb-16">
+            {t('property.residence.title')}
+          </h3>
+
+          {/* Image + Description */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-12 md:mb-20">
+            {/* Image */}
+            <div className="relative aspect-4/3 rounded-lg overflow-hidden shadow-lg">
+              <img
+                src="/pictures/villa_zefiro/ok piscina alta.webp"
+                alt={t('property.residence.name')}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Description */}
+            <div className="flex flex-col justify-center">
+              <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 md:mb-6">
+                {t('property.residence.name')}
+              </h4>
+
+              <div
+                className="text-base md:text-lg text-muted-foreground leading-relaxed [&_strong]:text-foreground [&_strong]:font-semibold"
+                dangerouslySetInnerHTML={{ __html: t('property.residence.description') }}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 md:auto-rows-fr">
+            {amenities.map((item, index) => (
+              <div
+                key={index}
+                className="h-full flex flex-col p-6 md:p-8 border border-border rounded-lg hover:shadow-lg hover:border-primary/50 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1"
+              >
+                <p className="text-3xl md:text-4xl mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
+                  {item.icon}
+                </p>
+                <h4 className="font-serif text-lg md:text-xl font-semibold text-foreground mb-2 md:mb-3">
+                  {item.title}
+                </h4>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

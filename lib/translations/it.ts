@@ -91,6 +91,38 @@ export const itTranslations: TranslationData = {
       bedrooms: "2 camere",
       bathrooms: "1 bagno",
       highlight: "Vista mare e giardino da ogni stanza"
+    },
+    residence: {
+      title: "Il Nostro Residence",
+      name: "Borgo84",
+      description: "A pochi passi dalla spiaggia in una <strong>residenza privata</strong>, a 400m dal porto di <strong>Marzamemi</strong>. Comfort moderni con fascino siciliano, cucina completamente attrezzata, terrazza con vista mare e <strong>parcheggio privato</strong> per un soggiorno tranquillo.<br/><br/>Le nostre ville si trovano all'interno di <strong>Borgo84</strong>, un villaggio di nuova costruzione con <strong>due piscine</strong> — una a sfioro panoramica e una con idromassaggio — area fitness, campi da padel e beach volley. Nelle vicinanze: <strong>Spiaggia Cavettone</strong> (800m), <strong>Riserva di Vendicari</strong> (17km), <strong>Cattedrale di Noto</strong> (25km).",
+    },
+    amenitiesTitle: "Cosa Offre la Residenza",
+    amenities: {
+      bedrooms: {
+        title: "Casa in Stile Siciliano",
+        description: "Nuova costruzione elegante con terrazza panoramica, architettura tradizionale, WiFi gratuito e kit di benvenuto"
+      },
+      kitchen: {
+        title: "Luxury Resort",
+        description: "Situata in un esclusivo luxury resort con posti auto privati riservati"
+      },
+      pool: {
+        title: "Due Piscine",
+        description: "Piscine con idromassaggio e piscina a sfioro panoramica"
+      },
+      terrace: {
+        title: "Mare a Due Passi",
+        description: "Alla spiaggia e al mare cristallino"
+      },
+      entertainment: {
+        title: "Sport e Divertimento",
+        description: "Campi da padel e beach volley per momenti di svago e competizione"
+      },
+      wellness: {
+        title: "Fitness all'Aperto",
+        description: "Palestra all'aperto attrezzata con pista ciclabile panoramica"
+      }
     }
   },
   gallery: {

@@ -29,7 +29,7 @@ export default function Home() {
 
       <FloatingLogoButton />
 
-      <div id="hero" className="relative z-0 bg-black">
+      <div id="hero" className="relative z-0 bg-white">
         <HeroSection />
       </div>
 

@@ -91,6 +91,38 @@ export const enTranslations: TranslationData = {
       bedrooms: "2 bedrooms",
       bathrooms: "1 bathroom",
       highlight: "Sea and garden view from every room"
+    },
+    residence: {
+      title: "Our Residence",
+      name: "Borgo84",
+      description: "Just steps from the beach in a <strong>private residence</strong>, 400m from <strong>Marzamemi</strong> port. Modern comforts with Sicilian charm, fully equipped kitchen, sea-view terrace, and <strong>private parking</strong> for a peaceful stay.<br/><br/>Our villas are located inside <strong>Borgo84</strong>, a newly built village featuring <strong>two pools</strong> — a panoramic infinity pool and a jacuzzi — outdoor gym, padel courts, and beach volleyball. Nearby: <strong>Spiaggia Cavettone</strong> (800m), <strong>Vendicari Reserve</strong> (17km), <strong>Noto Cathedral</strong> (25km).",
+    },
+    amenitiesTitle: "What the Residence Offers",
+    amenities: {
+      bedrooms: {
+        title: "Sicilian Style House",
+        description: "Elegant new construction with panoramic terrace, traditional architecture, free WiFi, and welcome kit"
+      },
+      kitchen: {
+        title: "Luxury Resort",
+        description: "Located in an exclusive luxury resort with reserved private parking"
+      },
+      pool: {
+        title: "Two Pools",
+        description: "Pools with jacuzzi and panoramic infinity pool"
+      },
+      terrace: {
+        title: "Steps from the Sea",
+        description: "To the beach and crystal-clear sea"
+      },
+      entertainment: {
+        title: "Sports & Entertainment",
+        description: "Padel courts and beach volleyball for leisure and competition"
+      },
+      wellness: {
+        title: "Outdoor Fitness",
+        description: "Fully equipped outdoor gym with panoramic cycling track"
+      }
     }
   },
   gallery: {

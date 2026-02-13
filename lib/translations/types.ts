@@ -91,6 +91,20 @@ export interface TranslationData {
       bathrooms: string
       highlight: string
     }
+    residence: {
+      title: string
+      name: string
+      description: string
+    }
+    amenitiesTitle: string
+    amenities: {
+      bedrooms: { title: string; description: string }
+      kitchen: { title: string; description: string }
+      pool: { title: string; description: string }
+      terrace: { title: string; description: string }
+      entertainment: { title: string; description: string }
+      wellness: { title: string; description: string }
+    }
   }
   gallery: {
     title: string
@@ -114,6 +128,10 @@ export interface TranslationData {
     priceComparison: string
     bestPrice: string
     view: string
+    available: string
+    notAvailable: string
+    guests: string
+    maxGuests: string
     platforms: {
       direct: string
     }
@@ -138,11 +156,13 @@ export interface TranslationData {
         name: string
         size: string
         rooms: string
+        bedrooms: string
       }
       villaI2Mari: {
         name: string
         size: string
         rooms: string
+        bedrooms: string
       }
     }
     unavailability: {
