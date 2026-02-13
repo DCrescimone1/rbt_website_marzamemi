@@ -73,7 +73,7 @@ export default function ContactSection() {
               {/* Email */}
               <div className="flex gap-4 items-start">
                 <div className="shrink-0 mt-1">
-                  <Mail size={24} className="text-secondary" />
+                  <Mail size={24} className="text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.email')}</p>
@@ -86,7 +86,7 @@ export default function ContactSection() {
               {/* Phone */}
               <div className="flex gap-4 items-start">
                 <div className="shrink-0 mt-1">
-                  <Phone size={24} className="text-secondary" />
+                  <Phone size={24} className="text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.phone')}</p>
@@ -99,7 +99,7 @@ export default function ContactSection() {
               {/* WhatsApp */}
               <div className="flex gap-4 items-start">
                 <div className="shrink-0 mt-1">
-                  <MessageCircle size={24} className="text-secondary" />
+                  <MessageCircle size={24} className="text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">

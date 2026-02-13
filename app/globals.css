@@ -12,8 +12,9 @@
   --popover: #E8E4D9;
   --popover-foreground: #2D3A3A;
 
-  /* Peachy sunset as primary */
-  --primary: #E89A7C;
+  /* Peachy sunset as primary --primary: #E89A7C; */
+  --primary: #7FDBDA ;
+
   --primary-foreground: #FFFFFF;
 
   /* Golden sun as secondary */
