@@ -100,13 +100,15 @@ export default function Footer() {
               <li className="pt-1 md:pt-2">
                 <div className="flex gap-3 md:gap-4">
                   {[
-                    { label: t('footer.contact.social.instagram'), href: "#" },
-                    { label: t('footer.contact.social.facebook'), href: "#" },
+                    { label: t('footer.contact.social.instagram'), href: "https://www.instagram.com/seacilyvillas/" },
+                    { label: t('footer.contact.social.facebook'), href: "https://www.facebook.com/people/Seacily-Villas/pfbid02ntBgSfHBwyyDnG1jXxeAJfMcQKRPXn1b68bYJM1vhfp9HfiJWRKaxCdiocFBejUhl/?ref=1" },
                     { label: t('footer.contact.social.whatsapp'), href: utils.whatsapp.getDefaultUrl() }
                   ].map((social) => (
                     <a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-primary-foreground/70 hover:text-primary-foreground hover:scale-110 transition-all duration-200 text-xs hover:underline"
                     >
                       {social.label}

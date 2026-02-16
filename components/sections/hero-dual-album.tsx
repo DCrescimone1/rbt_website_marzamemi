@@ -252,7 +252,7 @@ export default function HeroDualAlbum() {
     <section className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12 px-6 pb-6 h-[92vh] min-h-[600px]">
         {renderPanel(villaZefiroImages, left, "property.villaZefiro.name", "zoom")}
-        {renderPanel(villaI2MariImages, right, "property.villaI2Mari.name", "static")}
+        {renderPanel(villaI2MariImages, right, "property.villaI2Mari.name", "zoom")}
       </div>
     </section>
   )

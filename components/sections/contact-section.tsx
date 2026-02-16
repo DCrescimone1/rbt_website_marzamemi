@@ -116,13 +116,18 @@ export default function ContactSection() {
             <div className="mt-12 pt-8 border-t border-primary-foreground/20">
               <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-4 font-semibold">{t('contact.followUs')}</p>
               <div className="flex gap-4">
-                {["Instagram", "Facebook"].map((social) => (
+                {[
+                  { label: "Instagram", href: "https://www.instagram.com/seacilyvillas/" },
+                  { label: "Facebook", href: "https://www.facebook.com/people/Seacily-Villas/pfbid02ntBgSfHBwyyDnG1jXxeAJfMcQKRPXn1b68bYJM1vhfp9HfiJWRKaxCdiocFBejUhl/?ref=1" },
+                ].map((social) => (
                   <a
-                    key={social}
-                    href="#"
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-primary-foreground hover:text-secondary transition-colors hover:underline"
                   >
-                    {social}
+                    {social.label}
                   </a>
                 ))}
               </div>
