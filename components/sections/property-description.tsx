@@ -68,6 +68,12 @@ export default function PropertyDescriptionSection() {
                   {`${t("property.villaZefiro.bedrooms")} · ${t("property.villaZefiro.bathrooms")}`}
                 </p>
               </div>
+              <span className="text-border">|</span>
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {t("property.villaZefiro.parking")}
+                </p>
+              </div>
             </div>
 
             {/* Highlight badge */}
@@ -115,6 +121,12 @@ export default function PropertyDescriptionSection() {
               <div>
                 <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
                   {`${t("property.villaI2Mari.bedrooms")} · ${t("property.villaI2Mari.bathrooms")}`}
+                </p>
+              </div>
+              <span className="text-border">|</span>
+              <div>
+                <p className="text-lg md:text-xl font-serif font-semibold text-foreground">
+                  {t("property.villaI2Mari.parking")}
                 </p>
               </div>
             </div>

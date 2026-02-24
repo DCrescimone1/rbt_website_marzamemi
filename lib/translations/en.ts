@@ -80,6 +80,7 @@ export const enTranslations: TranslationData = {
       size: "68 m²",
       bedrooms: "2 bedrooms",
       bathrooms: "2 bathrooms",
+      parking: "parking n. 83",
       highlight: "Panoramic sea terrace"
     },
     villaI2Mari: {
@@ -90,6 +91,7 @@ export const enTranslations: TranslationData = {
       size: "44 m²",
       bedrooms: "2 bedrooms",
       bathrooms: "1 bathroom",
+      parking: "parking n. 84",
       highlight: "Sea and garden view from every room"
     },
     residence: {
