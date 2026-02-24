@@ -79,6 +79,7 @@ export interface TranslationData {
       size: string
       bedrooms: string
       bathrooms: string
+      parking: string
       highlight: string
     }
     villaI2Mari: {
@@ -89,6 +90,7 @@ export interface TranslationData {
       size: string
       bedrooms: string
       bathrooms: string
+      parking: string
       highlight: string
     }
     residence: {

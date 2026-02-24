@@ -80,6 +80,7 @@ export const itTranslations: TranslationData = {
       size: "68 m²",
       bedrooms: "2 camere",
       bathrooms: "2 bagni",
+      parking: "parcheggio n. 83",
       highlight: "Terrazza panoramica sul mare"
     },
     villaI2Mari: {
@@ -90,6 +91,7 @@ export const itTranslations: TranslationData = {
       size: "44 m²",
       bedrooms: "2 camere",
       bathrooms: "1 bagno",
+      parking: "parcheggio n. 84",
       highlight: "Vista mare e giardino da ogni stanza"
     },
     residence: {
@@ -101,7 +103,7 @@ export const itTranslations: TranslationData = {
     amenities: {
       bedrooms: {
         title: "Casa in Stile Siciliano",
-        description: "Nuova costruzione elegante con terrazza panoramica, architettura tradizionale, WiFi gratuito e kit di benvenuto"
+        description: "Nuova costruzione elegante con architettura tradizionale, WiFi gratuito e kit di benvenuto"
       },
       kitchen: {
         title: "Luxury Resort",
@@ -254,7 +256,7 @@ export const itTranslations: TranslationData = {
     },
     welcome: {
       greeting: "Benvenuto a SEAcily villas Casa Vacanze! 🌊",
-      question: "Come possiamo aiutarti a pianificare la tua perfetta fuga costiera?"
+      question: "Come possiamo aiutarti a pianificare la tua perfetta vacanza?"
     },
     input: {
       placeholder: "Scrivi il tuo messaggio...",
