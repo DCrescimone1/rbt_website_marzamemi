@@ -39,7 +39,7 @@ export default function GallerySection() {
     { id: 23, src: "/pictures/villa_i_2_mari/ok%20giardino2.webp", alt: "Garden view" },
     { id: 24, src: "/pictures/villa_i_2_mari/ok%20Marzamemi%20cinefest.webp", alt: "Marzamemi cinema festival" },
     { id: 25, src: "/pictures/villa_i_2_mari/ok%20carratois%20pantano.webp", alt: "Carratois beach" },
-    { id: 26, src: "/pictures/villa_i_2_mari/ok%20z%20area%20fitness+padel.webp", alt: "Fitness and padel area" },
+    { id: 26, src: "/pictures/villa_i_2_mari/ok%20z%20area%20fitness-padel.webp", alt: "Fitness and padel area" },
     { id: 27, src: "/pictures/villa_i_2_mari/ok%20z%20la%20cialoma1.webp", alt: "La Cialoma restaurant" },
     { id: 28, src: "/pictures/villa_i_2_mari/ok%20z%20manifesto%20tonnara2.webp", alt: "Tonnara poster" },
     { id: 29, src: "/pictures/villa_i_2_mari/ok%20z%20tonnara.webp", alt: "Tonnara" },

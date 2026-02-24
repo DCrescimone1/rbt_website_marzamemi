@@ -30,7 +30,7 @@ const villaI2MariImages = [
   { src: "/pictures/villa_i_2_mari/ok%20giardino2.webp", alt: "Garden 2" },
   { src: "/pictures/villa_i_2_mari/ok%20Marzamemi%20cinefest.webp", alt: "Marzamemi Cinefest" },
   { src: "/pictures/villa_i_2_mari/ok%20carratois%20pantano.webp", alt: "Carratois Pantano" },
-  { src: "/pictures/villa_i_2_mari/ok%20z%20area%20fitness+padel.webp", alt: "Fitness and padel area" },
+  { src: "/pictures/villa_i_2_mari/ok%20z%20area%20fitness-padel.webp", alt: "Fitness and padel area" },
   { src: "/pictures/villa_i_2_mari/ok%20z%20la%20cialoma1.webp", alt: "La Cialoma" },
   { src: "/pictures/villa_i_2_mari/ok%20z%20manifesto%20tonnara2.webp", alt: "Manifesto Tonnara" },
   { src: "/pictures/villa_i_2_mari/ok%20z%20tonnara.webp", alt: "Tonnara" },
