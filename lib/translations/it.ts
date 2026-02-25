@@ -168,6 +168,7 @@ export const itTranslations: TranslationData = {
       },
       legend: {
         selected: "Selezionato",
+        available: "Disponibile",
         booked: "Prenotato"
       },
       loadingError: "Errore nel caricamento del calendario"

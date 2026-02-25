@@ -168,6 +168,7 @@ export const enTranslations: TranslationData = {
       },
       legend: {
         selected: "Selected",
+        available: "Available",
         booked: "Booked"
       },
       loadingError: "Error loading calendar"

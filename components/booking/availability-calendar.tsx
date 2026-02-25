@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isAfter, isBefore, startOfToday } from "date-fns"
+import { it, enUS } from "date-fns/locale"
 import { useTranslation } from "@/lib/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
@@ -13,6 +14,7 @@ interface AvailabilityCalendarProps {
   sticky?: boolean
   initialFrom?: string
   initialTo?: string
+  readOnly?: boolean // New prop to control if calendar is selectable
 }
 
 export default function AvailabilityCalendar({
@@ -21,8 +23,10 @@ export default function AvailabilityCalendar({
   sticky = true,
   initialFrom,
   initialTo,
+  readOnly = false,
 }: AvailabilityCalendarProps) {
-  const { t } = useTranslation()
+  const { t, language } = useTranslation()
+  const locale = language === 'it' ? it : enUS
   // Initialize after mount to avoid SSR/client time mismatches
   const [currentMonth, setCurrentMonth] = useState<Date | null>(null)
   const [bookedDates, setBookedDates] = useState<any[]>([])
@@ -97,6 +101,8 @@ export default function AvailabilityCalendar({
   })
 
   const handleDateClick = (date: Date) => {
+    if (readOnly) return // No selection in read-only mode
+    
     const isPast = today ? isBefore(date, today) : false
     if (isDateBooked(date) || isPast) return
 
@@ -145,7 +151,9 @@ export default function AvailabilityCalendar({
       )}
     >
       <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <h3 className="font-serif text-base sm:text-lg font-bold text-foreground">{format(effectiveMonth, "MMMM yyyy")}</h3>
+        <h3 className="font-serif text-base sm:text-lg font-bold text-foreground">
+          {format(effectiveMonth, "MMMM yyyy", { locale }).replace(/^\w/, (c) => c.toUpperCase())}
+        </h3>
         <div className="flex gap-2">
           <Button
             size="icon"
@@ -189,39 +197,53 @@ export default function AvailabilityCalendar({
           const isBooked = isDateBooked(day)
           const isPast = today ? isBefore(day, today) : false
           const isSelected =
-            (selectedFrom && day.toDateString() === selectedFrom.toDateString()) ||
-            (selectedTo && day.toDateString() === selectedTo.toDateString())
-          const isInRange = selectedFrom && selectedTo && day > selectedFrom && day < selectedTo
+            !readOnly &&
+            ((selectedFrom && day.toDateString() === selectedFrom.toDateString()) ||
+              (selectedTo && day.toDateString() === selectedTo.toDateString()))
+          const isInRange = !readOnly && selectedFrom && selectedTo && day > selectedFrom && day < selectedTo
 
+          // Use button for selectable calendar, div for read-only
+          const Component = readOnly ? "div" : "button"
+          
           return (
-            <button
+            <Component
               key={day.toDateString()}
-              onClick={() => handleDateClick(day)}
-              disabled={isBooked || isPast}
-              className={`h-7 sm:h-8 md:h-9 rounded text-xs font-medium transition-colors ${
+              onClick={readOnly ? undefined : () => handleDateClick(day)}
+              disabled={!readOnly && (isBooked || isPast)}
+              className={`h-7 sm:h-8 md:h-9 rounded text-xs font-medium flex items-center justify-center ${
                 isBooked
-                  ? "bg-rose-200 text-rose-800 cursor-not-allowed font-semibold"
+                  ? "bg-rose-200 text-rose-800 font-semibold"
                   : isPast
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed opacity-50"
+                    ? "bg-gray-100 text-gray-400 opacity-50"
                     : isSelected
                       ? "bg-primary text-primary-foreground"
                       : isInRange
                         ? "bg-primary/20 text-primary"
-                        : "bg-[#e8f4f4] hover:bg-[#d4e9e9] text-foreground"
-              }`}
+                        : readOnly
+                          ? "bg-[#e8f4f4] text-foreground"
+                          : "bg-[#e8f4f4] hover:bg-[#d4e9e9] text-foreground cursor-pointer"
+              } ${!readOnly && !isBooked && !isPast ? "transition-colors" : ""}`}
             >
               {format(day, "d")}
-            </button>
+            </Component>
           )
         })}
       </div>
 
       {/* Legend */}
       <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border space-y-2 text-xs">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded bg-primary"></div>
-          <span className="text-muted-foreground">{t('booking.calendar.legend.selected')}</span>
-        </div>
+        {!readOnly && (
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded bg-primary"></div>
+            <span className="text-muted-foreground">{t('booking.calendar.legend.selected')}</span>
+          </div>
+        )}
+        {readOnly && (
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded bg-[#e8f4f4]"></div>
+            <span className="text-muted-foreground">{t('booking.calendar.legend.available')}</span>
+          </div>
+        )}
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded bg-rose-200"></div>
           <span className="text-muted-foreground">{t('booking.calendar.legend.booked')}</span>

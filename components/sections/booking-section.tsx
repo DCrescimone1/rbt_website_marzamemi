@@ -471,6 +471,7 @@ export default function BookingSection() {
           {/* Right Column - Calendar */}
           <div className="lg:col-span-1 order-first lg:order-last">
             <AvailabilityCalendar
+              readOnly={true}
               initialFrom={checkIn || undefined}
               initialTo={checkOut || undefined}
               onDateSelect={(dates) => {
