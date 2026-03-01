@@ -440,7 +440,7 @@ export default function BookingSection() {
                   onDirectBooking={handleDirectBooking}
                   property={{
                     name: t('booking.properties.villaZefiro.name'),
-                    image: "/pictures/villa_zefiro/ok%20Villa%20Zefiro%20soggiorno1.webp",
+                    image: "/pictures/villa_zefiro_new/2%20ok%20Villa%20Zefiro%20soggiorno.webp",
                     size: t('booking.properties.villaZefiro.size'),
                     rooms: t('booking.properties.villaZefiro.rooms'),
                     bedrooms: t('booking.properties.villaZefiro.bedrooms')
@@ -458,7 +458,7 @@ export default function BookingSection() {
                   onDirectBooking={handleDirectBooking}
                   property={{
                     name: t('booking.properties.villaI2Mari.name'),
-                    image: "/pictures/villa_i_2_mari/ok%20Villa%20i%202%20mari%20TV.webp",
+                    image: "/pictures/villa_i_2_mari_new/5%20ok%20Villa%20i%202%20mari%20TV.webp",
                     size: t('booking.properties.villaI2Mari.size'),
                     rooms: t('booking.properties.villaI2Mari.rooms'),
                     bedrooms: t('booking.properties.villaI2Mari.bedrooms')

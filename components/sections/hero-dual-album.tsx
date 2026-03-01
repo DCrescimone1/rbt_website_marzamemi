@@ -104,6 +104,38 @@ function useAutoCarousel(length: number) {
   return { currentIndex, isHovered, setIsHovered, next, prev, goTo }
 }
 
+function useSwipeGesture(onSwipeLeft: () => void, onSwipeRight: () => void) {
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe) {
+      onSwipeLeft()
+    } else if (isRightSwipe) {
+      onSwipeRight()
+    }
+  }
+
+  return { onTouchStart, onTouchMove, onTouchEnd }
+}
+
 type PanelVariant = "zoom" | "static"
 
 export default function HeroDualAlbum() {
@@ -121,6 +153,8 @@ export default function HeroDualAlbum() {
     const total = images.length
     const currentImage = images[state.currentIndex]
 
+    const swipeHandlers = useSwipeGesture(state.next, state.prev)
+
     // Different image classes based on variant
     const imageClassName = variant === "zoom"
       ? "object-cover scale-[1.04] transition-transform duration-[12000ms] ease-[ease]"
@@ -131,6 +165,7 @@ export default function HeroDualAlbum() {
         className="relative overflow-hidden cursor-pointer group rounded-xl"
         onMouseEnter={() => state.setIsHovered(true)}
         onMouseLeave={() => state.setIsHovered(false)}
+        {...swipeHandlers}
       >
         <div className="absolute inset-0 bg-black/5">
           <Image
