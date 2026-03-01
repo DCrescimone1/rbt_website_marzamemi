@@ -95,7 +95,7 @@ export const itTranslations: TranslationData = {
       highlight: "Vista mare e giardino da ogni stanza"
     },
     residence: {
-      title: "Il Nostro Residence",
+      title: "I Nostri Servizi Esclusivi",
       name: "Borgo84",
       description: "A pochi passi dalla spiaggia in una <strong>residenza privata</strong>, a 400m dal porto di <strong>Marzamemi</strong>. Comfort moderni con fascino siciliano, cucina completamente attrezzata, terrazza con vista mare e <strong>parcheggio privato</strong> per un soggiorno tranquillo.<br/><br/>Le nostre ville si trovano all'interno di <strong>Borgo84</strong>, un villaggio di nuova costruzione con <strong>due piscine</strong> — una a sfioro panoramica e una con idromassaggio — area fitness, campi da padel e beach volley. Nelle vicinanze: <strong>Spiaggia Cavettone</strong> (800m), <strong>Riserva di Vendicari</strong> (17km), <strong>Cattedrale di Noto</strong> (25km).",
     },
@@ -135,8 +135,9 @@ export const itTranslations: TranslationData = {
     title: "Assicura il Tuo Soggiorno",
     subtitle: "Trova date disponibili e confronta tariffe su diverse piattaforme",
     findDatesTitle: "Trova le Tue Date",
-    checkIn: "Check In",
-    checkOut: "Check Out",
+    checkIn: "Check-in",
+    checkOut: "Check-out",
+    calendarPopupTitle: "Imposta check-in e check-out",
     adults: "Adulti",
     children: "Bambini",
     pets: "Animali",

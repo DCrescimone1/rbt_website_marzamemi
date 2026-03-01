@@ -151,7 +151,7 @@ export default function PropertyDescriptionSection() {
             {/* Image */}
             <div className="relative aspect-4/3 rounded-lg overflow-hidden shadow-lg">
               <img
-                src="/pictures/villa_zefiro/ok piscina alta.webp"
+                src="/pictures/villa_i_2_mari_new/1 ok piscina alta1.webp"
                 alt={t('property.residence.name')}
                 className="w-full h-full object-cover"
               />

@@ -507,7 +507,7 @@ export default function BookingSection() {
               </button>
               <div className="p-6">
                 <h4 className="font-serif text-xl font-semibold text-foreground mb-4">
-                  {activeField === "checkIn" ? t("booking.checkIn") : t("booking.checkOut")}
+                  {t("booking.calendarPopupTitle")}
                 </h4>
                 <AvailabilityCalendar
                   sticky={false}
