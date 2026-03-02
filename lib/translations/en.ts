@@ -51,7 +51,7 @@ export const enTranslations: TranslationData = {
     },
     contact: {
       title: "Contact",
-      email: "cascinabozzetti@gmail.com",
+      email: " borgo84reservation@gmail.com",
       phone: "+393495780944",
       social: {
         instagram: "Instagram",

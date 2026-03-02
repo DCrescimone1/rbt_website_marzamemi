@@ -72,7 +72,7 @@ export default function BookingSuccessPage() {
             Return to Home
           </Link>
           <a
-            href="mailto:cascinabozzetti@gmail.com"
+            href="mailto: borgo84reservation@gmail.com"
             className="block w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
           >
             Contact Us

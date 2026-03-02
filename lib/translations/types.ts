@@ -118,6 +118,7 @@ export interface TranslationData {
     findDatesTitle: string
     checkIn: string
     checkOut: string
+    calendarPopupTitle: string
     adults: string
     children: string
     pets: string
@@ -149,6 +150,7 @@ export interface TranslationData {
       }
       legend: {
         selected: string
+        available: string
         booked: string
       }
       loadingError: string

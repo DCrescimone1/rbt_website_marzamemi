@@ -109,7 +109,7 @@ export default function RootLayout({
               ],
               logo: "/logo.webp",
               telephone: "+39 349 578 0944",
-              email: "cascinabozzetti@gmail.com",
+              email: " borgo84reservation@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Contrada Calafarina SNC",
