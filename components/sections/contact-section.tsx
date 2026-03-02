@@ -77,8 +77,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-wide text-primary-foreground/80 mb-2 font-semibold">{t('contact.email')}</p>
-                  <a href="mailto: borgo84reservation@gmail.com" className="text-lg hover:text-secondary transition-colors">
-                    c borgo84reservation@gmail.com
+                  <a href="mailto:borgo84reservation@gmail.com" className="text-lg hover:text-secondary transition-colors">
+                    borgo84reservation@gmail.com
                   </a>
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default function ContactSection() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
-              className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
+              className="bg-primary-foreground border-primary-foreground/30 text-primary placeholder:text-primary/70 h-12"
             />
 
             <Input
@@ -151,7 +151,7 @@ export default function ContactSection() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
-              className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
+              className="bg-primary-foreground border-primary-foreground/30 text-primary placeholder:text-primary/70 h-12"
             />
 
             <Input
@@ -159,7 +159,7 @@ export default function ContactSection() {
               placeholder={t('contact.form.phone')}
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
+              className="bg-primary-foreground border-primary-foreground/30 text-primary placeholder:text-primary/70 h-12"
             />
 
             <textarea
@@ -168,7 +168,7 @@ export default function ContactSection() {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               required
               rows={5}
-              className="w-full px-4 py-3 rounded-md bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary-foreground/30 transition-all"
+              className="w-full px-4 py-3 rounded-md bg-primary-foreground border border-primary-foreground/30 text-primary placeholder:text-primary/70 focus:outline-none focus:ring-2 focus:ring-primary-foreground/50 transition-all"
             />
 
             <Button

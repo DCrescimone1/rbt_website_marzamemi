@@ -41,10 +41,39 @@ function buildBookingUrl(params: BookingSearchParams): string {
   url.searchParams.set('checkout', dates.to);
   url.searchParams.set('group_adults', guests.adults.toString());
   url.searchParams.set('group_children', guests.children.toString());
+  // Booking.com requires an age param for each child; without it only 1 child is registered
+  for (let i = 0; i < guests.children; i++) {
+    url.searchParams.append('age', '10');
+  }
 
   // Add language suffix to pathname
   url.pathname = url.pathname.replace('.html', `.${languageSuffix}.html`);
 
+  return url.toString();
+}
+
+/**
+ * Build a clean hotel page URL for the "Visualizza" button.
+ * Mirrors the scraping URL parameters (currency, price type, language) so the user
+ * sees the same prices, but omits dest_id/dest_type which redirect to searchresults.
+ */
+function buildVillaLinkUrl(villaBaseUrl: string, params: BookingSearchParams): string {
+  const { dates, guests, language } = params;
+  const languageSuffix = getLanguageSuffix(language);
+  const url = new URL(villaBaseUrl);
+  url.searchParams.set('aid', BOOKING_CONFIG.staticParams.aid);
+  url.searchParams.set('no_rooms', '1');
+  url.searchParams.set('selected_currency', BOOKING_CONFIG.staticParams.selected_currency);
+  url.searchParams.set('sb_price_type', BOOKING_CONFIG.staticParams.sb_price_type);
+  url.searchParams.set('checkin', dates.from);
+  url.searchParams.set('checkout', dates.to);
+  url.searchParams.set('group_adults', guests.adults.toString());
+  url.searchParams.set('group_children', guests.children.toString());
+  // Booking.com requires an age param for each child; without it only 1 child is registered
+  for (let i = 0; i < guests.children; i++) {
+    url.searchParams.append('age', '10');
+  }
+  url.pathname = url.pathname.replace('.html', `.${languageSuffix}.html`);
   return url.toString();
 }
 
@@ -107,22 +136,29 @@ export async function searchBookingPrice(
             const roomTypeId = blockId.split('_')[0];
             if (!roomTypeId) continue;
 
-            // Extract guest capacity from the row
-            // Look for the occupancy icon/text (usually shows person icons with a number)
-            const occupancyCell = row.querySelector('td.hprt-table-cell-occupancy, td[class*="occupancy"]');
+            // Extract guest capacity from data-block-id (most reliable source).
+            // Format: "{roomTypeId}_{blockId}_{numGuests}_{...}" — 3rd segment is the guest count.
+            // Fallback to occupancy cell text for robustness.
+            const segments = blockId.split('_');
             let guestCapacity = 0;
-            
-            if (occupancyCell) {
-              // Try to find the guest count - look for patterns like "× 5" or just "5"
-              const occupancyText = (occupancyCell.textContent || '').trim();
-              const capacityMatch = occupancyText.match(/×?\s*(\d+)/);
-              if (capacityMatch) {
-                guestCapacity = parseInt(capacityMatch[1], 10);
+
+            const capacityFromId = parseInt(segments[2] || '', 10);
+            if (!isNaN(capacityFromId) && capacityFromId > 0) {
+              guestCapacity = capacityFromId;
+            } else {
+              // Fallback: parse occupancy cell text (e.g. "× 6" or "6")
+              const occupancyCell = row.querySelector('td.hprt-table-cell-occupancy, td[class*="occupancy"]');
+              if (occupancyCell) {
+                const capacityMatch = (occupancyCell.textContent || '').trim().match(/×?\s*(\d+)/);
+                if (capacityMatch) {
+                  guestCapacity = parseInt(capacityMatch[1], 10);
+                }
               }
             }
 
-            // Skip rows that can't accommodate the requested number of guests
-            if (guestCapacity > 0 && guestCapacity < requestedGuests) {
+            // Skip rows that can't accommodate the requested guests,
+            // or where capacity is still unknown (0) — avoids low-capacity cheap rows leaking in.
+            if (guestCapacity === 0 || guestCapacity < requestedGuests) {
               continue;
             }
 
@@ -217,20 +253,9 @@ export async function searchBookingPrice(
     const duration = Date.now() - startTime;
     console.log(`[prices] Booking.com search completed in ${duration}ms`);
 
-    // Build individual property URLs for each villa
-    const buildPropertyUrl = (baseUrl: string) => {
-      const propertyUrl = new URL(baseUrl);
-      propertyUrl.searchParams.set('checkin', params.dates.from);
-      propertyUrl.searchParams.set('checkout', params.dates.to);
-      propertyUrl.searchParams.set('group_adults', params.guests.adults.toString());
-      propertyUrl.searchParams.set('group_children', params.guests.children.toString());
-      Object.entries(BOOKING_CONFIG.staticParams).forEach(([key, value]) => {
-        propertyUrl.searchParams.set(key, value);
-      });
-      const languageSuffix = getLanguageSuffix(params.language);
-      propertyUrl.pathname = propertyUrl.pathname.replace('.html', `.${languageSuffix}.html`);
-      return propertyUrl.toString();
-    };
+    // Build clean hotel-page URLs for the "Visualizza" button (no dest_id/dest_type redirect params)
+    const zefiroLinkUrl = buildVillaLinkUrl(BOOKING_CONFIG.villaZefiroUrl, params);
+    const i2MariLinkUrl = buildVillaLinkUrl(BOOKING_CONFIG.villaI2MariUrl, params);
 
     let villaI2Mari: SearchResult | null = null;
     let villaZefiro: SearchResult | null = null;
@@ -242,7 +267,7 @@ export async function searchBookingPrice(
             platform: 'Booking.com',
             price: cheapestPrice.toString(),
             currency: '€',
-            url: buildPropertyUrl(BOOKING_CONFIG.villaZefiroUrl),
+            url: zefiroLinkUrl,
             logoSrc: '/logo/logo_booking.png',
           }
         : null;
@@ -253,7 +278,7 @@ export async function searchBookingPrice(
             platform: 'Booking.com',
             price: cheapestPrice.toString(),
             currency: '€',
-            url: buildPropertyUrl(BOOKING_CONFIG.villaI2MariUrl),
+            url: i2MariLinkUrl,
             logoSrc: '/logo/logo_booking.png',
           }
         : null;
@@ -263,7 +288,7 @@ export async function searchBookingPrice(
             platform: 'Booking.com',
             price: secondPrice.toString(),
             currency: '€',
-            url: buildPropertyUrl(BOOKING_CONFIG.villaZefiroUrl),
+            url: zefiroLinkUrl,
             logoSrc: '/logo/logo_booking.png',
           }
         : null;
