@@ -87,9 +87,8 @@ export async function searchBookingPrice(
     // Extract prices grouped by room type using data-block-id.
     // Each villa is a distinct room type (identified by the first segment of data-block-id).
     // Each room type has multiple pricing rows (non-refundable, free cancellation, etc.).
-    // We take the cheapest price per room type, then assign:
-    //   - cheaper room type → Villa I Due Mari
-    //   - more expensive room type → Villa Zefiro
+    // We filter by guest capacity first, then take the cheapest price per room type, then assign based on guest count
+    const requestedGuests = params.guests.adults + params.guests.children;
     let roomTypePrices: { roomTypeId: string; price: number }[] = [];
     try {
       await page.waitForSelector('.prco-valign-middle-helper', {
@@ -98,7 +97,7 @@ export async function searchBookingPrice(
 
       roomTypePrices = await page.$$eval(
         'table.hprt-table tbody tr[data-block-id]',
-        (rows) => {
+        (rows, requestedGuests) => {
           const results: { roomTypeId: string; price: number }[] = [];
 
           for (const row of rows) {
@@ -107,6 +106,25 @@ export async function searchBookingPrice(
             const blockId = row.getAttribute('data-block-id') || '';
             const roomTypeId = blockId.split('_')[0];
             if (!roomTypeId) continue;
+
+            // Extract guest capacity from the row
+            // Look for the occupancy icon/text (usually shows person icons with a number)
+            const occupancyCell = row.querySelector('td.hprt-table-cell-occupancy, td[class*="occupancy"]');
+            let guestCapacity = 0;
+            
+            if (occupancyCell) {
+              // Try to find the guest count - look for patterns like "× 5" or just "5"
+              const occupancyText = (occupancyCell.textContent || '').trim();
+              const capacityMatch = occupancyText.match(/×?\s*(\d+)/);
+              if (capacityMatch) {
+                guestCapacity = parseInt(capacityMatch[1], 10);
+              }
+            }
+
+            // Skip rows that can't accommodate the requested number of guests
+            if (guestCapacity > 0 && guestCapacity < requestedGuests) {
+              continue;
+            }
 
             const priceEl = row.querySelector('.prco-valign-middle-helper');
             if (!priceEl) continue;
@@ -124,6 +142,7 @@ export async function searchBookingPrice(
 
           return results;
         },
+        requestedGuests
       );
     } catch (error) {
       console.log('[prices] Booking.com: Failed to extract room type prices', error);
@@ -188,32 +207,67 @@ export async function searchBookingPrice(
       return { villaI2Mari: null, villaZefiro: null };
     }
 
-    // Cheapest room type = Villa I Due Mari, second = Villa Zefiro
+    // Assign prices to villas based on guest count and number of room types found
+    // If guests > 4, Villa i 2 Mari can't accommodate, so single room type = Villa Zefiro
+    // If guests <= 4, both villas available: cheapest = Villa I Due Mari, second = Villa Zefiro
+    const totalGuests = params.guests.adults + params.guests.children;
     const cheapestPrice = sortedRoomTypes[0]?.[1] ?? null;
     const secondPrice = sortedRoomTypes[1]?.[1] ?? null;
 
     const duration = Date.now() - startTime;
     console.log(`[prices] Booking.com search completed in ${duration}ms`);
 
-    const villaI2Mari: SearchResult | null = cheapestPrice
-      ? {
-          platform: 'Booking.com',
-          price: cheapestPrice.toString(),
-          currency: '€',
-          url,
-          logoSrc: '/logo/logo_booking.png',
-        }
-      : null;
+    // Build individual property URLs for each villa
+    const buildPropertyUrl = (baseUrl: string) => {
+      const propertyUrl = new URL(baseUrl);
+      propertyUrl.searchParams.set('checkin', params.dates.from);
+      propertyUrl.searchParams.set('checkout', params.dates.to);
+      propertyUrl.searchParams.set('group_adults', params.guests.adults.toString());
+      propertyUrl.searchParams.set('group_children', params.guests.children.toString());
+      Object.entries(BOOKING_CONFIG.staticParams).forEach(([key, value]) => {
+        propertyUrl.searchParams.set(key, value);
+      });
+      const languageSuffix = getLanguageSuffix(params.language);
+      propertyUrl.pathname = propertyUrl.pathname.replace('.html', `.${languageSuffix}.html`);
+      return propertyUrl.toString();
+    };
 
-    const villaZefiro: SearchResult | null = secondPrice
-      ? {
-          platform: 'Booking.com',
-          price: secondPrice.toString(),
-          currency: '€',
-          url,
-          logoSrc: '/logo/logo_booking.png',
-        }
-      : null;
+    let villaI2Mari: SearchResult | null = null;
+    let villaZefiro: SearchResult | null = null;
+
+    if (totalGuests > 4) {
+      // Villa i 2 Mari can't accommodate, so only Villa Zefiro prices should be on the page
+      villaZefiro = cheapestPrice
+        ? {
+            platform: 'Booking.com',
+            price: cheapestPrice.toString(),
+            currency: '€',
+            url: buildPropertyUrl(BOOKING_CONFIG.villaZefiroUrl),
+            logoSrc: '/logo/logo_booking.png',
+          }
+        : null;
+    } else {
+      // Both villas can accommodate: cheapest = Villa I Due Mari, second = Villa Zefiro
+      villaI2Mari = cheapestPrice
+        ? {
+            platform: 'Booking.com',
+            price: cheapestPrice.toString(),
+            currency: '€',
+            url: buildPropertyUrl(BOOKING_CONFIG.villaI2MariUrl),
+            logoSrc: '/logo/logo_booking.png',
+          }
+        : null;
+
+      villaZefiro = secondPrice
+        ? {
+            platform: 'Booking.com',
+            price: secondPrice.toString(),
+            currency: '€',
+            url: buildPropertyUrl(BOOKING_CONFIG.villaZefiroUrl),
+            logoSrc: '/logo/logo_booking.png',
+          }
+        : null;
+    }
 
     return { villaI2Mari, villaZefiro };
   } catch (error) {

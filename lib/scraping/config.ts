@@ -19,6 +19,8 @@ export const SCRAPING_CONFIG: ScrapingConfig = {
  */
 export const BOOKING_CONFIG = {
   baseUrl: 'https://www.booking.com/hotel/it/villa-zefiro-marzamemi.html',
+  villaZefiroUrl: 'https://www.booking.com/hotel/it/villa-zefiro-marzamemi.html',
+  villaI2MariUrl: 'https://www.booking.com/hotel/it/villa-i-2-mari.html',
   staticParams: {
     aid: '397594',
     dest_id: '12041954',
