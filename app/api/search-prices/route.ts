@@ -88,7 +88,12 @@ export async function POST(request: NextRequest) {
     try {
       browser = await chromium.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',  // Docker /dev/shm is 64MB; Chrome needs more
+          '--disable-gpu',
+        ]
       })
     } catch (error) {
       console.error('[prices] Browser launch failed:', error)

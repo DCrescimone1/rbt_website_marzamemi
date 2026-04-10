@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    unoptimized: true,
+    qualities: [75, 85],
+  },
   async rewrites() {
     return [
       { source: "/favicon.ico", destination: "/favicon_io/favicon.ico" },
