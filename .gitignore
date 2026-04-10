@@ -54,26 +54,13 @@ next-env.d.ts
 *.pid.lock
 Thumbs.db
 
-# Images and media (large files)
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.webp
-*.avif
-*.ico
-*.svg
+# Media (non-public)
 *.mp4
 *.webm
 *.mov
 *.avi
 *.mp3
 *.wav
-
-# Keep public directory structure but ignore actual images
-public/images/
-public/photos/
-public/gallery/
 
 # Temporary files
 tmp/
