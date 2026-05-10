@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(ls /Users/dannycrescimone/Documents/GitHub/rbt_website_marzamemi/next.config.*)",
-      "Bash(grep -r \"available\\\\|occupied\\\\|blocked\\\\|unavailable\\\\|checkout\\\\|checkin\" /Users/dannycrescimone/Documents/GitHub/rbt_website_marzamemi --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" --include=\"*.py\" ! -path \"*/node_modules/*\" ! -path \"*/.next/*\" -l)"
+      "Bash(grep -r \"available\\\\|occupied\\\\|blocked\\\\|unavailable\\\\|checkout\\\\|checkin\" /Users/dannycrescimone/Documents/GitHub/rbt_website_marzamemi --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" --include=\"*.py\" ! -path \"*/node_modules/*\" ! -path \"*/.next/*\" -l)",
+      "mcp__playwright__browser_take_screenshot"
     ]
   }
 }

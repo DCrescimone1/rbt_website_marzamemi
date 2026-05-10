@@ -74,3 +74,4 @@ temp/
 
 # Stripe CLI
 .stripe/
+/.playwright-mcp
