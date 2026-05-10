@@ -213,13 +213,10 @@ export async function POST(request: NextRequest) {
       console.error('[prices] Failed to fetch calendar data:', err)
     }
 
-    const searchFrom = new Date(dates.from)
-    const searchTo = new Date(dates.to)
-
     const hasOverlap = (event: CalendarEvent) => {
-      const eventStart = new Date(event.start)
-      const eventEnd = new Date(event.end)
-      return eventStart <= searchTo && searchFrom <= eventEnd
+      // Both intervals use exclusive end (checkout day is free for a new checkin).
+      // Overlap condition for [a, b) vs [c, d): a < d && c < b
+      return event.start < dates.to && dates.from < event.end
     }
 
     const villaZefiroBooked = calendarEvents

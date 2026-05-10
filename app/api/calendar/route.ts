@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import ICAL from "ical.js"
-import { startOfDay, endOfDay, subDays } from "date-fns"
 
 const VILLA_ZEFIRO_ICAL = process.env.VILLA_ZEFIRO_ICAL as string
 const VILLA_I2MARI_ICAL = process.env.VILLA_I2MARI_ICAL as string
@@ -35,14 +34,14 @@ async function fetchAndParseCalendar(
     const comp = new ICAL.Component(jcalData)
     const vevents = comp.getAllSubcomponents("vevent")
 
+    const pad = (n: number) => String(n).padStart(2, "0")
+
     return vevents.map((vevent) => {
       const event = new ICAL.Event(vevent)
-      const startDate = startOfDay(event.startDate.toJSDate())
-      const endDate = subDays(endOfDay(event.endDate.toJSDate()), 1)
 
       return {
-        start: startDate.toISOString(),
-        end: endDate.toISOString(),
+        start: `${event.startDate.year}-${pad(event.startDate.month)}-${pad(event.startDate.day)}`,
+        end: `${event.endDate.year}-${pad(event.endDate.month)}-${pad(event.endDate.day)}`,
         summary: event.summary || "Booked",
         source: source,
         property: property,

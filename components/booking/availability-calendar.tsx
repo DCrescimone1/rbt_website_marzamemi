@@ -75,21 +75,15 @@ export default function AvailabilityCalendar({
   }, [initialFrom, initialTo])
 
   const isDateBooked = (date: Date) => {
+    const dateStr = format(date, "yyyy-MM-dd")
+
     const zefiroBooked = bookedDates
       .filter((booking) => booking.property === "villa_zefiro")
-      .some((booking) => {
-        const start = new Date(booking.start)
-        const end = new Date(booking.end)
-        return date >= start && date <= end
-      })
+      .some((booking) => dateStr >= booking.start && dateStr < booking.end)
 
     const i2mariBooked = bookedDates
       .filter((booking) => booking.property === "villa_i2mari")
-      .some((booking) => {
-        const start = new Date(booking.start)
-        const end = new Date(booking.end)
-        return date >= start && date <= end
-      })
+      .some((booking) => dateStr >= booking.start && dateStr < booking.end)
 
     return zefiroBooked && i2mariBooked
   }
