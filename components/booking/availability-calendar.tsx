@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isAfter, isBefore, startOfToday } from "date-fns"
-import { it, enUS } from "date-fns/locale"
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isAfter, isBefore, startOfToday, getDay } from "date-fns"
 import { useTranslation } from "@/lib/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
@@ -26,7 +25,7 @@ export default function AvailabilityCalendar({
   readOnly = false,
 }: AvailabilityCalendarProps) {
   const { t, language } = useTranslation()
-  const locale = language === 'it' ? it : enUS
+  const intlLocale = language === 'it' ? 'it-IT' : 'en-US'
   // Initialize after mount to avoid SSR/client time mismatches
   const [currentMonth, setCurrentMonth] = useState<Date | null>(null)
   const [bookedDates, setBookedDates] = useState<any[]>([])
@@ -89,10 +88,13 @@ export default function AvailabilityCalendar({
   }
 
   const effectiveMonth = currentMonth ?? startOfToday()
+  const monthStart = startOfMonth(effectiveMonth)
   const days = eachDayOfInterval({
-    start: startOfMonth(effectiveMonth),
+    start: monthStart,
     end: endOfMonth(effectiveMonth),
   })
+  // Number of empty cells before day 1 so weekday columns line up (Sunday-first grid).
+  const leadingBlanks = getDay(monthStart)
 
   const handleDateClick = (date: Date) => {
     if (readOnly) return // No selection in read-only mode
@@ -146,7 +148,9 @@ export default function AvailabilityCalendar({
     >
       <div className="flex items-center justify-between mb-4 sm:mb-6">
         <h3 className="font-serif text-base sm:text-lg font-bold text-foreground">
-          {format(effectiveMonth, "MMMM yyyy", { locale }).replace(/^\w/, (c) => c.toUpperCase())}
+          {new Intl.DateTimeFormat(intlLocale, { month: "long", year: "numeric" })
+            .format(effectiveMonth)
+            .replace(/^\w/, (c) => c.toUpperCase())}
         </h3>
         <div className="flex gap-2">
           <Button
@@ -187,6 +191,9 @@ export default function AvailabilityCalendar({
 
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-1 sm:gap-2">
+        {Array.from({ length: leadingBlanks }).map((_, i) => (
+          <div key={`blank-${i}`} className="h-7 sm:h-8 md:h-9" aria-hidden />
+        ))}
         {days.map((day) => {
           const isBooked = isDateBooked(day)
           const isPast = today ? isBefore(day, today) : false
