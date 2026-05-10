@@ -96,22 +96,49 @@ export default function AvailabilityCalendar({
   // Number of empty cells before day 1 so weekday columns line up (Sunday-first grid).
   const leadingBlanks = getDay(monthStart)
 
-  const handleDateClick = (date: Date) => {
-    if (readOnly) return // No selection in read-only mode
-    
-    const isPast = today ? isBefore(date, today) : false
-    if (isDateBooked(date) || isPast) return
+  // True when a date is the first day of a booking (turnaround day — guest checks out,
+  // new guest checks in same morning). Valid as a checkout date for the previous stay.
+  const isTurnaroundDay = (dateStr: string) =>
+    bookedDates.some((b) => b.start === dateStr)
 
+  const handleDateClick = (date: Date) => {
+    if (readOnly) return
+
+    const isPast = today ? isBefore(date, today) : false
+    const booked = isDateBooked(date)
+
+    // Selecting checkin (no from yet, or resetting both)
     if (!selectedFrom || (selectedFrom && selectedTo)) {
+      if (booked || isPast) return
       setSelectedFrom(date)
       setSelectedTo(null)
-    } else if (isAfter(date, selectedFrom)) {
-      setSelectedTo(date)
-      onDateSelect?.({
-        from: format(selectedFrom, "yyyy-MM-dd"),
-        to: format(date, "yyyy-MM-dd"),
-      })
+      return
     }
+
+    // Selecting checkout
+    if (!isAfter(date, selectedFrom) || isPast) return
+
+    const dateStr = format(date, "yyyy-MM-dd")
+    const fromStr = format(selectedFrom, "yyyy-MM-dd")
+
+    // A booked date is only valid as checkout if it's a turnaround day
+    if (booked && !isTurnaroundDay(dateStr)) return
+
+    // Block if any booked nights exist in the range [selectedFrom, date),
+    // excluding the turnaround booking that starts on 'date' itself
+    const zefiroBlocked = bookedDates
+      .filter((b) => b.property === "villa_zefiro" && b.start !== dateStr)
+      .some((b) => b.start < dateStr && fromStr < b.end)
+    const i2mariBlocked = bookedDates
+      .filter((b) => b.property === "villa_i2mari" && b.start !== dateStr)
+      .some((b) => b.start < dateStr && fromStr < b.end)
+    if (zefiroBlocked && i2mariBlocked) return
+
+    setSelectedTo(date)
+    onDateSelect?.({
+      from: format(selectedFrom, "yyyy-MM-dd"),
+      to: format(date, "yyyy-MM-dd"),
+    })
   }
 
   if (loading) {
@@ -197,22 +224,25 @@ export default function AvailabilityCalendar({
         {days.map((day) => {
           const isBooked = isDateBooked(day)
           const isPast = today ? isBefore(day, today) : false
+          const dayStr = format(day, "yyyy-MM-dd")
+          const isSelectingCheckout = !!selectedFrom && !selectedTo
+          // Turnaround days are clickable as checkout when the user already has a checkin selected
+          const clickableAsTurnaround = isSelectingCheckout && isBooked && isTurnaroundDay(dayStr)
           const isSelected =
             !readOnly &&
             ((selectedFrom && day.toDateString() === selectedFrom.toDateString()) ||
               (selectedTo && day.toDateString() === selectedTo.toDateString()))
           const isInRange = !readOnly && selectedFrom && selectedTo && day > selectedFrom && day < selectedTo
 
-          // Use button for selectable calendar, div for read-only
           const Component = readOnly ? "div" : "button"
-          
+
           return (
             <Component
               key={day.toDateString()}
               onClick={readOnly ? undefined : () => handleDateClick(day)}
-              disabled={!readOnly && (isBooked || isPast)}
+              disabled={!readOnly && (isPast || (isBooked && !clickableAsTurnaround))}
               className={`h-7 sm:h-8 md:h-9 rounded text-xs font-medium flex items-center justify-center ${
-                isBooked
+                isBooked && !clickableAsTurnaround
                   ? "bg-rose-200 text-rose-800 font-semibold"
                   : isPast
                     ? "bg-gray-100 text-gray-400 opacity-50"
@@ -223,7 +253,7 @@ export default function AvailabilityCalendar({
                         : readOnly
                           ? "bg-[#e8f4f4] text-foreground"
                           : "bg-[#e8f4f4] hover:bg-[#d4e9e9] text-foreground cursor-pointer"
-              } ${!readOnly && !isBooked && !isPast ? "transition-colors" : ""}`}
+              } ${!readOnly && (!isBooked || clickableAsTurnaround) && !isPast ? "transition-colors" : ""}`}
             >
               {format(day, "d")}
             </Component>
