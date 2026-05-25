@@ -210,7 +210,8 @@ export const enTranslations: TranslationData = {
       send: "SEND MESSAGE",
       sending: "Sending...",
       sent: "Message Sent!",
-      error: "There was a problem sending your message. Please try again."
+      error: "There was a problem sending your message. Please try again.",
+      contactRequired: "Please provide at least an email address or phone number so we can reach you."
     }
   },
   location: {

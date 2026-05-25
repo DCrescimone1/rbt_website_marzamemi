@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { useTranslation } from "@/lib/hooks/useTranslation"
 
 export default function Footer() {
@@ -57,19 +58,29 @@ export default function Footer() {
             <ul className="space-y-2 text-xs md:text-sm">
               {[
                 { label: t('footer.information.terms'), href: "#" },
-                { label: t('footer.information.privacy'), href: "#" },
+                { label: t('footer.information.privacy'), href: "/privacy" },
                 { label: t('footer.information.cancellation'), href: "#" },
                 { label: t('footer.information.faqs'), href: "#" },
                 { label: t('footer.information.support'), href: "#" }
               ].map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-2 group"
-                  >
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      href={link.href}
+                      className="text-primary-foreground/70 hover:text-primary-foreground hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-2 group"
+                    >
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-primary-foreground/70 hover:text-primary-foreground hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-2 group"
+                    >
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

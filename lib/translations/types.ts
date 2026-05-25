@@ -192,6 +192,7 @@ export interface TranslationData {
       sending: string
       sent: string
       error: string
+      contactRequired: string
     }
   }
   location: {

@@ -19,10 +19,15 @@ export default function ContactSection() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [contactError, setContactError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Integrate with marzapage contact handling
+    if (!formData.email && !formData.phone) {
+      setContactError(t('contact.form.contactRequired'))
+      return
+    }
+    setContactError("")
     setLoading(true)
     try {
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string
@@ -149,18 +154,22 @@ export default function ContactSection() {
               type="email"
               placeholder={t('contact.form.email')}
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              required
+              onChange={(e) => { setFormData({ ...formData, email: e.target.value }); setContactError("") }}
               className="bg-primary-foreground border-primary-foreground/30 text-primary placeholder:text-primary/70 h-12"
             />
 
-            <Input
-              type="tel"
-              placeholder={t('contact.form.phone')}
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="bg-primary-foreground border-primary-foreground/30 text-primary placeholder:text-primary/70 h-12"
-            />
+            <div>
+              <Input
+                type="tel"
+                placeholder={t('contact.form.phone')}
+                value={formData.phone}
+                onChange={(e) => { setFormData({ ...formData, phone: e.target.value }); setContactError("") }}
+                className={`bg-primary-foreground border-primary-foreground/30 text-primary placeholder:text-primary/70 h-12 ${contactError ? "border-red-400" : ""}`}
+              />
+              {contactError && (
+                <p className="mt-1.5 text-sm text-red-300">{contactError}</p>
+              )}
+            </div>
 
             <textarea
               placeholder={t('contact.form.message')}

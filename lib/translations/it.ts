@@ -210,7 +210,8 @@ export const itTranslations: TranslationData = {
       send: "INVIA MESSAGGIO",
       sending: "Invio in corso...",
       sent: "Messaggio Inviato!",
-      error: "C'è stato un problema nell'invio del messaggio. Riprova."
+      error: "C'è stato un problema nell'invio del messaggio. Riprova.",
+      contactRequired: "Fornisci almeno un'email o un numero di telefono così possiamo contattarti."
     }
   },
   location: {
