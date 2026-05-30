@@ -39,8 +39,9 @@ export default function ContactSection() {
         templateId,
         {
           from_name: formData.name,
+          from_email: formData.email,
           reply_to: formData.email,
-          phone: formData.phone,
+          phone_number: formData.phone,
           message: formData.message,
         },
         { publicKey }
