@@ -128,15 +128,17 @@ export async function POST(request: NextRequest) {
     const airbnbZefiroAbort = new AbortController()
     const airbnbI2MariAbort = new AbortController()
 
-    // Only search Booking.com if at least one villa can accommodate guests
-    const bookingPromise = (searchVillaZefiro || searchVillaI2Mari)
-      ? withTimeout(
-          searchBookingPrice({ dates, guests, language: resolvedLanguage, browser, signal: bookingAbort.signal }),
-          15000,
-          'Booking.com',
-          bookingAbort,
-        )
-      : Promise.resolve({ villaI2Mari: null, villaZefiro: null })
+    // TODO: Booking.com scraping temporarily disabled. Re-enable by restoring the
+    // searchBookingPrice call below (see commented block).
+    const bookingPromise = Promise.resolve({ villaI2Mari: null, villaZefiro: null })
+    // const bookingPromise = (searchVillaZefiro || searchVillaI2Mari)
+    //   ? withTimeout(
+    //       searchBookingPrice({ dates, guests, language: resolvedLanguage, browser, signal: bookingAbort.signal }),
+    //       15000,
+    //       'Booking.com',
+    //       bookingAbort,
+    //     )
+    //   : Promise.resolve({ villaI2Mari: null, villaZefiro: null })
 
     // Only search Airbnb for Villa Zefiro if it can accommodate guests
     const airbnbZefiroPromise = (VILLA_ZEFIRO_AIRBNB_URL && searchVillaZefiro)
