@@ -73,11 +73,31 @@ export default function AvailabilityCalendar({
     }
   }, [initialFrom, initialTo])
 
-  const isDateBooked = (date: Date) => {
+  // A night is "booked" when BOTH villas are occupied that night. The range is
+  // [start, end): inclusive of the check-in day (the guest sleeps that night) and
+  // exclusive of the checkout day (the morning is free for a new arrival). Used for
+  // the red "busy" colour and to block check-in selection. This is the source of the
+  // visual availability state and must match the booking platforms' occupancy.
+  const isNightBooked = (date: Date) => {
     const dateStr = format(date, "yyyy-MM-dd")
 
-    // Use strict > for start: checkin days (turnaround mornings) are not counted as
-    // blocked nights, so they appear as available (light blue) in the calendar.
+    const zefiroBooked = bookedDates
+      .filter((booking) => booking.property === "villa_zefiro")
+      .some((booking) => dateStr >= booking.start && dateStr < booking.end)
+
+    const i2mariBooked = bookedDates
+      .filter((booking) => booking.property === "villa_i2mari")
+      .some((booking) => dateStr >= booking.start && dateStr < booking.end)
+
+    return zefiroBooked && i2mariBooked
+  }
+
+  // Strict interior check that EXCLUDES a booking's start day, so a check-in day can
+  // still be picked as a CHECKOUT date for a back-to-back (turnaround) stay. Used only
+  // to fully disable a cell. Note: interior ⊂ night, so every disabled cell is also red.
+  const isInteriorBooked = (date: Date) => {
+    const dateStr = format(date, "yyyy-MM-dd")
+
     const zefiroBooked = bookedDates
       .filter((booking) => booking.property === "villa_zefiro")
       .some((booking) => dateStr > booking.start && dateStr < booking.end)
@@ -105,7 +125,7 @@ export default function AvailabilityCalendar({
 
     // Selecting checkin (no from yet, or resetting both)
     if (!selectedFrom || (selectedFrom && selectedTo)) {
-      if (isDateBooked(date) || isPast) return
+      if (isNightBooked(date) || isPast) return
       setSelectedFrom(date)
       setSelectedTo(null)
       return
@@ -117,8 +137,9 @@ export default function AvailabilityCalendar({
     const dateStr = format(date, "yyyy-MM-dd")
     const fromStr = format(selectedFrom, "yyyy-MM-dd")
 
-    // Block interior booked nights as checkout target
-    if (isDateBooked(date)) return
+    // Block interior booked nights as checkout target (a booking's start day stays
+    // selectable as a checkout for a turnaround stay — see isInteriorBooked).
+    if (isInteriorBooked(date)) return
 
     // Block if booked nights exist between selectedFrom and date,
     // excluding any booking that starts exactly on 'date' (turnaround)
@@ -218,7 +239,8 @@ export default function AvailabilityCalendar({
           <div key={`blank-${i}`} className="h-7 sm:h-8 md:h-9" aria-hidden />
         ))}
         {days.map((day) => {
-          const isBooked = isDateBooked(day)
+          const isBooked = isNightBooked(day)
+          const isDisabled = isInteriorBooked(day)
           const isPast = today ? isBefore(day, today) : false
           const isSelected =
             !readOnly &&
@@ -232,7 +254,7 @@ export default function AvailabilityCalendar({
             <Component
               key={day.toDateString()}
               onClick={readOnly ? undefined : () => handleDateClick(day)}
-              disabled={!readOnly && (isBooked || isPast)}
+              disabled={!readOnly && (isDisabled || isPast)}
               className={`h-7 sm:h-8 md:h-9 rounded text-xs font-medium flex items-center justify-center ${
                 isBooked
                   ? "bg-rose-200 text-rose-800 font-semibold"
