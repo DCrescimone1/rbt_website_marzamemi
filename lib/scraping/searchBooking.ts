@@ -113,22 +113,85 @@ export async function searchBookingPrice(
       timeout: SCRAPING_CONFIG.navigationTimeout,
     });
 
-    // Extract prices grouped by room type using data-block-id.
     // Each villa is a distinct room type (identified by the first segment of data-block-id).
-    // Each room type has multiple pricing rows (non-refundable, free cancellation, etc.),
-    // and Villa Zefiro additionally has per-occupancy rate blocks: the 3rd segment of
-    // data-block-id is the number of sleepers the block is priced for (e.g. "_6_" vs "_4_"
-    // at different prices in the same table). Villa I Due Mari uses flat blocks ("_0_").
-    // A row is valid for the requested party when its occupancy segment is 0 (flat rate)
-    // or >= requested guests; among valid rows the cheapest per room type is the
-    // "Non rimborsabile" rate we want.
+    // Each room type has multiple rate blocks (non-refundable, free cancellation, and for
+    // Villa Zefiro per-occupancy pricing: 6/5/4-person blocks at different prices in the
+    // same table). A block is valid for the requested party when its occupancy is unknown
+    // (flat rate) or >= requested guests; among valid blocks the cheapest per room type is
+    // the "Non rimborsabile" rate we want.
     const requestedGuests = params.guests.adults + params.guests.children;
     let roomTypePrices: { roomTypeId: string; price: number }[] = [];
     try {
       await page.waitForSelector('.prco-valign-middle-helper', {
         timeout: SCRAPING_CONFIG.selectorTimeout,
       });
+    } catch (error) {
+      console.log('[prices] Booking.com: Price table did not appear', error);
+    }
 
+    // Primary extraction: the rooms JSON Booking embeds in the page. Unlike the visible
+    // price cells, it exposes totals in the HOTEL currency (EUR for this property) — some
+    // fresh sessions ignore selected_currency and render display prices in e.g. CHF, which
+    // must never be shown as "€". It also carries the real per-block occupancy
+    // (b_max_persons), including for flat blocks whose data-block-id has no occupancy.
+    try {
+      roomTypePrices = await page.evaluate((requestedGuests) => {
+        const results: { roomTypeId: string; price: number }[] = [];
+        const scripts = Array.from(document.querySelectorAll('script'));
+        const src = scripts.map((s) => s.textContent || '').find((t) => t.includes('b_rooms_available_and_soldout'));
+        if (!src) return results;
+        const start = src.indexOf('[', src.indexOf('b_rooms_available_and_soldout'));
+        if (start < 0) return results;
+        // Find the matching closing bracket of the rooms array
+        let depth = 0;
+        let end = -1;
+        let inStr = false;
+        let esc = false;
+        for (let i = start; i < src.length; i++) {
+          const c = src[i];
+          if (inStr) {
+            if (esc) esc = false;
+            else if (c === '\\') esc = true;
+            else if (c === '"') inStr = false;
+            continue;
+          }
+          if (c === '"') inStr = true;
+          else if (c === '[') depth++;
+          else if (c === ']') {
+            depth--;
+            if (depth === 0) { end = i; break; }
+          }
+        }
+        if (end < 0) return results;
+        const rooms = JSON.parse(src.slice(start, end + 1));
+        for (const room of rooms) {
+          const roomTypeId = String(room?.b_id ?? '');
+          if (!roomTypeId) continue;
+          for (const block of room?.b_blocks || []) {
+            const occupancy = Number(block?.b_max_persons) || 0;
+            if (occupancy > 0 && occupancy < requestedGuests) continue;
+            const totalPrice = block?.b_price_breakdown_simplified?.b_total_price?.[0];
+            const raw = Number(totalPrice?.b_raw_value_hotel_currency);
+            if (!raw || isNaN(raw)) continue;
+            // Hotel currency must be EUR; skip anything else rather than mislabel it
+            const hotelCcyStr = String(totalPrice?.b_value_hotel_currency || '');
+            if (hotelCcyStr && !hotelCcyStr.includes('€')) continue;
+            results.push({ roomTypeId, price: Math.round(raw) });
+          }
+        }
+        return results;
+      }, requestedGuests);
+      if (roomTypePrices.length) {
+        console.log(`[prices] Booking.com: Extracted ${roomTypePrices.length} blocks from embedded rooms JSON`);
+      }
+    } catch (error) {
+      console.log('[prices] Booking.com: Embedded rooms JSON extraction failed', error);
+    }
+
+    // Fallback 1: extract from the visible availability table rows.
+    // Only trust rows priced in EUR (the "€" sign) — see currency note above.
+    if (!roomTypePrices.length) try {
+      console.log('[prices] Booking.com: Falling back to DOM row extraction');
       roomTypePrices = await page.$$eval(
         'table.hprt-table tbody tr[data-block-id]',
         (rows, requestedGuests) => {
@@ -154,6 +217,7 @@ export async function searchBookingPrice(
             if (!priceEl) continue;
 
             const text = (priceEl.textContent || '').trim();
+            if (!text.includes('€')) continue;
             const match = text.match(/[\d.,]+/);
             if (match) {
               // "." is the thousands separator, "," the decimal one (e.g. "1.312,50")
@@ -173,7 +237,7 @@ export async function searchBookingPrice(
       console.log('[prices] Booking.com: Failed to extract room type prices', error);
     }
 
-    // Fallback: if structured extraction failed, try flat price collection
+    // Fallback 2: flat price collection from known price selectors (EUR-only, like above)
     if (!roomTypePrices.length) {
       console.log('[prices] Booking.com: Falling back to flat price extraction');
       const fallbackSelectors = [
@@ -186,7 +250,7 @@ export async function searchBookingPrice(
       for (const selector of fallbackSelectors) {
         try {
           const texts = await page.$$eval(selector, (els) =>
-            els.map((el) => (el.textContent || '').trim()).filter((t) => t.length > 0),
+            els.map((el) => (el.textContent || '').trim()).filter((t) => t.length > 0 && t.includes('€')),
           );
           if (texts.length > 0) {
             // Assign synthetic room type IDs alternating (best effort)
