@@ -19,8 +19,15 @@ export const SCRAPING_CONFIG: ScrapingConfig = {
  */
 export const BOOKING_CONFIG = {
   baseUrl: 'https://www.booking.com/hotel/it/villa-zefiro-marzamemi.html',
+  // Both villas are room types of the single "Seacily Villas" property page.
+  // The old villa-i-2-mari.html listing is closed on Booking.com and redirects to search results.
   villaZefiroUrl: 'https://www.booking.com/hotel/it/villa-zefiro-marzamemi.html',
-  villaI2MariUrl: 'https://www.booking.com/hotel/it/villa-i-2-mari.html',
+  villaI2MariUrl: 'https://www.booking.com/hotel/it/villa-zefiro-marzamemi.html',
+  // Room type IDs = first segment of data-block-id in the availability table (hprt-table).
+  roomTypeIds: {
+    villaZefiro: '1533882301', // 68 m², 2 bathrooms, up to 6 guests
+    villaI2Mari: '1533882302', // 45 m², bunk bed, up to 4 guests
+  },
   staticParams: {
     aid: '397594',
     dest_id: '12041954',
