@@ -55,6 +55,7 @@ const villaZefiroImages = [
   { src: "/pictures/villa_zefiro_new/15%20ok%20Villa%20Zefiro%20mansarda.webp", alt: "Attic room" },
   { src: "/pictures/villa_zefiro_new/16%20ok%20z%20colazione%20porto1.webp", alt: "Breakfast at port" },
   { src: "/pictures/villa_zefiro_new/17%20ok%20Villa%20Zefiro%20terrazza.webp", alt: "Terrace" },
+  { src: "/pictures/villa_zefiro_new/36%20ok%20Villa%20Zefiro%20terrazza2.webp", alt: "Terrace lounge with sea view" },
   { src: "/pictures/villa_zefiro_new/18%20ok%20Capo%20Passero%20dalla%20terrazza.webp", alt: "View from terrace" },
   { src: "/pictures/villa_zefiro_new/19%20ok%20drone3.webp", alt: "Aerial view" },
   { src: "/pictures/villa_zefiro_new/20%20ok%20z%20aperirivo1%20zefiro.webp", alt: "Aperitivo" },
